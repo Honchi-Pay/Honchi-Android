@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 30
-    buildToolsVersion "30.0.0"
+    buildToolsVersion "30.0.2"
 
     defaultConfig {
         applicationId "com.honchipay.honchi_android"
@@ -19,6 +19,13 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+
+        debug {
+            splits.abi.enable = false
+            splits.density.enable = false
+            aaptOptions.cruncherEnabled = false
+            ext.alwaysUpdateBuildId = false
+        }
     }
 
     compileOptions {
@@ -26,8 +33,16 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
-    dataBinding{
-        enabled = true
+    flavorDimensions "default"
+
+    productFlavors {
+        dev {
+            resConfigs('xhdpi')
+        }
+    }
+
+    buildFeatures {
+        dataBinding = true
     }
 }
 
