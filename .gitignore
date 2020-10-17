@@ -87,3 +87,5 @@ lint/tmp/
 HonchiAndroid/.idea/
 
 HonchiAndroid/app/src/main/res/values/secret.xml
+
+.DS_Store
