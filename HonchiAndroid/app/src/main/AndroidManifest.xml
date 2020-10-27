@@ -13,6 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+        <activity
+            android:name=".MessengerActivity"
+            android:windowSoftInputMode="adjustUnspecified|adjustPan" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
