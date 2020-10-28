@@ -7,7 +7,7 @@
     android:orientation="vertical"
     android:paddingLeft="40dp"
     android:paddingRight="40dp"
-    tools:context=".Sign.Fragment.LoginFragment">
+    tools:context=".sign.Fragment.LoginFragment">
 
     <ImageButton
         android:id="@+id/SUEmail_back_button"
@@ -37,7 +37,7 @@
         android:id="@+id/SUEmail_id_editText"
         android:layout_width="match_parent"
         android:layout_height="45dp"
-        android:layout_marginBottom="40dp"
+        android:layout_marginTop="7dp"
         android:background="@drawable/sign_transparent_btn"
         android:hint="@string/get_id"
         android:paddingLeft="10dp"
@@ -47,7 +47,7 @@
         android:id="@+id/SUEmail_authcode_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="239dp"
+        android:layout_marginTop="240dp"
         android:background="@drawable/sign_login_btn"
         android:text="@string/output_auth_code"
         android:textColor="@color/white"

@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:paddingLeft="40dp"
     android:paddingRight="40dp"
-    tools:context=".Sign.Fragment.LoginFragment">
+    tools:context=".sign.Fragment.LoginFragment">
 
     <ImageButton
         android:id="@+id/SUInfo_back_button"
@@ -37,8 +36,8 @@
         android:id="@+id/SUInfo_id_editText"
         android:layout_width="match_parent"
         android:layout_height="45dp"
-        android:layout_marginBottom="40dp"
         android:layout_marginTop="7dp"
+        android:layout_marginBottom="30dp"
         android:background="@drawable/sign_transparent_btn"
         android:hint="@string/get_nickname"
         android:paddingLeft="10dp"
@@ -55,8 +54,8 @@
         android:id="@+id/SUInfo_password_editText"
         android:layout_width="match_parent"
         android:layout_height="45dp"
-        android:layout_marginBottom="10dp"
         android:layout_marginTop="7dp"
+        android:layout_marginBottom="10dp"
         android:background="@drawable/sign_transparent_btn"
         android:hint="@string/only_number"
         android:paddingLeft="10dp"
@@ -65,19 +64,35 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="10sp"
-        android:textColor="@color/black"
+        android:layout_marginTop="30dp"
         android:text="@string/gender"
-        android:layout_marginTop="30dp" />
-
-    <RadioButton
-        android:layout_marginTop="10dp"
-        android:id="@+id/SUInfo_autoLogin_button"
-        android:layout_width="wrap_content"
-        android:layout_height="20dp"
-        android:text="@string/male"
         android:textColor="@color/black"
         android:textSize="10sp" />
+
+    <RadioGroup
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="15dp">
+
+        <RadioButton
+            android:id="@+id/SUInfo_male_button"
+            android:layout_width="wrap_content"
+            android:layout_height="22dp"
+            android:text="@string/male"
+            android:textColor="@color/black"
+            android:textSize="12sp" />
+
+        <RadioButton
+            android:id="@+id/SUInfo_female_button"
+            android:layout_width="wrap_content"
+            android:layout_height="22dp"
+            android:text="@string/female"
+            android:layout_marginLeft="15dp"
+            android:textColr="@color/black"
+            android:textSize="12sp" />
+
+    </RadioGroup>
 
     <Button
         android:id="@+id/SUInfo_login_button"
@@ -88,6 +103,5 @@
         android:text="@string/check"
         android:textColor="@color/white"
         android:textSize="16sp" />
-
 
 </LinearLayout>
