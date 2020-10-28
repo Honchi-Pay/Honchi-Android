@@ -14,7 +14,7 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".MessengerActivity"
+            android:name=".chat.MessengerActivity"
             android:windowSoftInputMode="adjustUnspecified|adjustPan" />
 
         <meta-data
