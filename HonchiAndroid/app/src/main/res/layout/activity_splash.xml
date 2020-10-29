@@ -6,18 +6,13 @@
     android:layout_height="match_parent"
     tools:context=".splash.SplashActivity">
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/splashBackground"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <ImageView
+        android:id="@+id/imageView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:foreground="#8F000000"
+        android:scaleType="centerCrop"
+        android:src="@drawable/splash_honchipay"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -29,6 +24,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="80dp"
         android:text="@string/HonchiPay"
+        android:textAlignment="center"
         android:textColor="@color/white"
         android:textSize="30sp"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -39,27 +35,25 @@
         android:id="@+id/splash_login_button"
         android:layout_width="300dp"
         android:layout_height="50dp"
-        android:layout_marginTop="380dp"
+        android:layout_marginBottom="20dp"
         android:background="@drawable/sign_login_btn"
         android:text="@string/splash_login"
         android:textColor="@color/white"
         android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/splash_signUp_button"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textView" />
+        app:layout_constraintRight_toRightOf="parent" />
 
     <Button
         android:id="@+id/splash_signUp_button"
         android:layout_width="300dp"
         android:layout_height="50dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginBottom="80dp"
         android:background="@drawable/splash_login_btn"
         android:text="@string/splash_signUp"
         android:textColor="@color/white"
         android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/splash_login_button" />
-
-
+        app:layout_constraintRight_toRightOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
