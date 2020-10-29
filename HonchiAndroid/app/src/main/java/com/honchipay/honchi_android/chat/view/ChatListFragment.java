@@ -1,4 +1,4 @@
-package com.honchipay.honchi_android.chat;
+package com.honchipay.honchi_android.chat.view;
 
 import android.os.Bundle;
 
