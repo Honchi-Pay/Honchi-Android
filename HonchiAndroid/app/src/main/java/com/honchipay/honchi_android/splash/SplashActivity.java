@@ -1,44 +1,34 @@
 package com.honchipay.honchi_android.splash;
 
 import androidx.appcompat.app.AppCompatActivity;
-
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
-
 import com.honchipay.honchi_android.R;
 import com.honchipay.honchi_android.sign.SignActivity;
 
-public class SplashActivity extends AppCompatActivity {
-    Button login_btn;
-    Button signUp_btn;
-
+public class SplashActivity extends AppCompatActivity implements View.OnClickListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
+    }
 
-        login_btn = findViewById(R.id.splash_login_button);
-        signUp_btn = findViewById(R.id.splash_signUp_button);
+    @SuppressLint("NonConstantResourceId")
+    @Override
+    public void onClick(View v) {
+        Intent intent = new Intent(this, SignActivity.class);
 
-        login_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), SignActivity.class);
-                intent.putExtra("splash","login");
-                startActivity(intent);
-            }
-        });
+        switch (v.getId()) {
+            case R.id.splash_login_button:
+                intent.putExtra("splash", "login");
+                break;
+            case R.id.splash_signUp_button:
+                intent.putExtra("splash", "signUp");
+                break;
+        }
 
-        signUp_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(),SignActivity.class);
-                intent.putExtra("splash","signUp");
-                startActivity(intent);
-            }
-        });
-
+        startActivity(intent);
     }
 }
