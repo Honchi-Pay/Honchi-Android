@@ -69,30 +69,6 @@
         android:textColor="@color/black"
         android:textSize="10sp" />
 
-    <RadioGroup
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="15dp">
-
-        <RadioButton
-            android:id="@+id/SUInfo_male_button"
-            android:layout_width="wrap_content"
-            android:layout_height="22dp"
-            android:text="@string/male"
-            android:textColor="@color/black"
-            android:textSize="12sp" />
-
-        <RadioButton
-            android:id="@+id/SUInfo_female_button"
-            android:layout_width="wrap_content"
-            android:layout_height="22dp"
-            android:text="@string/female"
-            android:layout_marginLeft="15dp"
-            android:textColr="@color/black"
-            android:textSize="12sp" />
-
-    </RadioGroup>
 
     <Button
         android:id="@+id/SUInfo_login_button"

@@ -3,6 +3,7 @@
     package="com.honchipay.honchi_android">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
         android:allowBackup="true"
@@ -13,8 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".splash.SplashActivity"></activity>
-        <activity android:name=".sign.SignActivity" />
+        <activity android:name=".splash.SplashActivity" />
         <activity android:name=".sign.SignActivity" />
 
         <meta-data
