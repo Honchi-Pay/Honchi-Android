@@ -24,7 +24,7 @@ public class TokenAuthenticator implements Interceptor {
             SharedPreferencesManager.getInstance().setAccessToken(null);
             Intent intent = new Intent(HonchipayApplication.context, SignActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            intent.putExtra("splash", "splash_login");
+            intent.putExtra("splash", "login");
             HonchipayApplication.context.startActivity(intent);
         }
 
