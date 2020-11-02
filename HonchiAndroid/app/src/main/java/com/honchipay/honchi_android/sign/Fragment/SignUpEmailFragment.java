@@ -5,7 +5,6 @@ import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.view.LayoutInflater;
@@ -14,7 +13,6 @@ import android.view.ViewGroup;
 
 import com.honchipay.honchi_android.R;
 import com.honchipay.honchi_android.databinding.FragmentSignUpEmailBinding;
-import com.honchipay.honchi_android.sign.Data.SignUpProcess;
 import com.honchipay.honchi_android.sign.SignActivity;
 import com.honchipay.honchi_android.sign.ViewModel.SignUpViewModel;
 
@@ -42,7 +40,7 @@ public class SignUpEmailFragment extends Fragment {
                     signUpViewModel.checkDuplicatedEmail(inputUserEmail);
                     break;
                 case EMAIL:
-                    ((SignActivity) requireActivity()).replaceFragment(new SignUp_password_Fragment());
+                    ((SignActivity) requireActivity()).replaceFragment(new SignUpPasswordFragment());
                     break;
                 default:
                     binding.signUpEmailAuthButton.setClickable(true);

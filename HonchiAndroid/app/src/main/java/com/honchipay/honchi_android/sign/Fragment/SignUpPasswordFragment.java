@@ -10,12 +10,9 @@ import android.view.ViewGroup;
 
 import com.honchipay.honchi_android.R;
 
-public class SignUp_password_Fragment extends Fragment {
-
+public class SignUpPasswordFragment extends Fragment {
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_sign_up_password, container, false);
     }
 }
