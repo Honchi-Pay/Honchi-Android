@@ -49,7 +49,12 @@ public class SignUpEmailFragment extends Fragment {
                     });
                     break;
                 case CODE:
-                    ((SignActivity) requireActivity()).replaceFragment(new SignUpPasswordFragment());
+                    SignUpPasswordFragment fragment = new SignUpPasswordFragment();
+                    Bundle bundle = new Bundle();
+                    bundle.putString("email", inputUserEmail);
+                    fragment.setArguments(bundle);
+
+                    ((SignActivity) requireActivity()).replaceFragment(fragment);
                     break;
                 default:
                     binding.signUpEmailAuthButton.setClickable(true);

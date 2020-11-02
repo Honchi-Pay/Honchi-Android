@@ -23,4 +23,8 @@ public class SignRepository {
 
         return HonchipayConnector.getInstance().getApi().checkAuthCode(body);
     }
+
+    public Single<Response<Void>> signUp(SignUpRequest signUpRequest) {
+        return HonchipayConnector.getInstance().getApi().singUp(signUpRequest);
+    }
 }

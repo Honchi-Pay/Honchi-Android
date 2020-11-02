@@ -1,5 +1,6 @@
 package com.honchipay.honchi_android.network;
 
+import com.honchipay.honchi_android.sign.Data.SignUpRequest;
 import com.honchipay.honchi_android.sign.Data.TokenResponseData;
 
 import java.util.HashMap;
@@ -26,4 +27,7 @@ public interface HonchipayApi {
 
     @PUT("/user/email/verify")
     Single<Response<Void>> checkAuthCode(@Body HashMap<String, String> body);
+
+    @POST("/user")
+    Single<Response<Void>> singUp(@Body SignUpRequest body);
 }

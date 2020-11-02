@@ -23,6 +23,14 @@ public class SignUpPasswordFragment extends Fragment {
     FragmentSignUpPasswordBinding binding;
     String inputPassword = null;
     String inputConfirm = null;
+    String email = null;
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        email = requireArguments().getString("email");
+    }
 
     @Override
     public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -62,6 +70,7 @@ public class SignUpPasswordFragment extends Fragment {
             if (inputPassword.equals(inputConfirm)) {
                 SignUpUserInfoFragment fragment = new SignUpUserInfoFragment();
                 Bundle bundle = new Bundle();
+                bundle.putString("email", email);
                 bundle.putString("password", inputPassword);
                 fragment.setArguments(bundle);
 
