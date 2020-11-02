@@ -20,6 +20,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class SignUpEmailFragment extends Fragment {
     String inputUserEmail = null;
+    String inputAuthCode = null;
     FragmentSignUpEmailBinding binding;
     SignUpViewModel signUpViewModel;
 
@@ -40,6 +41,14 @@ public class SignUpEmailFragment extends Fragment {
                     signUpViewModel.checkDuplicatedEmail(inputUserEmail);
                     break;
                 case EMAIL:
+                    binding.signUpEmailEmailEditText.setText("");
+                    binding.signUpEmailAuthButton.setText("다음");
+                    binding.signUpEmailAuthButton.setOnClickListener(v -> {
+                        inputAuthCode = binding.signUpEmailEmailEditText.getText().toString();
+                        signUpViewModel.checkAuthCode(inputUserEmail, inputAuthCode);
+                    });
+                    break;
+                case CODE:
                     ((SignActivity) requireActivity()).replaceFragment(new SignUpPasswordFragment());
                     break;
                 default:

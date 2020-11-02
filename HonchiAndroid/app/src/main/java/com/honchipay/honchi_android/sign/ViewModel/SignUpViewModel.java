@@ -55,4 +55,22 @@ public class SignUpViewModel extends BaseViewModel {
                 })
         );
     }
+
+    public void checkAuthCode(String email, String code) {
+        addDisposable(repository.checkAuthCode(email, code)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(new DisposableSingleObserver<Response<Void>>() {
+                    @Override
+                    public void onSuccess(@NonNull Response<Void> voidResponse) {
+                        haveToNextPageLiveData.postValue(SignUpProcess.CODE);
+                    }
+
+                    @Override
+                    public void onError(@NotNull Throwable e) {
+                        Log.e("LoginViewModel", e.getMessage());
+                    }
+                })
+        );
+    }
 }
