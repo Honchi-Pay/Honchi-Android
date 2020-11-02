@@ -29,7 +29,9 @@ public class SignUpViewModel extends BaseViewModel {
                 .subscribeWith(new DisposableSingleObserver<Response<Void>>() {
                     @Override
                     public void onSuccess(@NonNull Response<Void> voidResponse) {
-                        haveToNextPageLiveData.postValue(SignUpProcess.FIRST);
+                        if (voidResponse.isSuccessful() && voidResponse.code() == 200) {
+                            haveToNextPageLiveData.postValue(SignUpProcess.FIRST);
+                        }
                     }
 
                     @Override
@@ -47,7 +49,9 @@ public class SignUpViewModel extends BaseViewModel {
                 .subscribeWith(new DisposableSingleObserver<Response<Void>>() {
                     @Override
                     public void onSuccess(@NonNull Response<Void> voidResponse) {
-                        haveToNextPageLiveData.postValue(SignUpProcess.EMAIL);
+                        if (voidResponse.isSuccessful() && voidResponse.code() == 200) {
+                            haveToNextPageLiveData.postValue(SignUpProcess.EMAIL);
+                        }
                     }
 
                     @Override
@@ -65,7 +69,9 @@ public class SignUpViewModel extends BaseViewModel {
                 .subscribeWith(new DisposableSingleObserver<Response<Void>>() {
                     @Override
                     public void onSuccess(@NonNull Response<Void> voidResponse) {
-                        haveToNextPageLiveData.postValue(SignUpProcess.CODE);
+                        if (voidResponse.isSuccessful() && voidResponse.code() == 200) {
+                            haveToNextPageLiveData.postValue(SignUpProcess.CODE);
+                        }
                     }
 
                     @Override
@@ -83,7 +89,9 @@ public class SignUpViewModel extends BaseViewModel {
                 .subscribeWith(new DisposableSingleObserver<Response<Void>>() {
                     @Override
                     public void onSuccess(@NonNull Response<Void> voidResponse) {
-                        haveToNextPageLiveData.postValue(SignUpProcess.SIGN_UP);
+                        if (voidResponse.isSuccessful() && voidResponse.code() == 200) {
+                            haveToNextPageLiveData.postValue(SignUpProcess.SIGN_UP);
+                        }
                     }
 
                     @Override

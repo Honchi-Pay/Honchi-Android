@@ -13,5 +13,5 @@ public class HonchipayApplication extends Application {
     }
 
     static HonchipayApplication instance = null;
-    static Context context = instance;
+    static public Context context = instance;
 }

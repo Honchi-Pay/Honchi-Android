@@ -19,6 +19,7 @@ public class HonchipayConnector {
 
         OkHttpClient client = new OkHttpClient.Builder()
                 .addInterceptor(loggingInterceptor)
+                .addInterceptor(new TokenAuthenticator())
                 .build();
 
         Retrofit retrofit = new Retrofit.Builder()
