@@ -51,5 +51,7 @@ public class LoginFragment extends Fragment {
                 requireActivity().startActivity(intent);
             }
         });
+
+        binding.loginBackButton.setOnClickListener(v -> requireActivity().finish());
     }
 }

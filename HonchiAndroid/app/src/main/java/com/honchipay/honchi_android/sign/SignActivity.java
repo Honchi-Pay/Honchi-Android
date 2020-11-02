@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.widget.Toast;
 import com.honchipay.honchi_android.R;
 import com.honchipay.honchi_android.sign.Fragment.LoginFragment;
-import com.honchipay.honchi_android.sign.Fragment.SignUp_email_Fragment;
+import com.honchipay.honchi_android.sign.Fragment.SignUpEmailFragment;
 
 public class SignActivity extends AppCompatActivity {
     FragmentTransaction transaction;
@@ -25,14 +25,14 @@ public class SignActivity extends AppCompatActivity {
                 transaction.add(R.id.sign_fragment, new LoginFragment()).commit();
                 break;
             case "signUp":
-                transaction.add(R.id.sign_fragment, new SignUp_email_Fragment()).commit();
+                transaction.add(R.id.sign_fragment, new SignUpEmailFragment()).commit();
                 break;
             default:
                 Toast.makeText(this,"올바르지 않은 요청입니다.",Toast.LENGTH_LONG).show();
         }
     }
 
-    void replaceFragment(Fragment fragment) {
+    public void replaceFragment(Fragment fragment) {
         transaction.replace(R.id.sign_fragment, fragment).commit();
     }
 }
