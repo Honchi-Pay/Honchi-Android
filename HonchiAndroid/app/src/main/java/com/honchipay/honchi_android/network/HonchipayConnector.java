@@ -38,4 +38,8 @@ public class HonchipayConnector {
 
         return single_instance;
     }
+
+    public HonchipayApi getApi() {
+        return api;
+    }
 }
