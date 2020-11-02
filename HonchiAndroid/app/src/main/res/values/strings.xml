@@ -1,3 +1,27 @@
 <resources>
     <string name="app_name">Honchi-Android</string>
+    <string name="HonchiPay">Honchi Pay.</string>
+    <string name="splash_login">LOGIN</string>
+    <string name="splash_signUp">SIGN UP</string>
+    <string name="login">로그인</string>
+    <string name="signUp">회원가입</string>
+    <string name="id">아이디(이메일)</string>
+    <string name="password">비밀번호</string>
+    <string name="get_id">아이디를 입력해주세요</string>
+    <string name="get_password">비밀번호를 입력해주세요</string>
+    <string name="autoLogin">자동 로그인</string>
+    <string name="forgot_password">비밀번호를 잊어버리셨나요?</string>
+    <string name="find_password">비밀번호 찾기</string>
+    <string name="check_password">비밀번호 확인</string>
+    <string name="password_not_correct">비밀번호가 일치하 않습니다</string>
+    <string name="output_auth_code">인증번호 보내기</string>
+    <string name="next">다음</string>
+    <string name="gender">성별</string>
+    <string name="male">남성</string>
+    <string name="female">여성</string>
+    <string name="nickname">닉네임</string>
+    <string name="get_nickname">닉네임을 입력해주세요</string>
+    <string name="phonenumber">전화번호</string>
+    <string name="only_number">숫자만 입력해주세요</string>
+    <string name="check">확인</string>
 </resources>
