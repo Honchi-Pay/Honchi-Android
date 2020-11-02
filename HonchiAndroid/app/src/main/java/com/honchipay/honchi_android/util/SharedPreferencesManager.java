@@ -10,7 +10,7 @@ public class SharedPreferencesManager {
     private final String SAVE_REFRESH = "refreshToken";
     private static SharedPreferencesManager instance = null;
 
-    static SharedPreferencesManager getInstance() {
+    static public SharedPreferencesManager getInstance() {
         if (instance == null) instance = new SharedPreferencesManager();
         return instance;
     }
@@ -20,31 +20,31 @@ public class SharedPreferencesManager {
             Context.MODE_PRIVATE
     );
 
-    String getAccessToken() {
+    public String getAccessToken() {
         return sharedPrefs.getString(SAVE_TOKEN, null);
     }
 
-    void setAccessToken(String value) {
+    public void setAccessToken(String value) {
         SharedPreferences.Editor editor = sharedPrefs.edit();
         editor.putString(SAVE_TOKEN, value);
         editor.apply();
     }
 
-    String getRefreshToken() {
+    public String getRefreshToken() {
         return sharedPrefs.getString(SAVE_REFRESH, null);
     }
 
-    void setRefreshToken(String value) {
+    public void setRefreshToken(String value) {
         SharedPreferences.Editor editor = sharedPrefs.edit();
         editor.putString(SAVE_REFRESH, value);
         editor.apply();
     }
 
-    Boolean getIsLogin() {
+    public Boolean getIsLogin() {
         return sharedPrefs.getBoolean(IS_LOGIN, false);
     }
 
-    void setIsLogin(Boolean value) {
+    public void setIsLogin(Boolean value) {
         SharedPreferences.Editor editor = sharedPrefs.edit();
         editor.putBoolean(IS_LOGIN, value);
         editor.apply();
