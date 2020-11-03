@@ -10,6 +10,13 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.honchipay.honchi_android.R;
+import com.honchipay.honchi_android.chat.HonchiPaySocket;
+
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.WebSocket;
+import ua.naiksoftware.stomp.Stomp;
+import ua.naiksoftware.stomp.StompClient;
 
 public class ChatListFragment extends Fragment {
     @Override
@@ -21,6 +28,6 @@ public class ChatListFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
+        HonchiPaySocket.getInstance().connectSocket();
     }
 }
