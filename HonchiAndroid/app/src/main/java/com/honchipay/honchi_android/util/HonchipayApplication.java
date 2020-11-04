@@ -4,14 +4,14 @@ import android.annotation.SuppressLint;
 import android.app.Application;
 import android.content.Context;
 
-@SuppressLint("StaticFieldLeak")
 public class HonchipayApplication extends Application {
+    @SuppressLint("StaticFieldLeak")
+    static public Context context;
+
     @Override
     public void onCreate() {
-        instance = this;
         super.onCreate();
+        SharedPreferencesManager.getInstance().init(getApplicationContext());
+        context = getApplicationContext();
     }
-
-    static HonchipayApplication instance = null;
-    static public Context context = instance;
 }
