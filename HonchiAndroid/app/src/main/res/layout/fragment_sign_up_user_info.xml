@@ -27,7 +27,7 @@
             android:layout_marginStart="40dp"
             android:layout_marginTop="34dp"
             android:text="@string/signUp"
-            android:textColor="@android:color/black"
+            android:textColor="@color/black"
             android:textSize="24sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/SignUpInfo_back_button" />
@@ -39,7 +39,7 @@
             android:layout_marginStart="45dp"
             android:layout_marginTop="81dp"
             android:text="@string/nickname"
-            android:textColor="@android:color/black"
+            android:textColor="@color/black"
             android:textSize="10sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/SignUpInfo_title_textView"
@@ -127,6 +127,7 @@
                 android:scaleX="0.85"
                 android:scaleY="0.85"
                 android:text="@string/male"
+                android:textColor="@color/black"
                 android:textSize="12sp" />
 
             <RadioButton
@@ -137,6 +138,7 @@
                 android:scaleX="0.85"
                 android:scaleY="0.85"
                 android:text="@string/female"
+                android:textColor="@color/black"
                 android:textSize="12sp" />
         </RadioGroup>
 
