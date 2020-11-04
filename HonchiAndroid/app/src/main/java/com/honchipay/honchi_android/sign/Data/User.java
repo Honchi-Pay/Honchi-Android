@@ -5,7 +5,7 @@ public class User {
     private String password;
     private String nickname;
     private String phoneNumber;
-    private Enum sex;
+    private Gender sex;
     private Double lat;
     private Double lon;
 }
