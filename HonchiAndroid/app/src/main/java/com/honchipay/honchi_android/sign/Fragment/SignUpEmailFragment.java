@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProvider;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.honchipay.honchi_android.R;
 import com.honchipay.honchi_android.databinding.FragmentSignUpEmailBinding;
@@ -41,6 +42,7 @@ public class SignUpEmailFragment extends Fragment {
                     signUpViewModel.checkDuplicatedEmail(inputUserEmail);
                     break;
                 case EMAIL:
+                    Toast.makeText(getContext(), "메일을 보냈습니다. 인증코드를 3분 안에 인증해 주시길 바랍니다.", Toast.LENGTH_LONG).show();
                     binding.signUpEmailEmailEditText.setText("");
                     binding.signUpEmailAuthButton.setText("다음");
                     binding.signUpEmailAuthButton.setOnClickListener(v -> {
@@ -53,8 +55,11 @@ public class SignUpEmailFragment extends Fragment {
                     Bundle bundle = new Bundle();
                     bundle.putString("email", inputUserEmail);
                     fragment.setArguments(bundle);
-
                     ((SignActivity) requireActivity()).replaceFragment(fragment);
+                    break;
+                case REJECT:
+                    Toast.makeText(getContext(), "인증에 실패하였습니다.", Toast.LENGTH_LONG).show();
+                    setRejectAuthCode();
                     break;
                 default:
                     binding.signUpEmailAuthButton.setClickable(true);
@@ -68,5 +73,15 @@ public class SignUpEmailFragment extends Fragment {
         });
 
         binding.signUpEmailBackButton.setOnClickListener(v -> requireActivity().finish());
+    }
+
+    void setRejectAuthCode() {
+        binding.signUpEmailEmailEditText.setText("");
+        binding.signUpEmailAuthButton.setText("인증번호 보내기");
+        binding.signUpEmailAuthButton.setOnClickListener(v -> {
+            inputUserEmail = binding.signUpEmailEmailEditText.getText().toString();
+            signUpViewModel.checkFirstUser(inputUserEmail);
+            v.setClickable(false);
+        });
     }
 }

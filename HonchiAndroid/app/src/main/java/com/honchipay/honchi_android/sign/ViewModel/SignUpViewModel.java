@@ -38,6 +38,7 @@ public class SignUpViewModel extends BaseViewModel {
                     @Override
                     public void onError(@NotNull Throwable e) {
                         Log.e("LoginViewModel", e.getMessage());
+                        haveToNextPageLiveData.postValue(SignUpProcess.REJECT);
                     }
                 })
         );
@@ -52,12 +53,15 @@ public class SignUpViewModel extends BaseViewModel {
                     public void onSuccess(@NonNull Response<Void> voidResponse) {
                         if (voidResponse.isSuccessful() && voidResponse.code() == 200) {
                             haveToNextPageLiveData.postValue(SignUpProcess.EMAIL);
+                        } else {
+                            haveToNextPageLiveData.postValue(SignUpProcess.REJECT);
                         }
                     }
 
                     @Override
                     public void onError(@NotNull Throwable e) {
                         Log.e("LoginViewModel", e.getMessage());
+                        haveToNextPageLiveData.postValue(SignUpProcess.REJECT);
                     }
                 })
         );

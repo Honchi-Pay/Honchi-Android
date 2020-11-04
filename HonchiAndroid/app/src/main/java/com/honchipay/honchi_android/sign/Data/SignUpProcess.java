@@ -4,5 +4,6 @@ public enum SignUpProcess {
     FIRST,
     EMAIL,
     CODE,
-    SIGN_UP
+    SIGN_UP,
+    REJECT
 }
