@@ -1,5 +1,6 @@
 package com.honchipay.honchi_android.network;
 
+import com.honchipay.honchi_android.profile.data.UserProfileResponse;
 import com.honchipay.honchi_android.sign.Data.SignUpRequest;
 import com.honchipay.honchi_android.sign.Data.TokenResponseData;
 
@@ -22,10 +23,10 @@ public interface HonchipayApi {
     Single<Response<Void>> checkFirstTimeUser(@Field("email") String email);
 
     @FormUrlEncoded
-    @POST("/user/email/verify")
+    @POST("/email/verify")
     Single<Response<Void>> checkDuplicatedEmail(@Field("email") String email);
 
-    @PUT("/user/email/verify")
+    @PUT("/email/verify")
     Single<Response<Void>> checkAuthCode(@Body HashMap<String, String> body);
 
     @POST("/user")

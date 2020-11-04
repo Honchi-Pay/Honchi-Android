@@ -4,6 +4,5 @@ public enum SignUpProcess {
     FIRST,
     EMAIL,
     CODE,
-    PASSWORD,
     SIGN_UP
 }

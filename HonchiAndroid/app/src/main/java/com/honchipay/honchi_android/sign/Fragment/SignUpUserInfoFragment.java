@@ -24,14 +24,10 @@ import com.honchipay.honchi_android.databinding.FragmentSignUpUserInfoBinding;
 import com.honchipay.honchi_android.sign.Data.Gender;
 import com.honchipay.honchi_android.sign.Data.SignUpProcess;
 import com.honchipay.honchi_android.sign.Data.SignUpRequest;
+import com.honchipay.honchi_android.sign.SignActivity;
 import com.honchipay.honchi_android.sign.ViewModel.SignUpViewModel;
 
 import org.jetbrains.annotations.NotNull;
-
-import java.util.Objects;
-
-import io.reactivex.rxjava3.core.Observer;
-import retrofit2.Response;
 
 public class SignUpUserInfoFragment extends Fragment implements LocationListener {
     FragmentSignUpUserInfoBinding binding;
@@ -39,7 +35,6 @@ public class SignUpUserInfoFragment extends Fragment implements LocationListener
     SignUpRequest signUpRequest;
     String inputPhoneNumber = null;
     String inputNickName = null;
-
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -85,7 +80,8 @@ public class SignUpUserInfoFragment extends Fragment implements LocationListener
 
         signUpViewModel.haveToNextPageLiveData.observe(getViewLifecycleOwner(), signUpProcess -> {
             if (signUpProcess == SignUpProcess.SIGN_UP) {
-                Intent intent = new Intent(getContext(), );
+                Intent intent = new Intent(getContext(), SignActivity.class);
+                intent.putExtra("splash", "login");
                 requireActivity().startActivity(intent);
             }
         });

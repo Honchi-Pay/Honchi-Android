@@ -29,6 +29,8 @@ public class SignUpViewModel extends BaseViewModel {
                     @Override
                     public void onSuccess(@NonNull Response<Void> voidResponse) {
                         if (voidResponse.isSuccessful() && voidResponse.code() == 200) {
+                            haveToNextPageLiveData.postValue(SignUpProcess.EMAIL);
+                        } else {
                             haveToNextPageLiveData.postValue(SignUpProcess.FIRST);
                         }
                     }
