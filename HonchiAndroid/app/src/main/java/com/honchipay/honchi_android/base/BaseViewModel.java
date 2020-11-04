@@ -2,8 +2,8 @@ package com.honchipay.honchi_android.base;
 
 import androidx.lifecycle.ViewModel;
 
-import io.reactivex.rxjava3.disposables.CompositeDisposable;
-import io.reactivex.rxjava3.disposables.Disposable;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.disposables.Disposable;
 
 public class BaseViewModel extends ViewModel {
     protected CompositeDisposable compositeDisposable = new CompositeDisposable();

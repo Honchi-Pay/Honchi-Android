@@ -5,7 +5,7 @@ import com.honchipay.honchi_android.sign.Data.TokenResponseData;
 
 import java.util.HashMap;
 
-import io.reactivex.rxjava3.core.Single;
+import io.reactivex.Single;
 import retrofit2.Response;
 import retrofit2.http.Body;
 import retrofit2.http.Field;

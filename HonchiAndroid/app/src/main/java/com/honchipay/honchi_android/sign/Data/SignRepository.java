@@ -4,7 +4,7 @@ import com.honchipay.honchi_android.network.HonchipayConnector;
 
 import java.util.HashMap;
 
-import io.reactivex.rxjava3.core.Single;
+import io.reactivex.Single;
 import retrofit2.Response;
 
 public class SignRepository {
