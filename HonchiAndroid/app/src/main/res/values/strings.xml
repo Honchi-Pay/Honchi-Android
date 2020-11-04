@@ -24,4 +24,9 @@
     <string name="phonenumber">전화번호</string>
     <string name="only_number">숫자만 입력해주세요</string>
     <string name="check">확인</string>
+
+    <string name="logout">로그아웃</string>
+    <string name="change_password">비밀번호 변경</string>
+    <string name="chnage_user_information">개인정보 변경</string>
+    <string name="change_profile">프로필 변경</string>
 </resources>
