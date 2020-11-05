@@ -47,4 +47,7 @@ public interface HonchipayApi {
     @Multipart
     @PUT("/user/profile")
     Single<Response<Void>> updateUserProfile(@Header("Authorizaion") String header, @PartMap HashMap<String, RequestBody> partMap);
+
+    @PUT("/user/password/change")
+    Single<Response<Void>> changePassword(@Header("Authorizaion") String header, @Body HashMap<String, String> body);
 }

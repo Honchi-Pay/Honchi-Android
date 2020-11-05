@@ -20,6 +20,8 @@ import retrofit2.Response;
 public class EditProfileViewModel extends BaseViewModel {
     ProfileRepository repository = new ProfileRepository();
     public ObservableField<String> nickName = new ObservableField<>(SharedPreferencesManager.getInstance().getUserName());
+    public ObservableField<String> password = new ObservableField<>();
+    public ObservableField<String> confirm = new ObservableField<>();
     public MutableLiveData<Boolean> changeSuccess = new MutableLiveData<>();
 
     public void uploadUserNewInfo(File file) {
@@ -30,13 +32,32 @@ public class EditProfileViewModel extends BaseViewModel {
                     .subscribeWith(new DisposableSingleObserver<Response<Void>>() {
                         @Override
                         public void onSuccess(@NonNull Response<Void> uploadResponse) {
-                            if (uploadResponse.isSuccessful() && uploadResponse.code() == 200) {
-                                changeSuccess.postValue(true);
-                            }
+                            changeSuccess.postValue(uploadResponse.isSuccessful() && uploadResponse.code() == 200);
                         }
                         @Override
                         public void onError(@NonNull Throwable e) {
                             Log.e("EditProfileViewModel", e.getMessage());
+                            changeSuccess.postValue(false);
+                        }
+                    })
+            );
+        }
+    }
+
+    public void changeUserPassword() {
+        if (password.get().equals(confirm.get())) {
+            addDisposable(repository.changeUserPassword("")
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribeWith(new DisposableSingleObserver<Response<Void>>() {
+                        @Override
+                        public void onSuccess(@NonNull Response<Void> changeResponse) {
+                            changeSuccess.postValue(changeResponse.isSuccessful() && changeResponse.code() == 200);
+                        }
+                        @Override
+                        public void onError(@NonNull Throwable e) {
+                            Log.e("EditProfileViewModel", e.getMessage());
+                            changeSuccess.postValue(false);
                         }
                     })
             );

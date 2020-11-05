@@ -31,4 +31,7 @@
     <string name="change_profile">프로필 변경</string>
     <string name="to_change">변경하기</string>
     <string name="name">NAME</string>
+    <string name="to_change_password">변결할 비밀번호</string>
+    <string name="to_change_input_password">변경할 비밀번호를 입력해주세요</string>
+    <string name="password_again">다시 한 번 입력해주세요</string>
 </resources>

@@ -26,4 +26,10 @@ public class ProfileRepository {
         requestHashMap.put("nick_name", RequestBody.create(name, MediaType.parse("multipart/form-data")));
         return HonchipayConnector.getInstance().getApi().updateUserProfile(token, requestHashMap);
     }
+
+    public Single<Response<Void>> changeUserPassword(String password) {
+        HashMap<String, String> requestHashMap = new HashMap<>();
+        requestHashMap.put("password", password);
+        return HonchipayConnector.getInstance().getApi().changePassword(token, requestHashMap);
+    }
 }

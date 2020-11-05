@@ -2,38 +2,27 @@ package com.honchipay.honchi_android.profile.view;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.databinding.BindingAdapter;
-import androidx.databinding.DataBindingUtil;
-import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
+import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.databinding.DataBindingUtil;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.bumptech.glide.Glide;
 import com.honchipay.honchi_android.R;
 import com.honchipay.honchi_android.databinding.FragmentEditProfileBinding;
 import com.honchipay.honchi_android.profile.viewmodel.EditProfileViewModel;
-import com.honchipay.honchi_android.profile.viewmodel.ProfileViewModel;
-import com.honchipay.honchi_android.util.SharedPreferencesManager;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.io.BufferedOutputStream;
 import java.io.File;
-import java.io.FileOutputStream;
-import java.io.InputStream;
 
 public class EditProfileFragment extends Fragment {
     public String image = "";
@@ -65,6 +54,7 @@ public class EditProfileFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        EditPrivateInfoActivity activity = (EditPrivateInfoActivity) getActivity();
 
         binding.editProfileUserImageView.setOnClickListener(v -> {
             Intent intent = new Intent();
@@ -76,10 +66,16 @@ public class EditProfileFragment extends Fragment {
         binding.editProfileDoChangeButton.setOnClickListener(v -> {
             editProfileViewModel.uploadUserNewInfo(file);
         });
-        
+
         editProfileViewModel.changeSuccess.observe(getViewLifecycleOwner(), success -> {
-            if (success) getActivity().finish();
+            if (success) {
+                activity.finish();
+            } else {
+                Toast.makeText(getContext(), "프로필을 수정하는데 실패하였습니다.", Toast.LENGTH_LONG).show();
+            }
         });
+
+        binding.editProfileBackButton.setOnClickListener(v -> activity.finish());
     }
 
     @Override
