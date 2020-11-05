@@ -15,4 +15,12 @@ public class LoginRepository {
 
         return HonchipayConnector.getInstance().getApi().tryDoLogin(body);
     }
+
+    public Single<Response<Void>> findUserPassword(String email, String password) {
+        HashMap<String, String> body = new HashMap<>();
+        body.put("email", email);
+        body.put("password", password);
+
+        return HonchipayConnector.getInstance().getApi().findPassword(body);
+    }
 }

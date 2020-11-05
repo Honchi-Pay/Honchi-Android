@@ -130,7 +130,8 @@
             app:layout_constraintStart_toStartOf="parent" />
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:id="@+id/login_find_password_layout"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="18dp"
             android:gravity="center"
@@ -149,7 +150,6 @@
                 tools:ignore="SmallSp" />
 
             <TextView
-                android:id="@+id/login_find_password_textView"
                 android:layout_width="60dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"

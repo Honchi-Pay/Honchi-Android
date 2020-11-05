@@ -19,7 +19,7 @@ import retrofit2.Response;
 
 public class LoginViewModel extends BaseViewModel {
     private final LoginRepository repository = new LoginRepository();
-    public MutableLiveData<Boolean> tokenData = new MutableLiveData<>();
+    public MutableLiveData<Boolean> loginSuccess = new MutableLiveData<>();
 
     public void login(String email, String password) {
         addDisposable(repository.doLogin(email, password)
@@ -37,7 +37,27 @@ public class LoginViewModel extends BaseViewModel {
                                 sharedPreferences.setRefreshToken(tokens.getTokenType() + " " + tokens.getRefreshToken());
                             }
 
-                            tokenData.postValue(true);
+                            loginSuccess.postValue(true);
+                        }
+                    }
+
+                    @Override
+                    public void onError(@NotNull Throwable e) {
+                        Log.e("LoginViewModel", e.getMessage());
+                    }
+                })
+        );
+    }
+
+    public void forgotPassword(String email, String password) {
+        addDisposable(repository.findUserPassword(email, password)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(new DisposableSingleObserver<Response<Void>>() {
+                    @Override
+                    public void onSuccess(@NonNull Response<Void> findPasswordResponse) {
+                        if (findPasswordResponse.isSuccessful() && findPasswordResponse.code() == 200) {
+                            loginSuccess.postValue(true);
                         }
                     }
 
