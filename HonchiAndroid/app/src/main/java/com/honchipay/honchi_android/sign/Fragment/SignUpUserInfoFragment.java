@@ -34,6 +34,8 @@ import com.honchipay.honchi_android.splash.SplashActivity;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.regex.Pattern;
+
 public class SignUpUserInfoFragment extends Fragment implements LocationListener {
     FragmentSignUpUserInfoBinding binding;
     SignUpViewModel signUpViewModel;
@@ -89,7 +91,7 @@ public class SignUpUserInfoFragment extends Fragment implements LocationListener
 
             if (inputPhoneNumber != null && inputNickName != null) {
                 signUpRequest.setNickName(inputNickName);
-                signUpRequest.setPhoneNumber(inputPhoneNumber);
+                signUpRequest.setPhoneNumber(makePhoneNumber(inputPhoneNumber));
                 signUpRequest.setSex(inputGender);
                 signUpViewModel.signUp(signUpRequest);
             }
@@ -104,6 +106,16 @@ public class SignUpUserInfoFragment extends Fragment implements LocationListener
         });
 
         binding.SignUpInfoBackButton.setOnClickListener(v -> requireActivity().finish());
+    }
+
+    private String makePhoneNumber(String phoneNumber) {
+        String regEx = "(\\d{3})(\\d{3,4})(\\d{4})";
+
+        if (!Pattern.matches(regEx, phoneNumber)) {
+            return null;
+        } else {
+            return phoneNumber.replaceAll(regEx, "$1-$2-$3");
+        }
     }
 
     private void startLocationService() {
