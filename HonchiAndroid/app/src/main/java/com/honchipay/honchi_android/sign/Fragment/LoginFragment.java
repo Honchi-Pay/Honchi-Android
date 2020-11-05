@@ -14,6 +14,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.honchipay.honchi_android.R;
 import com.honchipay.honchi_android.databinding.FragmentLoginBinding;
 import com.honchipay.honchi_android.sign.ViewModel.LoginViewModel;
+import com.honchipay.honchi_android.util.SharedPreferencesManager;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -42,8 +43,11 @@ public class LoginFragment extends Fragment {
 
         loginViewModel.tokenData.observe(getViewLifecycleOwner(), loginIsSuccess -> {
             if (loginIsSuccess) {
-                Intent intent = new Intent(getContext(), );
-                requireActivity().startActivity(intent);
+                if (binding.loginAutoLoginCheckBox.isChecked()) {
+                    SharedPreferencesManager.getInstance().setIsLogin(true);
+                }
+//                Intent intent = new Intent(getContext(), );
+//                requireActivity().startActivity(intent);
             }
         });
 

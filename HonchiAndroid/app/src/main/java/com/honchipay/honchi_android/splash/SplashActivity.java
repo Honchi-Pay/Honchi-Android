@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import com.honchipay.honchi_android.R;
 import com.honchipay.honchi_android.sign.SignActivity;
+import com.honchipay.honchi_android.util.SharedPreferencesManager;
 
 public class SplashActivity extends AppCompatActivity implements View.OnClickListener {
     int PERMISSION_CODE = 1111;
@@ -27,6 +28,7 @@ public class SplashActivity extends AppCompatActivity implements View.OnClickLis
         setContentView(R.layout.activity_splash);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
         checkPermission();
+        checkAutoLogin();
     }
 
     @SuppressLint("NonConstantResourceId")
@@ -80,6 +82,13 @@ public class SplashActivity extends AppCompatActivity implements View.OnClickLis
                     finish();
                 }
             }
+        }
+    }
+
+    private void checkAutoLogin() {
+        if (SharedPreferencesManager.getInstance().getIsLogin()) {
+//            Intent intent = new Intent(this, );
+//            startActivity(intent);
         }
     }
 }
