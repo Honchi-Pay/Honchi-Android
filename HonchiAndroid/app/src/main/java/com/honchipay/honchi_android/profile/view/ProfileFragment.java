@@ -20,9 +20,12 @@ import com.honchipay.honchi_android.util.SharedPreferencesManager;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Objects;
+
 public class ProfileFragment extends Fragment {
     FragmentProfileBinding binding;
     ProfileViewModel profileViewModel;
+    String image = "";
 
     @Override
     public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -43,6 +46,8 @@ public class ProfileFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
 
         profileViewModel.getProfile(SharedPreferencesManager.getInstance().getUserName());
+        profileViewModel.profileLiveData.observe(getViewLifecycleOwner(), userProfileResponse ->
+                image = userProfileResponse.getEmail());
     }
 
     private void setBindingAttribute() {
@@ -52,7 +57,12 @@ public class ProfileFragment extends Fragment {
 
     public void moveToEditActivity(String value) {
         Intent intent = new Intent(getContext(), EditPrivateInfoActivity.class);
-        intent.putExtra("editActivity", value);
+        intent.putExtra("whereToEdit", value);
+
+        if (value.equals("profile")) {
+            intent.putExtra("userProfileItem", image);
+        }
+
         startActivity(intent);
     }
 }
