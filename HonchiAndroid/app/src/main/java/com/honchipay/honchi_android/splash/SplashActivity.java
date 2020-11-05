@@ -1,19 +1,17 @@
 package com.honchipay.honchi_android.splash;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-
 import android.Manifest;
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
 import com.honchipay.honchi_android.R;
 import com.honchipay.honchi_android.sign.SignActivity;
@@ -26,23 +24,18 @@ public class SplashActivity extends AppCompatActivity implements View.OnClickLis
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
         checkPermission();
         checkAutoLogin();
     }
 
-    @SuppressLint("NonConstantResourceId")
     @Override
     public void onClick(View v) {
         Intent intent = new Intent(this, SignActivity.class);
 
-        switch (v.getId()) {
-            case R.id.splash_login_button:
-                intent.putExtra("splash", "login");
-                break;
-            case R.id.splash_signUp_button:
-                intent.putExtra("splash", "signUp");
-                break;
+        if (v.getId() == R.id.splash_login_button) {
+            intent.putExtra("splash", "login");
+        } else if (v.getId() == R.id.splash_signUp_button) {
+            intent.putExtra("splash", "signUp");
         }
 
         startActivity(intent);

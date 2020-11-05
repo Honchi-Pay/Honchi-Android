@@ -43,6 +43,7 @@ public class SignUpEmailFragment extends Fragment {
                     break;
                 case EMAIL:
                     Toast.makeText(getContext(), "메일을 보냈습니다. 인증코드를 3분 안에 인증해 주시길 바랍니다.", Toast.LENGTH_LONG).show();
+                    binding.signUpEmailEmailTextView.setText("인증코드");
                     binding.signUpEmailEmailEditText.setText("");
                     binding.signUpEmailAuthButton.setText("다음");
                     binding.signUpEmailAuthButton.setOnClickListener(v -> {
