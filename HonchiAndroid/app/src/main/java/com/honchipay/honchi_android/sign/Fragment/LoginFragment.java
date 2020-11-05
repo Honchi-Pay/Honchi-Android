@@ -9,18 +9,13 @@ import android.view.ViewGroup;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.honchipay.honchi_android.R;
 import com.honchipay.honchi_android.databinding.FragmentLoginBinding;
-import com.honchipay.honchi_android.sign.Data.TokenResponseData;
 import com.honchipay.honchi_android.sign.ViewModel.LoginViewModel;
-import com.honchipay.honchi_android.util.SharedPreferencesManager;
 
 import org.jetbrains.annotations.NotNull;
-
-import java.util.Objects;
 
 public class LoginFragment extends Fragment {
     String inputUserId = null;
