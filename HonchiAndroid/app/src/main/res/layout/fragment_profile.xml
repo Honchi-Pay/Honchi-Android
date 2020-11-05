@@ -5,7 +5,9 @@
     tools:context=".profile.view.ProfileFragment">
 
     <data>
-
+        <variable
+            name="profileFragment"
+            type="com.honchipay.honchi_android.profile.view.ProfileFragment" />
         <variable
             name="profileViewModel"
             type="com.honchipay.honchi_android.profile.viewmodel.ProfileViewModel" />
@@ -108,7 +110,8 @@
                 android:background="@color/white"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
-                app:layout_constraintBottom_toTopOf="@+id/profile_change_user_info_layout"
+                android:onClick="@{() -> profileFragment.moveToEditActivity(`profile`)}"
+                app:layout_constraintBottom_toTopOf="@+id/profile_change_password_layout"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
@@ -140,13 +143,14 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/profile_change_user_info_layout"
+                android:id="@+id/profile_change_password_layout"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:background="@color/white"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
-                app:layout_constraintBottom_toTopOf="@+id/profile_change_password_layout"
+                android:onClick="@{() -> profileFragment.moveToEditActivity(`password`)}"
+                app:layout_constraintBottom_toTopOf="@+id/profile_logout_layout"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
@@ -178,17 +182,17 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/profile_change_password_layout"
+                android:id="@+id/profile_logout_layout"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:background="@color/white"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
-                app:layout_constraintBottom_toTopOf="@+id/profile_change_logout_layout"
+                app:layout_constraintBottom_toTopOf="@+id/profile_withdraw_layout"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/profile_change_user_info_layout">
+                app:layout_constraintTop_toBottomOf="@+id/profile_change_password_layout">
 
                 <ImageView
                     android:layout_width="20dp"
@@ -216,7 +220,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/profile_change_logout_layout"
+                android:id="@+id/profile_withdraw_layout"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:background="@color/white"
@@ -226,7 +230,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/profile_change_password_layout">
+                app:layout_constraintTop_toBottomOf="@+id/profile_logout_layout">
 
                 <ImageView
                     android:layout_width="20dp"

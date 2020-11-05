@@ -1,7 +1,9 @@
 package com.honchipay.honchi_android.profile.view;
 
+import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
@@ -13,7 +15,6 @@ import android.view.ViewGroup;
 
 import com.honchipay.honchi_android.R;
 import com.honchipay.honchi_android.databinding.FragmentProfileBinding;
-import com.honchipay.honchi_android.profile.data.UserProfileResponse;
 import com.honchipay.honchi_android.profile.viewmodel.ProfileViewModel;
 import com.honchipay.honchi_android.util.SharedPreferencesManager;
 
@@ -30,11 +31,28 @@ public class ProfileFragment extends Fragment {
     }
 
     @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        profileViewModel = new ViewModelProvider(this).get(ProfileViewModel.class);
+        setBindingAttribute();
+    }
+
+    @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        profileViewModel = new ViewModelProvider(this).get(ProfileViewModel.class);
-        binding.setProfileViewModel(profileViewModel);
         profileViewModel.getProfile(SharedPreferencesManager.getInstance().getUserName());
+    }
+
+    private void setBindingAttribute() {
+        binding.setProfileFragment(this);
+        binding.setProfileViewModel(profileViewModel);
+    }
+
+    public void moveToEditActivity(String value) {
+        Intent intent = new Intent(getContext(), EditPrivateInfoActivity.class);
+        intent.putExtra("editActivity", value);
+        startActivity(intent);
     }
 }
