@@ -5,6 +5,7 @@
     tools:context=".profile.view.ProfileFragment">
 
     <data>
+
         <variable
             name="profileViewModel"
             type="com.honchipay.honchi_android.profile.viewmodel.ProfileViewModel" />
@@ -25,6 +26,7 @@
 
             <ImageView
                 android:id="@+id/profile_user_imageView"
+                setImage="@{profileViewModel.profileLiveData.images}"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:layout_marginStart="50dp"
@@ -39,8 +41,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:fontFamily="@font/notosanscjkkrmedium"
-                android:text="@{profileViewModel.profileLiveData.nickName}"
                 android:includeFontPadding="false"
+                android:text="@{profileViewModel.profileLiveData.nickName}"
                 android:textColor="@color/white"
                 android:textSize="16sp"
                 app:layout_constraintStart_toEndOf="@+id/profile_user_imageView"
@@ -53,9 +55,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="4dp"
-                android:text="@{profileViewModel.profileLiveData.email}"
                 android:fontFamily="@font/notosanscjkkrlight"
                 android:includeFontPadding="false"
+                android:text="@{profileViewModel.profileLiveData.email}"
                 android:textColor="@color/white"
                 android:textSize="12sp"
                 app:layout_constraintStart_toEndOf="@+id/profile_user_imageView"
@@ -68,8 +70,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
-                android:rating="@{(float)profileViewModel.profileLiveData.star}"
                 android:layout_marginTop="12dp"
+                android:rating="@{(float)profileViewModel.profileLiveData.star}"
                 app:layout_constraintStart_toEndOf="@+id/profile_user_imageView"
                 app:layout_constraintTop_toBottomOf="@+id/profile_email_textView" />
 
@@ -117,7 +119,7 @@
                     android:layout_height="20dp"
                     android:layout_marginStart="20dp"
                     android:layout_marginEnd="20dp"
-                    android:src="@drawable/ic_change_profile"
+                    android:src="@drawable/ic_change_user"
                     tools:ignore="ContentDescription" />
 
                 <TextView
@@ -155,7 +157,7 @@
                     android:layout_height="20dp"
                     android:layout_marginStart="20dp"
                     android:layout_marginEnd="20dp"
-                    android:src="@drawable/ic_change_user"
+                    android:src="@drawable/ic_change_password"
                     tools:ignore="ContentDescription" />
 
                 <TextView
@@ -163,7 +165,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:fontFamily="@font/notosanscjkkrregular"
-                    android:text="@string/chnage_user_information"
+                    android:text="@string/change_password"
                     android:textColor="@color/black"
                     android:textSize="14sp" />
 
@@ -193,7 +195,7 @@
                     android:layout_height="20dp"
                     android:layout_marginStart="20dp"
                     android:layout_marginEnd="20dp"
-                    android:src="@drawable/ic_change_password"
+                    android:src="@drawable/ic_logout"
                     tools:ignore="ContentDescription" />
 
                 <TextView
@@ -201,7 +203,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:fontFamily="@font/notosanscjkkrregular"
-                    android:text="@string/change_password"
+                    android:text="@string/logout"
                     android:textColor="@color/black"
                     android:textSize="14sp" />
 
@@ -231,7 +233,7 @@
                     android:layout_height="20dp"
                     android:layout_marginStart="20dp"
                     android:layout_marginEnd="20dp"
-                    android:src="@drawable/ic_logout"
+                    android:src="@drawable/ic_round_block_24"
                     tools:ignore="ContentDescription" />
 
                 <TextView
@@ -239,7 +241,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:fontFamily="@font/notosanscjkkrregular"
-                    android:text="@string/logout"
+                    android:text="@string/unsubscribe"
                     android:textColor="@color/black"
                     android:textSize="14sp" />
 
