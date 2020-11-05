@@ -76,6 +76,10 @@ public class EditProfileFragment extends Fragment {
         binding.editProfileDoChangeButton.setOnClickListener(v -> {
             editProfileViewModel.uploadUserNewInfo(file);
         });
+        
+        editProfileViewModel.changeSuccess.observe(getViewLifecycleOwner(), success -> {
+            if (success) getActivity().finish();
+        });
     }
 
     @Override
