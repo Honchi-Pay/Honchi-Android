@@ -9,6 +9,7 @@ public class SharedPreferencesManager {
     private final String IS_LOGIN = "isLogin";
     private final String SAVE_TOKEN = "accessToken";
     private final String SAVE_REFRESH = "refreshToken";
+    private final String SAVE_USER_NAME = "userNickName";
     private static SharedPreferencesManager instance = null;
     private SharedPreferences sharedPrefs;
 
@@ -48,6 +49,14 @@ public class SharedPreferencesManager {
     public void setIsLogin(Boolean value) {
         SharedPreferences.Editor editor = sharedPrefs.edit();
         editor.putBoolean(IS_LOGIN, value);
+        editor.apply();
+    }
+
+    public String getUserName() { return sharedPrefs.getString(SAVE_USER_NAME, ""); }
+
+    public void setUserName(String value) {
+        SharedPreferences.Editor editor = sharedPrefs.edit();
+        editor.putString(SAVE_REFRESH, value);
         editor.apply();
     }
 }

@@ -9,6 +9,7 @@ import com.honchipay.honchi_android.base.BaseViewModel;
 import com.honchipay.honchi_android.sign.Data.SignRepository;
 import com.honchipay.honchi_android.sign.Data.SignUpProcess;
 import com.honchipay.honchi_android.sign.Data.SignUpRequest;
+import com.honchipay.honchi_android.util.SharedPreferencesManager;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -96,6 +97,7 @@ public class SignUpViewModel extends BaseViewModel {
                     public void onSuccess(@NonNull Response<Void> voidResponse) {
                         if (voidResponse.isSuccessful() && voidResponse.code() == 200) {
                             haveToNextPageLiveData.postValue(SignUpProcess.SIGN_UP);
+                            SharedPreferencesManager.getInstance().setUserName(signUpRequest.getNickName());
                         }
                     }
 
