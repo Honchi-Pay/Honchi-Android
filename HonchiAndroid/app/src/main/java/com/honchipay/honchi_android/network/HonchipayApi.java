@@ -24,6 +24,9 @@ public interface HonchipayApi {
     @POST("/auth")
     Single<Response<TokenResponseData>> tryDoLogin(@Body HashMap<String, String> body);
 
+    @PUT("/auth")
+    Single<Response<TokenResponseData>> renewToken(@Body String refreshToken);
+
     @PUT("/user/email/verify")
     Single<Response<Void>> findPassword(@Body HashMap<String, String> body);
 
