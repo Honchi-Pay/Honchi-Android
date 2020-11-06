@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Honchi-Android</string>
+    <string name="purchase_history">구매내역</string>
+    <string name="goods_name">상품이름</string>
+    <string name="price">가격</string>
+    <string name="date">날짜</string>
+    <string name="bought_together">함께 구매한 사람</string>
 </resources>
