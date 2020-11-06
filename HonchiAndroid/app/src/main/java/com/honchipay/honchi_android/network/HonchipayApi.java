@@ -55,6 +55,9 @@ public interface HonchipayApi {
     @PUT("/user/password/change")
     Single<Response<Void>> changePassword(@Header("Authorization") String header, @Body HashMap<String, String> body);
 
+    @POST("/user/star")
+    Single<Response<Void>> sendUserEvaluation(@Header("Authorization") String header, @Body HashMap<String, Integer> body);
+
     @FormUrlEncoded
     @DELETE("/user/out")
     Single<Response<Void>> withdrawFromService(@Header("Authorization") String header, @Field("nickName") String name);

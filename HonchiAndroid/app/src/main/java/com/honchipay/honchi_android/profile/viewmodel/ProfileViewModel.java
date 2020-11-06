@@ -44,6 +44,26 @@ public class ProfileViewModel extends BaseViewModel {
         );
     }
 
+    public void setUserRating(int rating) {
+        addDisposable(repository.sendUserEvaluation(rating)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(new DisposableSingleObserver<Response<Void>>() {
+                    @Override
+                    public void onSuccess(@NonNull Response<Void> ratingResponse) {
+                        if (ratingResponse.isSuccessful() && ratingResponse.code() == 200) {
+
+                        }
+                    }
+
+                    @Override
+                    public void onError(@NotNull Throwable e) {
+                        Log.e("ProfileViewModel", e.getMessage());
+                    }
+                })
+        );
+    }
+
     public void signOutFromLogin() {
         signOutLiveData.setValue(true);
     }

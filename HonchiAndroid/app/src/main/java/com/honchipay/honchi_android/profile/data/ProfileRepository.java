@@ -33,6 +33,12 @@ public class ProfileRepository {
         return HonchipayConnector.getInstance().getApi().changePassword(token, requestHashMap);
     }
 
+    public Single<Response<Void>> sendUserEvaluation(int rating) {
+        HashMap<String, Integer> requestHashMap = new HashMap<>();
+        requestHashMap.put("star", rating);
+        return HonchipayConnector.getInstance().getApi().sendUserEvaluation(token, requestHashMap);
+    }
+
     public Single<Response<Void>> withdrawFromService() {
         String name = SharedPreferencesManager.getInstance().getUserName();
         return HonchipayConnector.getInstance().getApi().withdrawFromService(token, name);
