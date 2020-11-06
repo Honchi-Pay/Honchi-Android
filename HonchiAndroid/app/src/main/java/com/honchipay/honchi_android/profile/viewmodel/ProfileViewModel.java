@@ -22,6 +22,7 @@ import retrofit2.Response;
 public class ProfileViewModel extends BaseViewModel {
     private final ProfileRepository repository = new ProfileRepository();
     public MutableLiveData<UserProfileResponse> profileLiveData = new MutableLiveData<>();
+    public MutableLiveData<Boolean> signOutLiveData = new MutableLiveData<>();
 
     public void getProfile(String name) {
         addDisposable(repository.getUserProfile(name)
@@ -38,6 +39,29 @@ public class ProfileViewModel extends BaseViewModel {
                     @Override
                     public void onError(@NotNull Throwable e) {
                         Log.e("ProfileViewModel", e.getMessage());
+                    }
+                })
+        );
+    }
+
+    public void signOutFromLogin() {
+        signOutLiveData.setValue(true);
+    }
+
+    public void signOutFromService() {
+        addDisposable(repository.withdrawFromService()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(new DisposableSingleObserver<Response<Void>>() {
+                    @Override
+                    public void onSuccess(@NonNull Response<Void> deleteUserResponse) {
+                        signOutLiveData.postValue(deleteUserResponse.isSuccessful() && deleteUserResponse.code() == 200);
+                    }
+
+                    @Override
+                    public void onError(@NotNull Throwable e) {
+                        Log.e("ProfileViewModel", e.getMessage());
+                        signOutLiveData.postValue(false);
                     }
                 })
         );

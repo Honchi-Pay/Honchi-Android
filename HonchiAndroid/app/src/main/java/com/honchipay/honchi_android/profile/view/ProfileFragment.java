@@ -1,5 +1,7 @@
 package com.honchipay.honchi_android.profile.view;
 
+import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -12,15 +14,19 @@ import androidx.lifecycle.ViewModelProvider;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.honchipay.honchi_android.R;
 import com.honchipay.honchi_android.databinding.FragmentProfileBinding;
 import com.honchipay.honchi_android.profile.viewmodel.ProfileViewModel;
+import com.honchipay.honchi_android.splash.SplashActivity;
 import com.honchipay.honchi_android.util.SharedPreferencesManager;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Objects;
 
 public class ProfileFragment extends Fragment {
     FragmentProfileBinding binding;
@@ -48,6 +54,18 @@ public class ProfileFragment extends Fragment {
         profileViewModel.getProfile(SharedPreferencesManager.getInstance().getUserName());
         profileViewModel.profileLiveData.observe(getViewLifecycleOwner(), userProfileResponse ->
                 image = userProfileResponse.getEmail());
+
+        profileViewModel.signOutLiveData.observe(getViewLifecycleOwner(), isSignOut -> {
+            Context context = getContext();
+
+            if (isSignOut) {
+                Intent intent = new Intent(context, SplashActivity.class);
+                context.startActivity(intent);
+                getActivity().finish();
+            } else {
+                Toast.makeText(context, "실패하였습니다.", Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
     private void setBindingAttribute() {
@@ -64,5 +82,26 @@ public class ProfileFragment extends Fragment {
         }
 
         startActivity(intent);
+    }
+
+    public void showDialog(String title, Boolean isOutFromService) {
+        Dialog dialog = new Dialog(getContext());
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.custom_dialog);
+        ((TextView) dialog.findViewById(R.id.dialog_title_textView)).setText(title);
+        dialog.show();
+
+        Button cancelButton = dialog.findViewById(R.id.dialog_cancel_button);
+        Button okButton = dialog.findViewById(R.id.dialog_ok_button);
+
+        cancelButton.setOnClickListener(v -> dialog.dismiss());
+        okButton.setOnClickListener(v -> {
+            dialog.dismiss();
+            if (isOutFromService) {
+                profileViewModel.signOutFromService();
+            } else {
+                profileViewModel.signOutFromLogin();
+            }
+        });
     }
 }

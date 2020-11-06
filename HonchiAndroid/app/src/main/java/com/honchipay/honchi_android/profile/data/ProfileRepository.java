@@ -32,4 +32,9 @@ public class ProfileRepository {
         requestHashMap.put("password", password);
         return HonchipayConnector.getInstance().getApi().changePassword(token, requestHashMap);
     }
+
+    public Single<Response<Void>> withdrawFromService() {
+        String name = SharedPreferencesManager.getInstance().getUserName();
+        return HonchipayConnector.getInstance().getApi().withdrawFromService(token, name);
+    }
 }

@@ -10,6 +10,7 @@ import io.reactivex.Single;
 import okhttp3.RequestBody;
 import retrofit2.Response;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -46,8 +47,12 @@ public interface HonchipayApi {
 
     @Multipart
     @PUT("/user/profile")
-    Single<Response<Void>> updateUserProfile(@Header("Authorizaion") String header, @PartMap HashMap<String, RequestBody> partMap);
+    Single<Response<Void>> updateUserProfile(@Header("Authorization") String header, @PartMap HashMap<String, RequestBody> partMap);
 
     @PUT("/user/password/change")
-    Single<Response<Void>> changePassword(@Header("Authorizaion") String header, @Body HashMap<String, String> body);
+    Single<Response<Void>> changePassword(@Header("Authorization") String header, @Body HashMap<String, String> body);
+
+    @FormUrlEncoded
+    @DELETE("/user/out")
+    Single<Response<Void>> withdrawFromService(@Header("Authorization") String header, @Field("nickName") String name);
 }
