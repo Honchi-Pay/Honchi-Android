@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,11 +28,12 @@ import com.honchipay.honchi_android.util.SharedPreferencesManager;
 
 import org.jetbrains.annotations.NotNull;
 
-
 public class ProfileFragment extends Fragment {
     FragmentProfileBinding binding;
     ProfileViewModel profileViewModel;
     String image = "";
+    int id = 0;
+    float rating = 0f;
 
     @Override
     public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -52,8 +54,10 @@ public class ProfileFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
 
         profileViewModel.getProfile(SharedPreferencesManager.getInstance().getUserName());
-        profileViewModel.profileLiveData.observe(getViewLifecycleOwner(), userProfileResponse ->
-                image = userProfileResponse.getEmail());
+        profileViewModel.profileLiveData.observe(getViewLifecycleOwner(), userProfileResponse -> {
+            image = userProfileResponse.getEmail();
+            id = userProfileResponse.getUserId();
+        });
 
         profileViewModel.signOutLiveData.observe(getViewLifecycleOwner(), isSignOut -> {
             Context context = getContext();
@@ -64,6 +68,13 @@ public class ProfileFragment extends Fragment {
                 getActivity().finish();
             } else {
                 Toast.makeText(context, "실패하였습니다.", Toast.LENGTH_LONG).show();
+            }
+        });
+
+        profileViewModel.successStarLiveData.observe(getViewLifecycleOwner(), isStared -> {
+            if (isStared) {
+                binding.profileConfidenceRatingBar.setRating(rating);
+                binding.profileRatingRateTextView.setText(String.valueOf(rating));
             }
         });
     }
@@ -106,6 +117,20 @@ public class ProfileFragment extends Fragment {
     }
 
     public void showRatingBar() {
+        Dialog dialog = new Dialog(getContext());
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.custom_rating_bar_dialog);
+        RatingBar ratingBar = dialog.findViewById(R.id.dialog_title_ratingBar);
+        dialog.show();
 
+        Button cancelButton = dialog.findViewById(R.id.dialog_cancel_button);
+        Button okButton = dialog.findViewById(R.id.dialog_ok_button);
+
+        cancelButton.setOnClickListener(v -> dialog.dismiss());
+        okButton.setOnClickListener(v -> {
+            dialog.dismiss();
+            rating = ratingBar.getRating();
+            profileViewModel.setUserRating((int) rating, id);
+        });
     }
 }

@@ -7,6 +7,7 @@ public class UserProfileResponse {
     private double star;
     private String images;
     private boolean mine;
+    private int userId;
 
     public String getEmail() {
         return email;
@@ -55,4 +56,8 @@ public class UserProfileResponse {
     public void setMine(boolean mine) {
         this.mine = mine;
     }
+
+    public int getUserId() { return userId; }
+
+    public void setUserId(int userId) { this.userId = userId; }
 }

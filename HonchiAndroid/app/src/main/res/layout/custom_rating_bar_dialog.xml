@@ -6,15 +6,15 @@
     android:layout_gravity="center"
     android:background="@drawable/sign_login_btn"
     android:backgroundTint="@color/white"
+    android:gravity="center"
     android:orientation="vertical">
 
     <RatingBar
-        android:id="@+id/dialog_title_"
-        android:layout_width="match_parent"
-        style="?android:attr/ratingBarStyleSmall"
+        android:id="@+id/dialog_title_ratingBar"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:numStars="10"
-        android:gravity="center" />
+        android:gravity="center"
+        android:numStars="5" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -27,7 +27,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@android:color/transparent"
-            android:text="@string/yes"
+            android:text="@string/cancel"
             android:textColor="@color/black"
             android:textSize="17sp"
             tools:ignore="ButtonStyle" />
@@ -38,7 +38,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@android:color/transparent"
-            android:text="@string/no"
+            android:text="@string/check"
             android:textColor="@color/black"
             android:textSize="17sp"
             tools:ignore="ButtonStyle" />

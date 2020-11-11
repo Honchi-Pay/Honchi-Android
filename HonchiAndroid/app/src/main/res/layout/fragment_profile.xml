@@ -5,7 +5,6 @@
     tools:context=".profile.view.ProfileFragment">
 
     <data>
-
         <variable
             name="profileFragment"
             type="com.honchipay.honchi_android.profile.view.ProfileFragment" />
@@ -75,6 +74,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="12dp"
+                android:onClick="@{() ->profileFragment.showRatingBar()}"
                 android:rating="@{(float)profileViewModel.profileLiveData.star}"
                 app:layout_constraintStart_toEndOf="@+id/profile_user_imageView"
                 app:layout_constraintTop_toBottomOf="@+id/profile_email_textView" />

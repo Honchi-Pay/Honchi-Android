@@ -33,8 +33,9 @@ public class ProfileRepository {
         return HonchipayConnector.getInstance().getApi().changePassword(token, requestHashMap);
     }
 
-    public Single<Response<Void>> sendUserEvaluation(int rating) {
+    public Single<Response<Void>> sendUserEvaluation(int userId, int rating) {
         HashMap<String, Integer> requestHashMap = new HashMap<>();
+        requestHashMap.put("targetId", userId);
         requestHashMap.put("star", rating);
         return HonchipayConnector.getInstance().getApi().sendUserEvaluation(token, requestHashMap);
     }

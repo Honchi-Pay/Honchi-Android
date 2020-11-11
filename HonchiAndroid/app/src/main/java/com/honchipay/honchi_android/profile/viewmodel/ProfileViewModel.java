@@ -23,6 +23,7 @@ public class ProfileViewModel extends BaseViewModel {
     private final ProfileRepository repository = new ProfileRepository();
     public MutableLiveData<UserProfileResponse> profileLiveData = new MutableLiveData<>();
     public MutableLiveData<Boolean> signOutLiveData = new MutableLiveData<>();
+    public MutableLiveData<Boolean> successStarLiveData = new MutableLiveData<>();
 
     public void getProfile(String name) {
         addDisposable(repository.getUserProfile(name)
@@ -44,15 +45,15 @@ public class ProfileViewModel extends BaseViewModel {
         );
     }
 
-    public void setUserRating(int rating) {
-        addDisposable(repository.sendUserEvaluation(rating)
+    public void setUserRating(int userId, int rating) {
+        addDisposable(repository.sendUserEvaluation(userId, rating)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(new DisposableSingleObserver<Response<Void>>() {
                     @Override
                     public void onSuccess(@NonNull Response<Void> ratingResponse) {
                         if (ratingResponse.isSuccessful() && ratingResponse.code() == 200) {
-
+                            successStarLiveData.postValue(true);
                         }
                     }
 
