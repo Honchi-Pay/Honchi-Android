@@ -8,4 +8,9 @@
     <color name="white">#ffffff</color>
     <color name="sign_gray">#8d8d8d</color>
     <color name="black">#000000</color>
+    <color name="colorPrimary">#6200EE</color>
+    <color name="colorPrimaryDark">@android:color/white</color>
+    <color name="colorAccent">#03DAC5</color>
+    <color name="mainColor">#79A5DF</color>
+    <color name="brightGray">#E4E4E4</color>
 </resources>

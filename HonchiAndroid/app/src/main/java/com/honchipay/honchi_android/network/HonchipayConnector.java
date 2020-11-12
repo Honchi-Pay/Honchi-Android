@@ -1,4 +1,3 @@
-
 package com.honchipay.honchi_android.network;
 
 import okhttp3.OkHttpClient;
@@ -39,7 +38,7 @@ public class HonchipayConnector {
 
         return single_instance;
     }
-
+  
     public HonchipayApi getApi() {
         return api;
     }
