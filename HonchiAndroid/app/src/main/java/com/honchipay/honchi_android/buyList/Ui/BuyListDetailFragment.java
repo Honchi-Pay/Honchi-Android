@@ -1,4 +1,4 @@
-package com.honchipay.honchi_android.purchaseHistory.Ui;
+package com.honchipay.honchi_android.buyList.Ui;
 
 import android.os.Bundle;
 
