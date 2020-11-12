@@ -1,12 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
-
-    <data>
-        <variable
-            name="purchase"
-            type="com.honchipay.honchi_android.purchaseHistory.ViewModel.PurchaseHistoryViewModel" />
-    </data>
         
     <LinearLayout
         android:layout_width="match_parent"
@@ -15,7 +9,7 @@
         android:orientation="vertical"
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
-        tools:context=".purchaseHistory.Ui.BuyListFragment">
+        tools:context=".buyList.Ui.BuyListFragment">
 
         <TextView
             android:layout_width="match_parent"
@@ -64,7 +58,7 @@
         </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/purchase_recyclerView"
+            android:id="@+id/buyList_recyclerView"
             android:layout_width="match_parent"
             android:layout_height="450dp" />
 
@@ -76,28 +70,28 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/purchase_back_button"
+                android:id="@+id/buyList_back_button"
                 android:layout_width="24dp"
                 android:layout_height="match_parent"
                 android:layout_marginRight="20dp"
                 android:background="@color/white" />
 
             <Button
-                android:id="@+id/purchase_pageOne_button"
+                android:id="@+id/buyList_pageOne_button"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_marginRight="8dp"
                 android:background="@color/white" />
 
             <Button
-                android:id="@+id/purchase_pageTwo_button"
+                android:id="@+id/buyList_pageTwo_button"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_marginRight="20dp"
                 android:background="@color/white" />
 
             <Button
-                android:id="@+id/purchase_next_button"
+                android:id="@+id/buyList_next_button"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:background="@color/white" />

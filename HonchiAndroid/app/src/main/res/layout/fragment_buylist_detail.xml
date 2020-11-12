@@ -8,7 +8,7 @@
         android:layout_height="match_parent"
         android:background="@color/purchase_background"
         android:orientation="vertical"
-        tools:context=".purchaseHistory.Ui.BuyListDetailFragment">
+        tools:context=".buyList.Ui.BuyListDetailFragment">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"

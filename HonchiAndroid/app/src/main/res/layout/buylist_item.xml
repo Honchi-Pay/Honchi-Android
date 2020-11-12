@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="buyListViewModel"
+            type="com.honchipay.honchi_android.buyList.ViewModel.BuyListViewModel" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -9,33 +16,33 @@
         android:paddingRight="20dp">
 
         <TextView
-            android:id="@+id/purchaseItem_goods_textView"
+            android:id="@+id/buyList_goods_textView"
             android:layout_width="25dp"
             android:layout_height="7dp"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="170dp"
-            android:text="빠삐코"
+            android:text="@{buyListViewModel.buyListLiveData.title}"
             android:textSize="11sp"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toLeftOf="@id/purchaseItem_price_textView"
+            app:layout_constraintRight_toLeftOf="@id/buyList_price_textView"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/purchaseItem_price_textView"
+            android:id="@+id/buyList_price_textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="50dp"
-            android:text="30000"
+            android:text="@{buyListViewModel.buyListLiveData.price}"
             android:textSize="11sp"
-            app:layout_constraintRight_toLeftOf="@id/purchaseItem_date_textView"
+            app:layout_constraintRight_toLeftOf="@id/buyList_date_textView"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/purchaseItem_date_textView"
+            android:id="@+id/buyList_date_textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="20dp"
-            android:text="2020.11.04"
+            android:text="@{buyListViewModel.buyListLiveData.created_at}"
             android:textSize="11sp"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -45,7 +52,7 @@
             android:layout_height="2dp"
             android:layout_marginTop="15dp"
             android:background="@color/item_gray"
-            app:layout_constraintTop_toBottomOf="@id/purchaseItem_goods_textView" />
+            app:layout_constraintTop_toBottomOf="@id/buyList_goods_textView" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
