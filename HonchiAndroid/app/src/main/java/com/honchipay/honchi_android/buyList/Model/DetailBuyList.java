@@ -1,7 +1,7 @@
-package com.honchipay.honchi_android.purchaseHistory.Model;
+package com.honchipay.honchi_android.buyList.Model;
 
 
-public class BuyListDetailItem {
+public class DetailBuyList {
     int post_id;
     String title;
     String writer;
