@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="colorPrimary">#FFFFFF</color>
+    <color name="colorPrimaryDark">#FFFFFF</color>
+    <color name="colorAccent">#79A5DF</color>
+    <color name="splashBackground">#8c000000</color>
+    <color name="red">#DB0000</color>
+    <color name="white">#ffffff</color>
+    <color name="sign_gray">#8d8d8d</color>
+    <color name="black">#000000</color>
     <color name="colorPrimary">#6200EE</color>
     <color name="colorPrimaryDark">@android:color/white</color>
     <color name="colorAccent">#03DAC5</color>

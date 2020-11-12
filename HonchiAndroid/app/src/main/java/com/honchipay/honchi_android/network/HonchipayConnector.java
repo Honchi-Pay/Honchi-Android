@@ -8,7 +8,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class HonchipayConnector {
     HonchipayApi api;
-    String baseURL = "";
+    String baseURL = "http://10.156.145.107:3000";
 
     private static HonchipayConnector single_instance = null;
 
@@ -18,6 +18,7 @@ public class HonchipayConnector {
 
         OkHttpClient client = new OkHttpClient.Builder()
                 .addInterceptor(loggingInterceptor)
+                .addInterceptor(new TokenAuthenticator())
                 .build();
 
         Retrofit retrofit = new Retrofit.Builder()
@@ -36,5 +37,9 @@ public class HonchipayConnector {
         }
 
         return single_instance;
+    }
+  
+    public HonchipayApi getApi() {
+        return api;
     }
 }

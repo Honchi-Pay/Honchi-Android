@@ -3,8 +3,11 @@
     package="com.honchipay.honchi_android">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
+        android:name=".util.HonchipayApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -16,18 +19,21 @@
         <activity
             android:name=".chat.view.MessengerActivity"
             android:windowSoftInputMode="adjustUnspecified|adjustPan" />
-
-        <meta-data
-            android:name="com.google.android.geo.API_KEY"
-            android:value="@string/googleMapApi" />
-
-        <activity android:name=".MainActivity">
+        <activity
+          android:name=".splash.SplashActivity"
+          android:theme="@style/FullScreenTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".sign.SignActivity" />
+        <activity android:name=".profile.view.EditPrivateInfoActivity" />
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/googleMapApi" />
     </application>
 
 </manifest>
