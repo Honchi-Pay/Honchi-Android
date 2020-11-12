@@ -60,4 +60,9 @@ public class UserProfileResponse {
     public int getUserId() { return userId; }
 
     public void setUserId(int userId) { this.userId = userId; }
+
+
+    public float getFloatStar() { return (float) star; }
+
+    public String getStringStar() { return Double.toString(star); }
 }

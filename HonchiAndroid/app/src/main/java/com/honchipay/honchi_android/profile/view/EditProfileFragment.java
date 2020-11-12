@@ -47,7 +47,7 @@ public class EditProfileFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         editProfileViewModel = new ViewModelProvider(this).get(EditProfileViewModel.class);
-        binding.setDditProfileViewModel(editProfileViewModel);
+        binding.setEditProfileViewModel(editProfileViewModel);
         Glide.with(this).load(image).circleCrop().into(binding.editProfileUserImageView);
     }
 

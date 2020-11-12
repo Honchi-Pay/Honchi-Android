@@ -95,11 +95,11 @@ public class ProfileFragment extends Fragment {
         startActivity(intent);
     }
 
-    public void showDialog(String title, Boolean isOutFromService) {
+    public void showSignOutDialog() {
         Dialog dialog = new Dialog(getContext());
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.custom_dialog);
-        ((TextView) dialog.findViewById(R.id.dialog_title_textView)).setText(title);
+        ((TextView) dialog.findViewById(R.id.dialog_title_textView)).setText("정말 탈퇴하시겠습니까?");
         dialog.show();
 
         Button cancelButton = dialog.findViewById(R.id.dialog_cancel_button);
@@ -108,11 +108,24 @@ public class ProfileFragment extends Fragment {
         cancelButton.setOnClickListener(v -> dialog.dismiss());
         okButton.setOnClickListener(v -> {
             dialog.dismiss();
-            if (isOutFromService) {
-                profileViewModel.signOutFromService();
-            } else {
-                profileViewModel.signOutFromLogin();
-            }
+            profileViewModel.signOutFromService();
+        });
+    }
+
+    public void showLogOutDialog() {
+        Dialog dialog = new Dialog(getContext());
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.custom_dialog);
+        ((TextView) dialog.findViewById(R.id.dialog_title_textView)).setText("정말 로그아웃하시겠습니까?");
+        dialog.show();
+
+        Button cancelButton = dialog.findViewById(R.id.dialog_cancel_button);
+        Button okButton = dialog.findViewById(R.id.dialog_ok_button);
+
+        cancelButton.setOnClickListener(v -> dialog.dismiss());
+        okButton.setOnClickListener(v -> {
+            dialog.dismiss();
+            profileViewModel.signOutFromLogin();
         });
     }
 

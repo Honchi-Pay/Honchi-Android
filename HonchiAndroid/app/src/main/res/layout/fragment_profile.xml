@@ -5,6 +5,7 @@
     tools:context=".profile.view.ProfileFragment">
 
     <data>
+
         <variable
             name="profileFragment"
             type="com.honchipay.honchi_android.profile.view.ProfileFragment" />
@@ -74,8 +75,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="12dp"
-                android:onClick="@{() ->profileFragment.showRatingBar()}"
-                android:rating="@{(float)profileViewModel.profileLiveData.star}"
+                android:onClick="@{()->profileFragment.showRatingBar()}"
+                android:rating="@{profileViewModel.profileLiveData.getFloatStar}"
                 app:layout_constraintStart_toEndOf="@+id/profile_user_imageView"
                 app:layout_constraintTop_toBottomOf="@+id/profile_email_textView" />
 
@@ -85,7 +86,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:includeFontPadding="false"
-                android:text="@{Double.toString(profileViewModel.profileLiveData.star)}"
+                android:text="@{profileViewModel.profileLiveData.getStringStar}"
                 android:textColor="@color/white"
                 android:textSize="10sp"
                 app:layout_constraintBottom_toBottomOf="@+id/profile_confidence_ratingBar"
@@ -111,7 +112,7 @@
                 android:layout_height="50dp"
                 android:background="@color/white"
                 android:gravity="center_vertical"
-                android:onClick="@{() -> profileFragment.moveToEditActivity(`profile`)}"
+                android:onClick='@{()->profileFragment.moveToEditActivity("profile")}'
                 android:orientation="horizontal"
                 app:layout_constraintBottom_toTopOf="@+id/profile_change_password_layout"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -150,7 +151,7 @@
                 android:layout_height="50dp"
                 android:background="@color/white"
                 android:gravity="center_vertical"
-                android:onClick="@{() -> profileFragment.moveToEditActivity(`password`)}"
+                android:onClick='@{()->profileFragment.moveToEditActivity("password")}'
                 android:orientation="horizontal"
                 app:layout_constraintBottom_toTopOf="@+id/profile_logout_layout"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -189,7 +190,7 @@
                 android:layout_height="50dp"
                 android:background="@color/white"
                 android:gravity="center_vertical"
-                android:onClick="@{() -> profileFragment.showDialog(`정말 로그아웃하시겠습니까?`, false)}"
+                android:onClick='@{()->profileFragment.showLogOutDialog()}'
                 android:orientation="horizontal"
                 app:layout_constraintBottom_toTopOf="@+id/profile_withdraw_layout"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -228,7 +229,7 @@
                 android:layout_height="50dp"
                 android:background="@color/white"
                 android:gravity="center_vertical"
-                android:onClick="@{() -> profileFragment.showDialog(`정말 탈퇴하시겠습니까?`, true)}"
+                android:onClick='@{()->profileFragment.showSignOutDialog()}'
                 android:orientation="horizontal"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
