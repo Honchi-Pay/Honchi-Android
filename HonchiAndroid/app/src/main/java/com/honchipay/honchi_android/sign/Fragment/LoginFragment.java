@@ -1,6 +1,5 @@
 package com.honchipay.honchi_android.sign.Fragment;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,18 +8,14 @@ import android.view.ViewGroup;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.honchipay.honchi_android.R;
 import com.honchipay.honchi_android.databinding.FragmentLoginBinding;
-import com.honchipay.honchi_android.sign.Data.TokenResponseData;
 import com.honchipay.honchi_android.sign.ViewModel.LoginViewModel;
 import com.honchipay.honchi_android.util.SharedPreferencesManager;
 
 import org.jetbrains.annotations.NotNull;
-
-import java.util.Objects;
 
 public class LoginFragment extends Fragment {
     String inputUserId = null;
@@ -45,13 +40,27 @@ public class LoginFragment extends Fragment {
             loginViewModel.login(inputUserId, inputUserPW);
         });
 
-        loginViewModel.tokenData.observe(getViewLifecycleOwner(), loginIsSuccess -> {
+        loginViewModel.loginSuccess.observe(getViewLifecycleOwner(), loginIsSuccess -> {
             if (loginIsSuccess) {
-                Intent intent = new Intent(getContext(), );
-                requireActivity().startActivity(intent);
+                if (binding.loginAutoLoginCheckBox.isChecked()) {
+                    SharedPreferencesManager.getInstance().setIsLogin(true);
+                }
+//                Intent intent = new Intent(getContext(), );
+//                requireActivity().startActivity(intent);
             }
         });
 
         binding.loginBackButton.setOnClickListener(v -> requireActivity().finish());
+        binding.loginFindPasswordLayout.setOnClickListener(v -> {
+            binding.loginPasswordEditText.setHint("변경하실 비밀번호를 입력해주세요");
+            binding.loginAutoLoginCheckBox.setVisibility(View.GONE);
+            binding.loginLoginButton.setText("비밀번호 변경하기");
+            binding.loginLoginButton.setOnClickListener(v1 -> {
+                inputUserId = binding.loginIdEditText.getText().toString();
+                inputUserPW = binding.loginPasswordEditText.getText().toString();
+                loginViewModel.forgotPassword(inputUserId, inputUserPW);
+            });
+            v.setVisibility(View.GONE);
+        });
     }
 }

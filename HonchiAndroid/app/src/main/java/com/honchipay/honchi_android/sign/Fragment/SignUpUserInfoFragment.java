@@ -14,38 +14,42 @@ import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RadioGroup;
+import android.widget.Toast;
 
 import com.honchipay.honchi_android.R;
 import com.honchipay.honchi_android.databinding.FragmentSignUpUserInfoBinding;
 import com.honchipay.honchi_android.sign.Data.Gender;
 import com.honchipay.honchi_android.sign.Data.SignUpProcess;
 import com.honchipay.honchi_android.sign.Data.SignUpRequest;
+import com.honchipay.honchi_android.sign.SignActivity;
 import com.honchipay.honchi_android.sign.ViewModel.SignUpViewModel;
+import com.honchipay.honchi_android.splash.SplashActivity;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Objects;
-
-import io.reactivex.rxjava3.core.Observer;
-import retrofit2.Response;
+import java.util.regex.Pattern;
 
 public class SignUpUserInfoFragment extends Fragment implements LocationListener {
     FragmentSignUpUserInfoBinding binding;
     SignUpViewModel signUpViewModel;
-    SignUpRequest signUpRequest;
+    SignUpRequest signUpRequest = new SignUpRequest();
     String inputPhoneNumber = null;
     String inputNickName = null;
-
+    Gender inputGender = Gender.MALE;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        signUpRequest.setEmail(requireArguments().getString("email"));
-        signUpRequest.setPassword(requireArguments().getString("password"));
+
+        signUpRequest.setEmail(getArguments().getString("email", null));
+        signUpRequest.setPassword(getArguments().getString("password", null));
         startLocationService();
     }
 
@@ -71,26 +75,47 @@ public class SignUpUserInfoFragment extends Fragment implements LocationListener
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        signUpViewModel = new ViewModelProvider(this).get(SignUpViewModel.class);
+
+        binding.SignUpInfoGenderRadioGroup.setOnCheckedChangeListener((group, checkedId) -> {
+            if (checkedId == R.id.SignUpInfo_male_radioButton) {
+                inputGender = Gender.MALE;
+            } else {
+                inputGender = Gender.FEMALE;
+            }
+        });
 
         binding.SignUpInfoSignUpButton.setOnClickListener(v -> {
             inputPhoneNumber = binding.SignUpInfoPhoneEditText.getText().toString();
             inputNickName = binding.SignUpInfoNameEditText.getText().toString();
 
-            if (inputPhoneNumber != null) {
+            if (inputPhoneNumber != null && inputNickName != null) {
                 signUpRequest.setNickName(inputNickName);
-                signUpRequest.setPhoneNumber(inputPhoneNumber);
+                signUpRequest.setPhoneNumber(makePhoneNumber(inputPhoneNumber));
+                signUpRequest.setSex(inputGender);
                 signUpViewModel.signUp(signUpRequest);
             }
         });
 
         signUpViewModel.haveToNextPageLiveData.observe(getViewLifecycleOwner(), signUpProcess -> {
             if (signUpProcess == SignUpProcess.SIGN_UP) {
-                Intent intent = new Intent(getContext(), );
+                Toast.makeText(getContext(), "회원가입을 성공하였습니다.", Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(getContext(), SplashActivity.class);
                 requireActivity().startActivity(intent);
             }
         });
 
         binding.SignUpInfoBackButton.setOnClickListener(v -> requireActivity().finish());
+    }
+
+    private String makePhoneNumber(String phoneNumber) {
+        String regEx = "(\\d{3})(\\d{3,4})(\\d{4})";
+
+        if (!Pattern.matches(regEx, phoneNumber)) {
+            return null;
+        } else {
+            return phoneNumber.replaceAll(regEx, "$1-$2-$3");
+        }
     }
 
     private void startLocationService() {

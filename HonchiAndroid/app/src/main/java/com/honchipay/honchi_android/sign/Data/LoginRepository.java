@@ -1,8 +1,10 @@
 package com.honchipay.honchi_android.sign.Data;
 
 import com.honchipay.honchi_android.network.HonchipayConnector;
+
 import java.util.HashMap;
-import io.reactivex.rxjava3.core.Single;
+
+import io.reactivex.Single;
 import retrofit2.Response;
 
 public class LoginRepository {
@@ -12,5 +14,13 @@ public class LoginRepository {
         body.put("password", password);
 
         return HonchipayConnector.getInstance().getApi().tryDoLogin(body);
+    }
+
+    public Single<Response<Void>> findUserPassword(String email, String password) {
+        HashMap<String, String> body = new HashMap<>();
+        body.put("email", email);
+        body.put("password", password);
+
+        return HonchipayConnector.getInstance().getApi().findPassword(body);
     }
 }

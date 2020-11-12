@@ -1,9 +1,14 @@
 package com.honchipay.honchi_android.base;
 
+import android.widget.ImageView;
+
+import androidx.databinding.BindingAdapter;
 import androidx.lifecycle.ViewModel;
 
-import io.reactivex.rxjava3.disposables.CompositeDisposable;
-import io.reactivex.rxjava3.disposables.Disposable;
+import com.bumptech.glide.Glide;
+
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.disposables.Disposable;
 
 public class BaseViewModel extends ViewModel {
     protected CompositeDisposable compositeDisposable = new CompositeDisposable();
@@ -16,5 +21,10 @@ public class BaseViewModel extends ViewModel {
     protected void onCleared() {
         compositeDisposable.clear();
         super.onCleared();
+    }
+
+    @BindingAdapter("setImage")
+    public static void setProfileImageUrl(ImageView view, String profile){
+        Glide.with(view.getContext()).load(profile).circleCrop().into(view);
     }
 }

@@ -2,26 +2,28 @@ package com.honchipay.honchi_android.util;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
 
 public class SharedPreferencesManager {
-    private final String MY_APP_PREFERENCES = "Honchipay-Android";
+    private static final String MY_APP_PREFERENCES = "Honchipay-Android";
     private final String IS_LOGIN = "isLogin";
     private final String SAVE_TOKEN = "accessToken";
     private final String SAVE_REFRESH = "refreshToken";
+    private final String SAVE_USER_NAME = "userNickName";
     private static SharedPreferencesManager instance = null;
+    private SharedPreferences sharedPrefs;
 
     static public SharedPreferencesManager getInstance() {
         if (instance == null) instance = new SharedPreferencesManager();
         return instance;
     }
 
-    private final SharedPreferences sharedPrefs = HonchipayApplication.context.getSharedPreferences(
-            MY_APP_PREFERENCES,
-            Context.MODE_PRIVATE
-    );
+    public void init(Context context) {
+        sharedPrefs = context.getSharedPreferences(MY_APP_PREFERENCES, Context.MODE_PRIVATE);
+    }
 
     public String getAccessToken() {
-        return sharedPrefs.getString(SAVE_TOKEN, null);
+        return sharedPrefs.getString(SAVE_TOKEN, "");
     }
 
     public void setAccessToken(String value) {
@@ -31,7 +33,7 @@ public class SharedPreferencesManager {
     }
 
     public String getRefreshToken() {
-        return sharedPrefs.getString(SAVE_REFRESH, null);
+        return sharedPrefs.getString(SAVE_REFRESH, "");
     }
 
     public void setRefreshToken(String value) {
@@ -47,6 +49,14 @@ public class SharedPreferencesManager {
     public void setIsLogin(Boolean value) {
         SharedPreferences.Editor editor = sharedPrefs.edit();
         editor.putBoolean(IS_LOGIN, value);
+        editor.apply();
+    }
+
+    public String getUserName() { return sharedPrefs.getString(SAVE_USER_NAME, ""); }
+
+    public void setUserName(String value) {
+        SharedPreferences.Editor editor = sharedPrefs.edit();
+        editor.putString(SAVE_REFRESH, value);
         editor.apply();
     }
 }

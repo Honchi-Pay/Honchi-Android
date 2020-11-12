@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,7 +30,7 @@ public class SignUpPasswordFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        email = requireArguments().getString("email");
+        email = getArguments().getString("email");
     }
 
     @Override
@@ -49,11 +50,7 @@ public class SignUpPasswordFragment extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (binding.signUpPasswordPasswordEditText.getText().toString() != s) {
+                if (!binding.signUpPasswordPasswordEditText.getText().toString().equals(s.toString())) {
                     binding.signUpPasswordConfirmEditText.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#DB0000")));
                     binding.signUpPasswordErrorTextView.setVisibility(View.VISIBLE);
                 } else {
@@ -61,6 +58,9 @@ public class SignUpPasswordFragment extends Fragment {
                     binding.signUpPasswordErrorTextView.setVisibility(View.INVISIBLE);
                 }
             }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) { }
         });
 
         binding.signUpPasswordNextButton.setOnClickListener(v -> {

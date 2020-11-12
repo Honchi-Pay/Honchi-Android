@@ -11,15 +11,15 @@ import com.honchipay.honchi_android.util.SharedPreferencesManager;
 
 import org.jetbrains.annotations.NotNull;
 
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
-import io.reactivex.rxjava3.annotations.NonNull;
-import io.reactivex.rxjava3.observers.DisposableSingleObserver;
-import io.reactivex.rxjava3.schedulers.Schedulers;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.observers.DisposableSingleObserver;
+import io.reactivex.schedulers.Schedulers;
 import retrofit2.Response;
 
 public class LoginViewModel extends BaseViewModel {
     private final LoginRepository repository = new LoginRepository();
-    public MutableLiveData<Boolean> tokenData = new MutableLiveData<>();
+    public MutableLiveData<Boolean> loginSuccess = new MutableLiveData<>();
 
     public void login(String email, String password) {
         addDisposable(repository.doLogin(email, password)
@@ -37,7 +37,27 @@ public class LoginViewModel extends BaseViewModel {
                                 sharedPreferences.setRefreshToken(tokens.getTokenType() + " " + tokens.getRefreshToken());
                             }
 
-                            tokenData.postValue(true);
+                            loginSuccess.postValue(true);
+                        }
+                    }
+
+                    @Override
+                    public void onError(@NotNull Throwable e) {
+                        Log.e("LoginViewModel", e.getMessage());
+                    }
+                })
+        );
+    }
+
+    public void forgotPassword(String email, String password) {
+        addDisposable(repository.findUserPassword(email, password)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(new DisposableSingleObserver<Response<Void>>() {
+                    @Override
+                    public void onSuccess(@NonNull Response<Void> findPasswordResponse) {
+                        if (findPasswordResponse.isSuccessful() && findPasswordResponse.code() == 200) {
+                            loginSuccess.postValue(true);
                         }
                     }
 
