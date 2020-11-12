@@ -21,11 +21,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
-                android:contentDescription="@string/image_not_found"
                 android:src="@drawable/ic_round_arrow_back_ios_24"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tool:ignore="ContentDescription" />
 
             <TextView
                 android:id="@+id/messenger_titleName_textView"
@@ -59,8 +59,8 @@
             android:id="@+id/messenger_chooseImage_imageView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:contentDescription="@string/image_not_found"
-            android:src="@drawable/ic_round_insert_photo_24" />
+            android:src="@drawable/ic_round_insert_photo_24"
+            tool:ignore="ContentDescription" />
 
         <LinearLayout
             android:layout_width="0dp"
@@ -92,8 +92,8 @@
                 android:id="@+id/messenger_sendMessage_imageView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:contentDescription="@string/image_not_found"
-                android:src="@drawable/ic_baseline_send_24" />
+                android:src="@drawable/ic_baseline_send_24"
+                tool:ignore="ContentDescription" />
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>
