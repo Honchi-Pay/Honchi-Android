@@ -49,7 +49,7 @@ public class ChatRoomListAdapter extends RecyclerView.Adapter<ChatRoomListAdapte
         notifyDataSetChanged();
     }
 
-    static class ChatRoomListViewHolder extends RecyclerView.ViewHolder{
+    static class ChatRoomListViewHolder extends RecyclerView.ViewHolder {
         ItemChatListBinding binding;
 
         public ChatRoomListViewHolder(View itemView) {
