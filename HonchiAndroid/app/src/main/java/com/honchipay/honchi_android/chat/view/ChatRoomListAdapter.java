@@ -1,5 +1,7 @@
 package com.honchipay.honchi_android.chat.view;
 
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,6 +35,7 @@ public class ChatRoomListAdapter extends RecyclerView.Adapter<ChatRoomListAdapte
     public void onBindViewHolder(@NonNull ChatRoomListViewHolder holder, int position) {
         ChatListItem chatListItem = chatListItems.get(position);
         holder.binding.setChatRoomItem(chatListItem);
+        holder.itemView.setOnClickListener(v -> holder.onClick(chatListItem));
     }
 
     @Override
@@ -46,12 +49,20 @@ public class ChatRoomListAdapter extends RecyclerView.Adapter<ChatRoomListAdapte
         notifyDataSetChanged();
     }
 
-    static class ChatRoomListViewHolder extends RecyclerView.ViewHolder {
+    static class ChatRoomListViewHolder extends RecyclerView.ViewHolder{
         ItemChatListBinding binding;
 
         public ChatRoomListViewHolder(View itemView) {
             super(itemView);
             binding = DataBindingUtil.bind(itemView);
+        }
+
+        public void onClick(ChatListItem item) {
+            Intent intent = new Intent(itemView.getContext(), MessengerActivity.class);
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("chatData", item);
+            intent.putExtras(bundle);
+            itemView.getContext().startActivity(intent);
         }
     }
 }

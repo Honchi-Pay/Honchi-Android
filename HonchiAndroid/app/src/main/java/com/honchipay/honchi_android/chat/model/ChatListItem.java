@@ -1,6 +1,8 @@
 package com.honchipay.honchi_android.chat.model;
 
-public class ChatListItem {
+import java.io.Serializable;
+
+public class ChatListItem implements Serializable {
     String roomId;
     String title;
     int people;
