@@ -1,10 +1,12 @@
 package com.honchipay.honchi_android.network;
 
+import com.honchipay.honchi_android.chat.model.ChatListItem;
 import com.honchipay.honchi_android.profile.data.UserProfileResponse;
 import com.honchipay.honchi_android.sign.Data.SignUpRequest;
 import com.honchipay.honchi_android.sign.Data.TokenResponseData;
 
 import java.util.HashMap;
+import java.util.List;
 
 import io.reactivex.Single;
 import okhttp3.RequestBody;
@@ -61,4 +63,7 @@ public interface HonchipayApi {
     @FormUrlEncoded
     @DELETE("/user/out")
     Single<Response<Void>> withdrawFromService(@Header("Authorization") String header, @Field("nickName") String name);
+
+    @GET("/chat")
+    Single<Response<List<ChatListItem>>> getChatList(@Header("Authorization") String header);
 }

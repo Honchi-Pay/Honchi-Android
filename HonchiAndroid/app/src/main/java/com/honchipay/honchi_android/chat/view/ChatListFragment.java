@@ -29,4 +29,14 @@ public class ChatListFragment extends Fragment {
         chatViewModel = new ViewModelProvider(this).get(ChatViewModel.class);
         HonchiPaySocket.getInstance().connectSocket();
     }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        chatViewModel.getParticipatingChatRooms();
+        chatViewModel.chatRoomListLiveData.observe(getViewLifecycleOwner(), chatListItems -> {
+
+        });
+    }
 }
