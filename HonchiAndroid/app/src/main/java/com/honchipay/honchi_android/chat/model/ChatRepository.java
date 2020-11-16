@@ -12,4 +12,8 @@ public class ChatRepository extends BaseRepository {
     public Single<Response<List<ChatListItem>>> getChatList() {
         return HonchipayConnector.getInstance().getApi().getChatList(token);
     }
+
+    public Single<Response<Void>> changeRoomTitle(String title) {
+        return HonchipayConnector.getInstance().getApi().updateChatRoomTitle(title);
+    }
 }

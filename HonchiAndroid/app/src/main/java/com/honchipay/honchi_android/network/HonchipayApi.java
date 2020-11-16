@@ -66,4 +66,7 @@ public interface HonchipayApi {
 
     @GET("/chat")
     Single<Response<List<ChatListItem>>> getChatList(@Header("Authorization") String header);
+
+    @PUT("/chat")
+    Single<Response<Void>> updateChatRoomTitle(@Field("") String title);
 }
