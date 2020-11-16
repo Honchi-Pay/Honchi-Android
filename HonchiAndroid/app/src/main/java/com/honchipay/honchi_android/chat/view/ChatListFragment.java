@@ -8,13 +8,13 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import com.honchipay.honchi_android.chat.HonchiPaySocket;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.honchipay.honchi_android.R;
-import com.honchipay.honchi_android.chat.HonchiPaySocket;
 import com.honchipay.honchi_android.chat.viewModel.ChatViewModel;
 
 public class ChatListFragment extends Fragment {
@@ -27,7 +27,7 @@ public class ChatListFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         chatViewModel = new ViewModelProvider(this).get(ChatViewModel.class);
-        HonchiPaySocket.getInstance().connectSocket();
+        HonchiPaySocket.getInstance().connect();
     }
 
     @Override

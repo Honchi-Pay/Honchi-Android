@@ -16,7 +16,6 @@ import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,7 +27,6 @@ import com.honchipay.honchi_android.databinding.FragmentSignUpUserInfoBinding;
 import com.honchipay.honchi_android.sign.Data.Gender;
 import com.honchipay.honchi_android.sign.Data.SignUpProcess;
 import com.honchipay.honchi_android.sign.Data.SignUpRequest;
-import com.honchipay.honchi_android.sign.SignActivity;
 import com.honchipay.honchi_android.sign.ViewModel.SignUpViewModel;
 import com.honchipay.honchi_android.splash.SplashActivity;
 
