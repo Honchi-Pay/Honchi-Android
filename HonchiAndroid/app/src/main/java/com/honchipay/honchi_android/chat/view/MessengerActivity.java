@@ -41,13 +41,19 @@ public class MessengerActivity extends AppCompatActivity {
         chatViewModel = new ViewModelProvider(this).get(ChatViewModel.class);
         chatRoomData = (ChatListItem) getIntent().getExtras().getSerializable("chatData");
         binding.setRoomTitle(chatRoomData.getTitle());
+        roomTitle = chatRoomData.getTitle();
         HonchiPaySocket.getInstance().joinIntoRoom(chatRoomData.getRoomId());
     }
 
     private void setEditToChangeRoomTitle() {
         binding.messengerInputMessageEditText.setOnKeyListener((v, keyCode, event) -> {
             if (event.getAction() == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER) {
-                chatViewModel.changeChatRoomTitle(((EditText) v).getText().toString());
+                String changeTitle = ((EditText) v).getText().toString();
+
+                if (!changeTitle.equals("") && !changeTitle.equals(roomTitle)) {
+                    chatViewModel.changeChatRoomTitle(changeTitle);
+                }
+
                 return true;
             }
             return false;
@@ -71,7 +77,17 @@ public class MessengerActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == PICTURES_REQUEST_CODE && resultCode == RESULT_OK && data != null) {
-            Uri uri = data.getData();
+            ClipData clipData = data.getClipData();
+            Uri uri;
+
+            if (clipData != null) {
+                for (int i = 0; i < clipData.getItemCount(); i++) {
+                    uri = clipData.getItemAt(i).getUri();
+                    
+                }
+            } else {
+                uri = data.getData();
+            }
         }
     }
 

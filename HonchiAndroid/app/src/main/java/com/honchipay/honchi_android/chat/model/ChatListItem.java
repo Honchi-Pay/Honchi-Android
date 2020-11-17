@@ -3,9 +3,10 @@ package com.honchipay.honchi_android.chat.model;
 import java.io.Serializable;
 
 public class ChatListItem implements Serializable {
-    String roomId;
-    String title;
-    int people;
+    private String roomId;
+    private String title;
+    private int people;
+    private String message;
 
     public String getRoomId() {
         return roomId;
@@ -29,5 +30,13 @@ public class ChatListItem implements Serializable {
 
     public void setPeople(int people) {
         this.people = people;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
     }
 }
