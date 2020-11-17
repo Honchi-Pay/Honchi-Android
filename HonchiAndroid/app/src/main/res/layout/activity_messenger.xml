@@ -29,6 +29,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="32dp"
+                    android:onClick="pressBackButton"
                     android:src="@drawable/ic_round_arrow_back_ios_24"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -71,6 +72,7 @@
                 android:id="@+id/messenger_chooseImage_imageView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:onClick="selectImages"
                 android:src="@drawable/ic_round_insert_photo_24"
                 tool:ignore="ContentDescription" />
 
