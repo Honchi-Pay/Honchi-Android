@@ -8,10 +8,14 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.bumptech.glide.Glide;
 import com.honchipay.honchi_android.base.BaseViewModel;
+import com.honchipay.honchi_android.chat.model.ChatListItem;
 import com.honchipay.honchi_android.profile.data.ProfileRepository;
 import com.honchipay.honchi_android.profile.data.UserProfileResponse;
+import com.honchipay.honchi_android.util.CustomDisposableSingleObserver;
 
 import org.jetbrains.annotations.NotNull;
+
+import java.util.List;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
@@ -24,56 +28,39 @@ public class ProfileViewModel extends BaseViewModel {
     public MutableLiveData<UserProfileResponse> profileLiveData = new MutableLiveData<>();
     public MutableLiveData<Boolean> signOutLiveData = new MutableLiveData<>();
     public MutableLiveData<Boolean> successStarLiveData = new MutableLiveData<>();
+    private final String TAG = ProfileViewModel.class.getSimpleName();
 
     public void getProfile(String name) {
-        addDisposable(repository.getUserProfile(name)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeWith(new DisposableSingleObserver<Response<UserProfileResponse>>() {
+        DisposableSingleObserver<Response<UserProfileResponse>> userProfileResponseObserver =
+                new CustomDisposableSingleObserver<Response<UserProfileResponse>>(TAG) {
                     @Override
                     public void onSuccess(@NonNull Response<UserProfileResponse> profileResponseResponse) {
                         if (profileResponseResponse.isSuccessful() && profileResponseResponse.code() == 200) {
                             profileLiveData.postValue(profileResponseResponse.body());
                         }
                     }
+                };
 
-                    @Override
-                    public void onError(@NotNull Throwable e) {
-                        Log.e("ProfileViewModel", e.getMessage());
-                    }
-                })
-        );
+        addSingle(repository.getUserProfile(name), userProfileResponseObserver);
     }
 
     public void setUserRating(int userId, int rating) {
-        addDisposable(repository.sendUserEvaluation(userId, rating)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeWith(new DisposableSingleObserver<Response<Void>>() {
+        DisposableSingleObserver<Response<Void>> userRatingObserver =
+                new CustomDisposableSingleObserver<Response<Void>>(TAG) {
                     @Override
                     public void onSuccess(@NonNull Response<Void> ratingResponse) {
                         if (ratingResponse.isSuccessful() && ratingResponse.code() == 200) {
                             successStarLiveData.postValue(true);
                         }
                     }
+                };
 
-                    @Override
-                    public void onError(@NotNull Throwable e) {
-                        Log.e("ProfileViewModel", e.getMessage());
-                    }
-                })
-        );
-    }
-
-    public void signOutFromLogin() {
-        signOutLiveData.setValue(true);
+        addSingle(repository.sendUserEvaluation(userId, rating), userRatingObserver);
     }
 
     public void signOutFromService() {
-        addDisposable(repository.withdrawFromService()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeWith(new DisposableSingleObserver<Response<Void>>() {
+        DisposableSingleObserver<Response<Void>> signOutServiceObserver =
+                new CustomDisposableSingleObserver<Response<Void>>(TAG) {
                     @Override
                     public void onSuccess(@NonNull Response<Void> deleteUserResponse) {
                         signOutLiveData.postValue(deleteUserResponse.isSuccessful() && deleteUserResponse.code() == 200);
@@ -81,10 +68,15 @@ public class ProfileViewModel extends BaseViewModel {
 
                     @Override
                     public void onError(@NotNull Throwable e) {
-                        Log.e("ProfileViewModel", e.getMessage());
+                        Log.e(TAG, e.getMessage());
                         signOutLiveData.postValue(false);
                     }
-                })
-        );
+                };
+
+        addSingle(repository.withdrawFromService(), signOutServiceObserver);
+    }
+
+    public void signOutFromLogin() {
+        signOutLiveData.setValue(true);
     }
 }

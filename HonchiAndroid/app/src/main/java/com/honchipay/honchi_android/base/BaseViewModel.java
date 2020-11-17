@@ -22,8 +22,7 @@ public class BaseViewModel extends ViewModel {
     }
 
     protected <T> void addSingle(Single<T> single, DisposableSingleObserver<T> observer) {
-        addDisposable(single
-                .subscribeOn(Schedulers.io())
+        addDisposable(single.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(observer));
     }
@@ -35,7 +34,7 @@ public class BaseViewModel extends ViewModel {
     }
 
     @BindingAdapter("setImage")
-    public static void setProfileImageUrl(ImageView view, String profile){
+    public static void setProfileImageUrl(ImageView view, String profile) {
         Glide.with(view.getContext()).load(profile).circleCrop().into(view);
     }
 }
