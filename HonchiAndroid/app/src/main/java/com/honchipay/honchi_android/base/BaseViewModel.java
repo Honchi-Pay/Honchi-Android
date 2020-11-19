@@ -21,12 +21,6 @@ public class BaseViewModel extends ViewModel {
         compositeDisposable.add(disposable);
     }
 
-    protected <T> void addSingle(Single<T> single, DisposableSingleObserver<T> observer) {
-        addDisposable(single.subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeWith(observer));
-    }
-
     @Override
     protected void onCleared() {
         compositeDisposable.clear();
