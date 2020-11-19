@@ -1,26 +1,18 @@
 package com.honchipay.honchi_android.profile.viewmodel;
 
 import android.util.Log;
-import android.widget.ImageView;
 
-import androidx.databinding.BindingAdapter;
 import androidx.lifecycle.MutableLiveData;
 
-import com.bumptech.glide.Glide;
 import com.honchipay.honchi_android.base.BaseViewModel;
-import com.honchipay.honchi_android.chat.model.ChatListItem;
 import com.honchipay.honchi_android.profile.data.ProfileRepository;
 import com.honchipay.honchi_android.profile.data.UserProfileResponse;
 import com.honchipay.honchi_android.util.CustomDisposableSingleObserver;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.util.List;
-
-import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.observers.DisposableSingleObserver;
-import io.reactivex.schedulers.Schedulers;
 import retrofit2.Response;
 
 public class ProfileViewModel extends BaseViewModel {

@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.honchipay.honchi_android.R;
 import com.honchipay.honchi_android.chat.model.ChatRoomItem;
-import com.honchipay.honchi_android.databinding.ItemChatListBinding;
+import com.honchipay.honchi_android.databinding.ItemChatRoomsBinding;
 
 import java.util.Collections;
 import java.util.List;
@@ -50,7 +50,7 @@ public class ChatRoomsAdapter extends RecyclerView.Adapter<ChatRoomsAdapter.Chat
     }
 
     static class ChatRoomsViewHolder extends RecyclerView.ViewHolder {
-        ItemChatListBinding binding;
+        ItemChatRoomsBinding binding;
 
         public ChatRoomsViewHolder(View itemView) {
             super(itemView);
