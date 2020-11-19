@@ -1,4 +1,4 @@
-package com.honchipay.honchi_android.sign.ViewModel;
+package com.honchipay.honchi_android.sign.viewModel;
 
 import android.util.Log;
 

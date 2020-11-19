@@ -1,4 +1,4 @@
-package com.honchipay.honchi_android.sign.Fragment;
+package com.honchipay.honchi_android.sign.fragment;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,7 +12,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.honchipay.honchi_android.R;
 import com.honchipay.honchi_android.databinding.FragmentLoginBinding;
-import com.honchipay.honchi_android.sign.ViewModel.LoginViewModel;
+import com.honchipay.honchi_android.sign.viewModel.LoginViewModel;
 import com.honchipay.honchi_android.util.SharedPreferencesManager;
 
 import org.jetbrains.annotations.NotNull;

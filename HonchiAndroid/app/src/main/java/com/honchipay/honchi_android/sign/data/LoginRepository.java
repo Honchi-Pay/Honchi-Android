@@ -1,4 +1,4 @@
-package com.honchipay.honchi_android.sign.Data;
+package com.honchipay.honchi_android.sign.data;
 
 import com.honchipay.honchi_android.network.HonchipayConnector;
 

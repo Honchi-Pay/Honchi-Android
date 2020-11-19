@@ -1,4 +1,4 @@
-package com.honchipay.honchi_android.sign.Fragment;
+package com.honchipay.honchi_android.sign.fragment;
 
 import android.os.Bundle;
 
@@ -15,13 +15,11 @@ import android.widget.Toast;
 import com.honchipay.honchi_android.R;
 import com.honchipay.honchi_android.databinding.FragmentSignUpEmailBinding;
 import com.honchipay.honchi_android.sign.SignActivity;
-import com.honchipay.honchi_android.sign.ViewModel.SignUpViewModel;
+import com.honchipay.honchi_android.sign.viewModel.SignUpViewModel;
 
 import org.jetbrains.annotations.NotNull;
 
 public class SignUpEmailFragment extends Fragment {
-    String inputUserEmail = null;
-    String inputAuthCode = null;
     FragmentSignUpEmailBinding binding;
     SignUpViewModel signUpViewModel;
 
@@ -39,7 +37,7 @@ public class SignUpEmailFragment extends Fragment {
         signUpViewModel.haveToNextPageLiveData.observe(getViewLifecycleOwner(), signUpProcess -> {
             switch (signUpProcess) {
                 case FIRST:
-                    signUpViewModel.checkDuplicatedEmail(inputUserEmail);
+                    signUpViewModel.checkDuplicatedEmail();
                     break;
                 case EMAIL:
                     Toast.makeText(getContext(), "메일을 보냈습니다. 인증코드를 3분 안에 인증해 주시길 바랍니다.", Toast.LENGTH_LONG).show();
@@ -47,16 +45,11 @@ public class SignUpEmailFragment extends Fragment {
                     binding.signUpEmailEmailEditText.setText("");
                     binding.signUpEmailAuthButton.setText("다음");
                     binding.signUpEmailAuthButton.setOnClickListener(v -> {
-                        inputAuthCode = binding.signUpEmailEmailEditText.getText().toString();
-                        signUpViewModel.checkAuthCode(inputUserEmail, inputAuthCode);
+                        signUpViewModel.checkAuthCode();
                     });
                     break;
                 case CODE:
-                    SignUpPasswordFragment fragment = new SignUpPasswordFragment();
-                    Bundle bundle = new Bundle();
-                    bundle.putString("email", inputUserEmail);
-                    fragment.setArguments(bundle);
-                    ((SignActivity) requireActivity()).replaceFragment(fragment);
+                    ((SignActivity) requireActivity()).replaceFragment(new SignUpPasswordFragment());
                     break;
                 case REJECT:
                     Toast.makeText(getContext(), "인증에 실패하였습니다.", Toast.LENGTH_LONG).show();
@@ -68,8 +61,7 @@ public class SignUpEmailFragment extends Fragment {
         });
 
         binding.signUpEmailAuthButton.setOnClickListener(v -> {
-            inputUserEmail = binding.signUpEmailEmailEditText.getText().toString();
-            signUpViewModel.checkFirstUser(inputUserEmail);
+            signUpViewModel.checkFirstUser();
             v.setClickable(false);
         });
 
@@ -80,8 +72,7 @@ public class SignUpEmailFragment extends Fragment {
         binding.signUpEmailEmailEditText.setText("");
         binding.signUpEmailAuthButton.setText("인증번호 보내기");
         binding.signUpEmailAuthButton.setOnClickListener(v -> {
-            inputUserEmail = binding.signUpEmailEmailEditText.getText().toString();
-            signUpViewModel.checkFirstUser(inputUserEmail);
+            signUpViewModel.checkFirstUser();
             v.setClickable(false);
         });
     }

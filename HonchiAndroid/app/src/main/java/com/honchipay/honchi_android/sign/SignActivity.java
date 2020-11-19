@@ -8,8 +8,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.honchipay.honchi_android.R;
-import com.honchipay.honchi_android.sign.Fragment.LoginFragment;
-import com.honchipay.honchi_android.sign.Fragment.SignUpEmailFragment;
+import com.honchipay.honchi_android.sign.fragment.LoginFragment;
+import com.honchipay.honchi_android.sign.fragment.SignUpEmailFragment;
 
 public class SignActivity extends AppCompatActivity {
 

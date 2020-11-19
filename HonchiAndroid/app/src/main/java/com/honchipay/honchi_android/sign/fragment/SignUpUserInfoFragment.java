@@ -1,4 +1,4 @@
-package com.honchipay.honchi_android.sign.Fragment;
+package com.honchipay.honchi_android.sign.fragment;
 
 import android.Manifest;
 import android.content.Context;
@@ -19,15 +19,14 @@ import androidx.lifecycle.ViewModelProvider;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.honchipay.honchi_android.R;
 import com.honchipay.honchi_android.databinding.FragmentSignUpUserInfoBinding;
-import com.honchipay.honchi_android.sign.Data.Gender;
-import com.honchipay.honchi_android.sign.Data.SignUpProcess;
-import com.honchipay.honchi_android.sign.Data.SignUpRequest;
-import com.honchipay.honchi_android.sign.ViewModel.SignUpViewModel;
+import com.honchipay.honchi_android.sign.data.Gender;
+import com.honchipay.honchi_android.sign.data.SignUpProcess;
+import com.honchipay.honchi_android.sign.data.SignUpRequest;
+import com.honchipay.honchi_android.sign.viewModel.SignUpViewModel;
 import com.honchipay.honchi_android.splash.SplashActivity;
 
 import org.jetbrains.annotations.NotNull;
