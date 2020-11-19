@@ -5,8 +5,8 @@ import android.util.Log;
 import androidx.lifecycle.MutableLiveData;
 
 import com.honchipay.honchi_android.base.BaseViewModel;
-import com.honchipay.honchi_android.sign.Data.LoginRepository;
-import com.honchipay.honchi_android.sign.Data.TokenResponseData;
+import com.honchipay.honchi_android.sign.data.LoginRepository;
+import com.honchipay.honchi_android.sign.data.TokenResponseData;
 import com.honchipay.honchi_android.util.SharedPreferencesManager;
 
 import org.jetbrains.annotations.NotNull;
