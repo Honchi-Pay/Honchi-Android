@@ -13,10 +13,12 @@ import android.view.ViewGroup;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.honchipay.honchi_android.R;
 import com.honchipay.honchi_android.databinding.FragmentSignUpPasswordBinding;
 import com.honchipay.honchi_android.sign.SignActivity;
+import com.honchipay.honchi_android.sign.ViewModel.SignUpViewModel;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -25,6 +27,7 @@ public class SignUpPasswordFragment extends Fragment {
     String inputPassword = null;
     String inputConfirm = null;
     String email = null;
+    SignUpViewModel signUpViewModel;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -42,6 +45,7 @@ public class SignUpPasswordFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        signUpViewModel = new ViewModelProvider(requireActivity()).get(SignUpViewModel.class);
 
         binding.signUpPasswordConfirmEditText.addTextChangedListener(new TextWatcher() {
             @Override

@@ -34,7 +34,7 @@ public class SignUpEmailFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        signUpViewModel = new ViewModelProvider(this).get(SignUpViewModel.class);
+        signUpViewModel = new ViewModelProvider(requireActivity()).get(SignUpViewModel.class);
 
         signUpViewModel.haveToNextPageLiveData.observe(getViewLifecycleOwner(), signUpProcess -> {
             switch (signUpProcess) {
