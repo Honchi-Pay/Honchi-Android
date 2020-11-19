@@ -20,7 +20,7 @@ import com.honchipay.honchi_android.chat.viewModel.ChatViewModel;
 public class ChatListFragment extends Fragment {
     ChatViewModel chatViewModel;
     RecyclerView recyclerView;
-    ChatRoomListAdapter chatRoomListAdapter;
+    ChatRoomsAdapter chatRoomsAdapter;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -39,11 +39,11 @@ public class ChatListFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        chatRoomListAdapter = new ChatRoomListAdapter();
+        chatRoomsAdapter = new ChatRoomsAdapter();
         recyclerView = view.findViewById(R.id.chat_list_recyclerView);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        recyclerView.setAdapter(chatRoomListAdapter);
+        recyclerView.setAdapter(chatRoomsAdapter);
     }
 
     @Override
@@ -52,7 +52,7 @@ public class ChatListFragment extends Fragment {
 
         chatViewModel.getParticipatingChatRooms();
         chatViewModel.chatRoomListLiveData.observe(getViewLifecycleOwner(), chatListItems -> {
-            chatRoomListAdapter.renewChatList(chatListItems);
+            chatRoomsAdapter.renewChatList(chatListItems);
         });
     }
 }

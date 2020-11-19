@@ -2,7 +2,7 @@ package com.honchipay.honchi_android.chat.model;
 
 import java.io.Serializable;
 
-public class ChatListItem implements Serializable {
+public class ChatRoomItem implements Serializable {
     private String roomId;
     private String title;
     private int people;

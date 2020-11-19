@@ -17,12 +17,12 @@ import android.widget.EditText;
 
 import com.honchipay.honchi_android.R;
 import com.honchipay.honchi_android.chat.HonchiPaySocket;
-import com.honchipay.honchi_android.chat.model.ChatListItem;
+import com.honchipay.honchi_android.chat.model.ChatRoomItem;
 import com.honchipay.honchi_android.chat.viewModel.ChatViewModel;
 import com.honchipay.honchi_android.databinding.ActivityMessengerBinding;
 
 public class MessengerActivity extends AppCompatActivity {
-    ChatListItem chatRoomData;
+    ChatRoomItem chatRoomData;
     String roomTitle;
     ChatViewModel chatViewModel;
     ActivityMessengerBinding binding;
@@ -39,7 +39,7 @@ public class MessengerActivity extends AppCompatActivity {
     private void init() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_messenger);
         chatViewModel = new ViewModelProvider(this).get(ChatViewModel.class);
-        chatRoomData = (ChatListItem) getIntent().getExtras().getSerializable("chatData");
+        chatRoomData = (ChatRoomItem) getIntent().getExtras().getSerializable("chatData");
         binding.setRoomTitle(chatRoomData.getTitle());
         roomTitle = chatRoomData.getTitle();
         HonchiPaySocket.getInstance().joinIntoRoom(chatRoomData.getRoomId());

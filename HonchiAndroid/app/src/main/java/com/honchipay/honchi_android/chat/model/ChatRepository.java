@@ -9,7 +9,7 @@ import io.reactivex.Single;
 import retrofit2.Response;
 
 public class ChatRepository extends BaseRepository {
-    public Single<Response<List<ChatListItem>>> getChatList() {
+    public Single<Response<List<ChatRoomItem>>> getChatList() {
         return HonchipayConnector.getInstance().getApi().getChatList(token);
     }
 
