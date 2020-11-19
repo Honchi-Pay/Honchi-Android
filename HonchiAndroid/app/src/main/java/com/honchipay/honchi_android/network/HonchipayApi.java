@@ -65,7 +65,7 @@ public interface HonchipayApi {
     Single<Response<Void>> withdrawFromService(@Header("Authorization") String header, @Field("nickName") String name);
 
     @GET("/chat")
-    Single<Response<List<ChatRoomItem>>> getChatList(@Header("Authorization") String header);
+    Single<Response<List<ChatRoomItem>>> getChatRooms(@Header("Authorization") String header);
 
     @PUT("/chat")
     Single<Response<Void>> updateChatRoomTitle(@Field("") String title);

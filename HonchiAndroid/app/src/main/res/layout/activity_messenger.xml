@@ -5,8 +5,8 @@
 
     <data>
         <variable
-            name="roomTitle"
-            type="String" />
+            name="chatViewModel"
+            type="com.honchipay.honchi_android.chat.viewModel.ChatViewModel" />
     </data>
 
     <LinearLayout
@@ -43,7 +43,7 @@
                     android:background="@android:color/transparent"
                     android:fontFamily="@font/nanumsquareextrabold"
                     android:hint="방제목"
-                    android:text="@{roomTitle}"
+                    android:text="@={chatViewModel.roomTitle}"
                     android:inputType="text"
                     android:textAlignment="center"
                     android:textColor="@android:color/black"

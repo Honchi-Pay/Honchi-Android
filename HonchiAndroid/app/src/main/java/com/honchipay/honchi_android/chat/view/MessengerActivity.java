@@ -23,7 +23,6 @@ import com.honchipay.honchi_android.databinding.ActivityMessengerBinding;
 
 public class MessengerActivity extends AppCompatActivity {
     ChatRoomItem chatRoomData;
-    String roomTitle;
     ChatViewModel chatViewModel;
     ActivityMessengerBinding binding;
     int PICTURES_REQUEST_CODE = 13;
@@ -33,31 +32,18 @@ public class MessengerActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         init();
-        setEditToChangeRoomTitle();
     }
 
     private void init() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_messenger);
+
         chatViewModel = new ViewModelProvider(this).get(ChatViewModel.class);
         chatRoomData = (ChatRoomItem) getIntent().getExtras().getSerializable("chatData");
-        binding.setRoomTitle(chatRoomData.getTitle());
-        roomTitle = chatRoomData.getTitle();
+        chatViewModel.roomTitle.set(chatRoomData.getTitle());
+        chatViewModel.setRoomTitleValidation(chatRoomData.getTitle());
+
+        binding.setChatViewModel(chatViewModel);
         HonchiPaySocket.getInstance().joinIntoRoom(chatRoomData.getRoomId());
-    }
-
-    private void setEditToChangeRoomTitle() {
-        binding.messengerInputMessageEditText.setOnKeyListener((v, keyCode, event) -> {
-            if (event.getAction() == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER) {
-                String changeTitle = ((EditText) v).getText().toString();
-
-                if (!changeTitle.equals("") && !changeTitle.equals(roomTitle)) {
-                    chatViewModel.changeChatRoomTitle(changeTitle);
-                }
-
-                return true;
-            }
-            return false;
-        });
     }
 
     @SuppressLint("IntentReset")

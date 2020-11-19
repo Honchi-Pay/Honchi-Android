@@ -1,5 +1,7 @@
 package com.honchipay.honchi_android.chat.viewModel;
 
+import androidx.databinding.Observable;
+import androidx.databinding.ObservableField;
 import androidx.lifecycle.MutableLiveData;
 
 import com.honchipay.honchi_android.base.BaseViewModel;
@@ -14,13 +16,24 @@ import io.reactivex.observers.DisposableSingleObserver;
 import retrofit2.Response;
 
 public class ChatViewModel extends BaseViewModel {
-    private final ChatRepository repository = new ChatRepository();
-    public MutableLiveData<List<ChatRoomItem>> chatRoomListLiveData = new MutableLiveData<>();
     private final String TAG = ChatViewModel.class.getSimpleName();
+    private final ChatRepository repository = new ChatRepository();
+    public final ObservableField<String> roomTitle = new ObservableField<>();
+    public MutableLiveData<List<ChatRoomItem>> chatRoomListLiveData = new MutableLiveData<>();
+
+    public void setRoomTitleValidation(String preRoomTitle) {
+        roomTitle.addOnPropertyChangedCallback(new Observable.OnPropertyChangedCallback() {
+            @Override
+            public void onPropertyChanged(Observable sender, int propertyId) {
+                if (!roomTitle.get().equals("") && !roomTitle.get().equals(preRoomTitle)) {
+                    changeChatRoomTitle();
+                }
+            }
+        });
+    }
 
     public void getParticipatingChatRooms() {
-        DisposableSingleObserver<Response<List<ChatRoomItem>>> chatListItemObserver =
-                new CustomDisposableSingleObserver<Response<List<ChatRoomItem>>>(TAG) {
+        DisposableSingleObserver<Response<List<ChatRoomItem>>> chatRoomObserver = new CustomDisposableSingleObserver<Response<List<ChatRoomItem>>>(TAG) {
             @Override
             public void onSuccess(@NonNull Response<List<ChatRoomItem>> listResponse) {
                 if (listResponse.isSuccessful() && listResponse.code() == 200) {
@@ -29,17 +42,16 @@ public class ChatViewModel extends BaseViewModel {
             }
         };
 
-        addSingle(repository.getChatList(), chatListItemObserver);
+        addDisposable(repository.getChatRooms(chatRoomObserver));
     }
 
-    public void changeChatRoomTitle(String title) {
-        DisposableSingleObserver<Response<Void>> roomTitleObserver =
-                new CustomDisposableSingleObserver<Response<Void>>(TAG) {
-                    @Override
-                    public void onSuccess(@NonNull Response<Void> listResponse) {
-                    }
-                };
+    private void changeChatRoomTitle() {
+        DisposableSingleObserver<Response<Void>> roomTitleObserver = new CustomDisposableSingleObserver<Response<Void>>(TAG) {
+            @Override
+            public void onSuccess(@NonNull Response<Void> listResponse) {
+            }
+        };
 
-        addSingle(repository.changeRoomTitle(title), roomTitleObserver);
+        addDisposable(repository.changeRoomTitle(roomTitle.get(), roomTitleObserver));
     }
 }
