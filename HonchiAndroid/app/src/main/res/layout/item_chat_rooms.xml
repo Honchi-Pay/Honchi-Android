@@ -1,9 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tool="http://schemas.android.com/tools"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tool="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="chatRoomItem"
+            type="com.honchipay.honchi_android.chat.model.ChatRoomItem" />
+    </data>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/white"
         android:orientation="horizontal"
         android:padding="16dp">
 
@@ -12,7 +20,8 @@
             android:layout_width="55dp"
             android:layout_height="55dp"
             android:layout_marginStart="16dp"
-            android:layout_marginEnd="20dp" />
+            android:layout_marginEnd="20dp"
+            tool:ignore="ContentDescription" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -26,6 +35,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/nanumsquarebold"
+                android:text="@{chatRoomItem.title}"
                 android:textColor="@android:color/black"
                 android:textSize="14sp"
                 tool:text="최땡땡" />
@@ -35,6 +45,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
+                android:text="@{chatRoomItem.message}"
                 android:fontFamily="@font/nanumsquareregular"
                 android:textColor="@android:color/black"
                 android:textSize="12sp"

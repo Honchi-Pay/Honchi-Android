@@ -1,5 +1,6 @@
 package com.honchipay.honchi_android.profile.data;
 
+import com.honchipay.honchi_android.base.BaseRepository;
 import com.honchipay.honchi_android.network.HonchipayConnector;
 import com.honchipay.honchi_android.util.SharedPreferencesManager;
 
@@ -11,9 +12,7 @@ import okhttp3.MediaType;
 import okhttp3.RequestBody;
 import retrofit2.Response;
 
-public class ProfileRepository {
-    String token = SharedPreferencesManager.getInstance().getAccessToken();
-
+public class ProfileRepository extends BaseRepository {
     public Single<Response<UserProfileResponse>> getUserProfile(String name) {
         return HonchipayConnector.getInstance().getApi().getUserProfile(token, name);
     }
