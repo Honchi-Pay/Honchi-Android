@@ -36,17 +36,11 @@ import java.util.regex.Pattern;
 public class SignUpUserInfoFragment extends Fragment implements LocationListener {
     FragmentSignUpUserInfoBinding binding;
     SignUpViewModel signUpViewModel;
-    SignUpRequest signUpRequest = new SignUpRequest();
-    String inputPhoneNumber = null;
-    String inputNickName = null;
-    Gender inputGender = Gender.MALE;
+    Location location;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        signUpRequest.setEmail(getArguments().getString("email", null));
-        signUpRequest.setPassword(getArguments().getString("password", null));
         startLocationService();
     }
 
@@ -57,41 +51,18 @@ public class SignUpUserInfoFragment extends Fragment implements LocationListener
     }
 
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
-        binding.SignUpInfoGenderRadioGroup.setOnCheckedChangeListener((group, checkedId) -> {
-            if (checkedId == R.id.SignUpInfo_male_radioButton) {
-                signUpRequest.setSex(Gender.MALE);
-            } else if (checkedId == R.id.SignUpInfo_female_radioButton) {
-                signUpRequest.setSex(Gender.FEMALE);
-            }
-        });
-    }
-
-    @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         signUpViewModel = new ViewModelProvider(requireActivity()).get(SignUpViewModel.class);
 
-        binding.SignUpInfoGenderRadioGroup.setOnCheckedChangeListener((group, checkedId) -> {
-            if (checkedId == R.id.SignUpInfo_male_radioButton) {
-                inputGender = Gender.MALE;
-            } else {
-                inputGender = Gender.FEMALE;
-            }
-        });
-
         binding.SignUpInfoSignUpButton.setOnClickListener(v -> {
-            inputPhoneNumber = binding.SignUpInfoPhoneEditText.getText().toString();
-            inputNickName = binding.SignUpInfoNameEditText.getText().toString();
-
-            if (inputPhoneNumber != null && inputNickName != null) {
-                signUpRequest.setNickName(inputNickName);
-                signUpRequest.setPhoneNumber(makePhoneNumber(inputPhoneNumber));
-                signUpRequest.setSex(inputGender);
-                signUpViewModel.signUp(signUpRequest);
+            if (binding.SignUpInfoGenderRadioGroup.getCheckedRadioButtonId() == R.id.SignUpInfo_male_radioButton) {
+                signUpViewModel.gender = Gender.MALE;
+            } else {
+                signUpViewModel.gender = Gender.FEMALE;
             }
+            signUpViewModel.location = location;
+            signUpViewModel.signUp();
         });
 
         signUpViewModel.haveToNextPageLiveData.observe(getViewLifecycleOwner(), signUpProcess -> {
@@ -103,16 +74,6 @@ public class SignUpUserInfoFragment extends Fragment implements LocationListener
         });
 
         binding.SignUpInfoBackButton.setOnClickListener(v -> requireActivity().finish());
-    }
-
-    private String makePhoneNumber(String phoneNumber) {
-        String regEx = "(\\d{3})(\\d{3,4})(\\d{4})";
-
-        if (!Pattern.matches(regEx, phoneNumber)) {
-            return null;
-        } else {
-            return phoneNumber.replaceAll(regEx, "$1-$2-$3");
-        }
     }
 
     private void startLocationService() {
@@ -130,8 +91,7 @@ public class SignUpUserInfoFragment extends Fragment implements LocationListener
 
     @Override
     public void onLocationChanged(@NonNull Location location) {
-        signUpRequest.setLat(location.getLatitude());
-        signUpRequest.setLon(location.getLongitude());
+        this.location = location;
     }
 
     @Override

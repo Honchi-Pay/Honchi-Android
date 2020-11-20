@@ -22,6 +22,8 @@ import org.jetbrains.annotations.NotNull;
 public class SignUpEmailFragment extends Fragment {
     FragmentSignUpEmailBinding binding;
     SignUpViewModel signUpViewModel;
+    final int gone = View.GONE;
+    final int visibility = View.VISIBLE;
 
     @Override
     public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -41,12 +43,9 @@ public class SignUpEmailFragment extends Fragment {
                     break;
                 case EMAIL:
                     Toast.makeText(getContext(), "메일을 보냈습니다. 인증코드를 3분 안에 인증해 주시길 바랍니다.", Toast.LENGTH_LONG).show();
-                    binding.signUpEmailEmailTextView.setText("인증코드");
-                    binding.signUpEmailEmailEditText.setText("");
+                    setVisibility(true);
                     binding.signUpEmailAuthButton.setText("다음");
-                    binding.signUpEmailAuthButton.setOnClickListener(v -> {
-                        signUpViewModel.checkAuthCode();
-                    });
+                    binding.signUpEmailAuthButton.setOnClickListener(v -> signUpViewModel.checkAuthCode());
                     break;
                 case CODE:
                     ((SignActivity) requireActivity()).replaceFragment(new SignUpPasswordFragment());
@@ -69,11 +68,28 @@ public class SignUpEmailFragment extends Fragment {
     }
 
     void setRejectAuthCode() {
-        binding.signUpEmailEmailEditText.setText("");
+        setVisibility(false);
         binding.signUpEmailAuthButton.setText("인증번호 보내기");
         binding.signUpEmailAuthButton.setOnClickListener(v -> {
             signUpViewModel.checkFirstUser();
             v.setClickable(false);
         });
+    }
+
+    void setVisibility(boolean isVisibility) {
+        if (isVisibility) {
+            binding.signUpEmailEmailTextView.setVisibility(gone);
+            binding.signUpEmailEmailEditText.setVisibility(gone);
+            binding.signUpEmailAuthCodeTextView.setVisibility(visibility);
+            binding.signUpEmailAuthCodeEditText.setVisibility(visibility);
+            binding.signUpEmailAuthCodeEditText.setText(null);
+        } else {
+            binding.signUpEmailEmailTextView.setVisibility(visibility);
+            binding.signUpEmailEmailEditText.setVisibility(visibility);
+            binding.signUpEmailAuthCodeTextView.setVisibility(gone);
+            binding.signUpEmailAuthCodeEditText.setVisibility(gone);
+            binding.signUpEmailEmailEditText.setText(null);
+
+        }
     }
 }

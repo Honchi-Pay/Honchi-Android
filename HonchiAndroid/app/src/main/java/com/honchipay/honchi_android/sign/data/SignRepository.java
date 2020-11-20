@@ -30,7 +30,7 @@ public class SignRepository extends BaseRepository {
         return wrappingSingle(HonchipayConnector.getInstance().getApi().checkAuthCode(body), checkAuthCodeObserver);
     }
 
-    public Single<Response<Void>> signUp(SignUpRequest signUpRequest) {
-        return HonchipayConnector.getInstance().getApi().singUp(signUpRequest);
+    public Disposable signUp(SignUpRequest signUpRequest, DisposableSingleObserver<Response<Void>> signUpObserver) {
+        return wrappingSingle(HonchipayConnector.getInstance().getApi().singUp(signUpRequest), signUpObserver);
     }
 }

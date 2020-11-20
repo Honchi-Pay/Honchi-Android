@@ -1,4 +1,15 @@
 package com.honchipay.honchi_android.util;
 
-public class CustomTextWatcher {
+import android.text.Editable;
+import android.text.TextWatcher;
+
+abstract public class CustomTextWatcher implements TextWatcher {
+    @Override
+    public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
+
+    @Override
+    public void onTextChanged(CharSequence s, int start, int before, int count) { }
+
+    @Override
+    public void afterTextChanged(Editable s) { }
 }
