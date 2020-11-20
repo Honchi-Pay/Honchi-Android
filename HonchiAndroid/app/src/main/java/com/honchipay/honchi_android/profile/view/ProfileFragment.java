@@ -94,13 +94,10 @@ public class ProfileFragment extends Fragment {
         Button okButton = dialog.findViewById(R.id.dialog_ok_button);
         cancelButton.setOnClickListener(v -> dialog.dismiss());
         okButton.setOnClickListener(v -> {
-            switch (title) {
-                case "정말 탈퇴하시겠습니까?":
-                    profileViewModel.signOutFromService();
-                    break;
-                case "정말 로그아웃하시겠습니까?":
-                    profileViewModel.signOutFromLogin();
-                    break;
+            if (title.equals(getString(R.string.sign_out_message))) {
+                profileViewModel.signOutFromService();
+            } else {
+                profileViewModel.signOutFromLogin();
             }
 
             dialog.dismiss();
