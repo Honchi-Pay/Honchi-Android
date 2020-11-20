@@ -46,7 +46,7 @@ public class EditProfileFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        editProfileViewModel = new ViewModelProvider(this).get(EditProfileViewModel.class);
+        editProfileViewModel = new ViewModelProvider(requireActivity()).get(EditProfileViewModel.class);
         binding.setEditProfileViewModel(editProfileViewModel);
         Glide.with(this).load(image).circleCrop().into(binding.editProfileUserImageView);
     }
@@ -54,7 +54,7 @@ public class EditProfileFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        EditPrivateInfoActivity activity = (EditPrivateInfoActivity) getActivity();
+        EditPrivateInfoActivity activity = (EditPrivateInfoActivity) requireActivity();
 
         binding.editProfileUserImageView.setOnClickListener(v -> {
             Intent intent = new Intent();

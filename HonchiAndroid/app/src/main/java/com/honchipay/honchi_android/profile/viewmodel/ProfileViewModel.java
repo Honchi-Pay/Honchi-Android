@@ -16,11 +16,12 @@ import io.reactivex.observers.DisposableSingleObserver;
 import retrofit2.Response;
 
 public class ProfileViewModel extends BaseViewModel {
+    private final String TAG = ProfileViewModel.class.getSimpleName();
     private final ProfileRepository repository = new ProfileRepository();
     public MutableLiveData<UserProfileResponse> profileLiveData = new MutableLiveData<>();
     public MutableLiveData<Boolean> signOutLiveData = new MutableLiveData<>();
     public MutableLiveData<Boolean> successStarLiveData = new MutableLiveData<>();
-    private final String TAG = ProfileViewModel.class.getSimpleName();
+    private int id = 0;
 
     public void getProfile(String name) {
         DisposableSingleObserver<Response<UserProfileResponse>> userProfileResponseObserver =
@@ -28,15 +29,16 @@ public class ProfileViewModel extends BaseViewModel {
                     @Override
                     public void onSuccess(@NonNull Response<UserProfileResponse> profileResponseResponse) {
                         if (profileResponseResponse.isSuccessful() && profileResponseResponse.code() == 200) {
+                            id = profileResponseResponse.body().getUserId();
                             profileLiveData.postValue(profileResponseResponse.body());
                         }
                     }
                 };
 
-        addSingle(repository.getUserProfile(name), userProfileResponseObserver);
+        addDisposable(repository.getUserProfile(name, userProfileResponseObserver));
     }
 
-    public void setUserRating(int userId, int rating) {
+    public void setUserRating(int rating) {
         DisposableSingleObserver<Response<Void>> userRatingObserver =
                 new CustomDisposableSingleObserver<Response<Void>>(TAG) {
                     @Override
@@ -47,7 +49,7 @@ public class ProfileViewModel extends BaseViewModel {
                     }
                 };
 
-        addSingle(repository.sendUserEvaluation(userId, rating), userRatingObserver);
+        addDisposable(repository.sendUserEvaluation(id, rating, userRatingObserver));
     }
 
     public void signOutFromService() {
@@ -65,7 +67,7 @@ public class ProfileViewModel extends BaseViewModel {
                     }
                 };
 
-        addSingle(repository.withdrawFromService(), signOutServiceObserver);
+        addDisposable(repository.withdrawFromService(signOutServiceObserver));
     }
 
     public void signOutFromLogin() {

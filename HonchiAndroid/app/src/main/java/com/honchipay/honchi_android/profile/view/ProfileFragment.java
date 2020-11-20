@@ -32,7 +32,6 @@ public class ProfileFragment extends Fragment {
     FragmentProfileBinding binding;
     ProfileViewModel profileViewModel;
     String image = "";
-    int id = 0;
     float rating = 0f;
 
     @Override
@@ -42,21 +41,15 @@ public class ProfileFragment extends Fragment {
     }
 
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
-        profileViewModel = new ViewModelProvider(this).get(ProfileViewModel.class);
-        setBindingAttribute();
-    }
-
-    @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
+        profileViewModel = new ViewModelProvider(this).get(ProfileViewModel.class);
+        binding.setProfileFragment(this);
+        binding.setProfileViewModel(profileViewModel);
         profileViewModel.getProfile(SharedPreferencesManager.getInstance().getUserName());
+
         profileViewModel.profileLiveData.observe(getViewLifecycleOwner(), userProfileResponse -> {
-            image = userProfileResponse.getEmail();
-            id = userProfileResponse.getUserId();
+            image = userProfileResponse.getImages();
         });
 
         profileViewModel.signOutLiveData.observe(getViewLifecycleOwner(), isSignOut -> {
@@ -65,7 +58,7 @@ public class ProfileFragment extends Fragment {
             if (isSignOut) {
                 Intent intent = new Intent(context, SplashActivity.class);
                 context.startActivity(intent);
-                getActivity().finish();
+                requireActivity().finish();
             } else {
                 Toast.makeText(context, "실패하였습니다.", Toast.LENGTH_LONG).show();
             }
@@ -79,11 +72,6 @@ public class ProfileFragment extends Fragment {
         });
     }
 
-    private void setBindingAttribute() {
-        binding.setProfileFragment(this);
-        binding.setProfileViewModel(profileViewModel);
-    }
-
     public void moveToEditActivity(String value) {
         Intent intent = new Intent(getContext(), EditPrivateInfoActivity.class);
         intent.putExtra("whereToEdit", value);
@@ -95,37 +83,28 @@ public class ProfileFragment extends Fragment {
         startActivity(intent);
     }
 
-    public void showSignOutDialog() {
+    public void showDialog(String title) {
         Dialog dialog = new Dialog(getContext());
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.custom_dialog);
-        ((TextView) dialog.findViewById(R.id.dialog_title_textView)).setText("정말 탈퇴하시겠습니까?");
+        ((TextView) dialog.findViewById(R.id.dialog_title_textView)).setText(title);
         dialog.show();
 
         Button cancelButton = dialog.findViewById(R.id.dialog_cancel_button);
         Button okButton = dialog.findViewById(R.id.dialog_ok_button);
-
         cancelButton.setOnClickListener(v -> dialog.dismiss());
         okButton.setOnClickListener(v -> {
+            switch (title) {
+                case "정말 탈퇴하시겠습니까?":
+                    profileViewModel.signOutFromService();
+                    break;
+                case "정말 로그아웃하시겠습니까?":
+                    profileViewModel.signOutFromLogin();
+                    break;
+            }
+
             dialog.dismiss();
-            profileViewModel.signOutFromService();
-        });
-    }
 
-    public void showLogOutDialog() {
-        Dialog dialog = new Dialog(getContext());
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setContentView(R.layout.custom_dialog);
-        ((TextView) dialog.findViewById(R.id.dialog_title_textView)).setText("정말 로그아웃하시겠습니까?");
-        dialog.show();
-
-        Button cancelButton = dialog.findViewById(R.id.dialog_cancel_button);
-        Button okButton = dialog.findViewById(R.id.dialog_ok_button);
-
-        cancelButton.setOnClickListener(v -> dialog.dismiss());
-        okButton.setOnClickListener(v -> {
-            dialog.dismiss();
-            profileViewModel.signOutFromLogin();
         });
     }
 
@@ -143,7 +122,7 @@ public class ProfileFragment extends Fragment {
         okButton.setOnClickListener(v -> {
             dialog.dismiss();
             rating = ratingBar.getRating();
-            profileViewModel.setUserRating((int) rating, id);
+            profileViewModel.setUserRating((int) rating);
         });
     }
 }
