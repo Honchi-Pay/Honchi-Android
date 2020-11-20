@@ -74,8 +74,6 @@ public class EditProfileFragment extends Fragment {
                 Toast.makeText(getContext(), "프로필을 수정하는데 실패하였습니다.", Toast.LENGTH_LONG).show();
             }
         });
-
-        binding.editProfileBackButton.setOnClickListener(v -> activity.finish());
     }
 
     @Override

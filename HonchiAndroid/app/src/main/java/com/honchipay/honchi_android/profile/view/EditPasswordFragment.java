@@ -31,17 +31,13 @@ public class EditPasswordFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        EditPrivateInfoActivity activity = (EditPrivateInfoActivity) requireActivity();
-
         editProfileViewModel = new ViewModelProvider(this).get(EditProfileViewModel.class);
         binding.setEditProfileViewModel(editProfileViewModel);
+
         editProfileViewModel.changeSuccess.observe(getViewLifecycleOwner(), success -> {
             if (success) {
-                activity.finish();
-            } else {
-                Toast.makeText(getContext(), "", Toast.LENGTH_LONG).show();
+                requireActivity().finish();
             }
         });
-        binding.signUpPasswordBackButton3.setOnClickListener(v -> activity.finish());
     }
 }

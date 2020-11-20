@@ -15,18 +15,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ImageButton
-            android:id="@+id/SignUpInfo_back_button"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:layout_marginStart="22dp"
-            android:layout_marginTop="6dp"
-            android:background="@android:color/transparent"
-            android:src="@drawable/ic_round_arrow_back_ios_24"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="ContentDescription" />
-
         <TextView
             android:id="@+id/SignUpInfo_title_textView"
             android:layout_width="wrap_content"
@@ -37,7 +25,7 @@
             android:textColor="@color/black"
             android:textSize="24sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/SignUpInfo_back_button" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/SignUpInfo_name_textView"

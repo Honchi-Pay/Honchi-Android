@@ -18,6 +18,17 @@ public class SignActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign);
 
+        setbackButton();
+        navigateRoute();
+    }
+
+    private void setbackButton() {
+        findViewById(R.id.sign_back_button).setOnClickListener(v -> {
+            finish();
+        });
+    }
+
+    private void navigateRoute() {
         String division = getIntent().getStringExtra("splash");
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 

@@ -45,7 +45,6 @@ public class LoginFragment extends Fragment {
             }
         });
 
-        binding.loginBackButton.setOnClickListener(v -> requireActivity().finish());
         binding.loginFindPasswordLayout.setOnClickListener(v -> {
             binding.loginPasswordEditText.setHint("변경하실 비밀번호를 입력해주세요");
             binding.loginAutoLoginCheckBox.setVisibility(View.GONE);

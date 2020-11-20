@@ -59,7 +59,5 @@ public class SignUpPasswordFragment extends Fragment {
                 ((SignActivity) requireActivity()).replaceFragment(new SignUpUserInfoFragment());
             }
         });
-
-        binding.signUpPasswordBackButton.setOnClickListener(v -> requireActivity().finish());
     }
 }

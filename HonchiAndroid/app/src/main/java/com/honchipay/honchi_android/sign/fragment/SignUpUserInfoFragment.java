@@ -73,8 +73,6 @@ public class SignUpUserInfoFragment extends Fragment implements LocationListener
                 requireActivity().startActivity(intent);
             }
         });
-
-        binding.SignUpInfoBackButton.setOnClickListener(v -> requireActivity().finish());
     }
 
     private void startLocationService() {

@@ -64,8 +64,6 @@ public class SignUpEmailFragment extends Fragment {
             signUpViewModel.checkFirstUser();
             v.setClickable(false);
         });
-
-        binding.signUpEmailBackButton.setOnClickListener(v -> requireActivity().finish());
     }
 
     void setRejectAuthCode() {
