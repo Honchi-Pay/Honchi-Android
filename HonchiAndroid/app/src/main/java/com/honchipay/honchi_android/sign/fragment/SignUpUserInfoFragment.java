@@ -54,6 +54,7 @@ public class SignUpUserInfoFragment extends Fragment implements LocationListener
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         signUpViewModel = new ViewModelProvider(requireActivity()).get(SignUpViewModel.class);
+        binding.setSignUpViewModel(signUpViewModel);
 
         binding.SignUpInfoSignUpButton.setOnClickListener(v -> {
             if (binding.SignUpInfoGenderRadioGroup.getCheckedRadioButtonId() == R.id.SignUpInfo_male_radioButton) {

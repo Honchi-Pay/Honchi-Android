@@ -18,8 +18,6 @@ import com.honchipay.honchi_android.util.SharedPreferencesManager;
 import org.jetbrains.annotations.NotNull;
 
 public class LoginFragment extends Fragment {
-    String inputUserId = null;
-    String inputUserPW = null;
     FragmentLoginBinding binding;
     LoginViewModel loginViewModel;
 
@@ -33,12 +31,9 @@ public class LoginFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         loginViewModel = new ViewModelProvider(this).get(LoginViewModel.class);
+        binding.setLoginViewModel(loginViewModel);
 
-        binding.loginLoginButton.setOnClickListener(v -> {
-            inputUserId = binding.loginIdEditText.getText().toString();
-            inputUserPW = binding.loginPasswordEditText.getText().toString();
-            loginViewModel.login(inputUserId, inputUserPW);
-        });
+        binding.loginLoginButton.setOnClickListener(v -> loginViewModel.login());
 
         loginViewModel.loginSuccess.observe(getViewLifecycleOwner(), loginIsSuccess -> {
             if (loginIsSuccess) {
@@ -55,11 +50,7 @@ public class LoginFragment extends Fragment {
             binding.loginPasswordEditText.setHint("변경하실 비밀번호를 입력해주세요");
             binding.loginAutoLoginCheckBox.setVisibility(View.GONE);
             binding.loginLoginButton.setText("비밀번호 변경하기");
-            binding.loginLoginButton.setOnClickListener(v1 -> {
-                inputUserId = binding.loginIdEditText.getText().toString();
-                inputUserPW = binding.loginPasswordEditText.getText().toString();
-                loginViewModel.forgotPassword(inputUserId, inputUserPW);
-            });
+            binding.loginLoginButton.setOnClickListener(v1 -> loginViewModel.forgotPassword());
             v.setVisibility(View.GONE);
         });
     }

@@ -36,6 +36,7 @@ public class SignUpPasswordFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         signUpViewModel = new ViewModelProvider(requireActivity()).get(SignUpViewModel.class);
+        binding.setSignUpViewModel(signUpViewModel);
 
         binding.signUpPasswordConfirmEditText.addTextChangedListener(new CustomTextWatcher() {
             @Override

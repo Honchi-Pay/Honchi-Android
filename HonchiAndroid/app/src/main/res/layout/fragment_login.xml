@@ -4,6 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".sign.fragment.LoginFragment">
 
+    <data>
+
+        <variable
+            name="loginViewModel"
+            type="com.honchipay.honchi_android.sign.viewModel.LoginViewModel" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -62,6 +69,7 @@
             android:inputType="textPersonName"
             android:paddingStart="10dp"
             android:paddingEnd="0dp"
+            android:text="@={loginViewModel.inputUserId}"
             android:textSize="12sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -94,6 +102,7 @@
             android:inputType="textPassword"
             android:paddingStart="10dp"
             android:paddingEnd="0dp"
+            android:text="@={loginViewModel.inputUserPW}"
             android:textSize="12sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
