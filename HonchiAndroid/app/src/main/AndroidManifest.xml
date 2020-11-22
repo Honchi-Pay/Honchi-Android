@@ -16,6 +16,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+        <activity android:name=".home.Ui.homeActivity"></activity>
         <activity
             android:name=".splash.SplashActivity"
             android:theme="@style/FullScreenTheme">
