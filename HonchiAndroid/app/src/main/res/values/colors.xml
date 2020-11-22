@@ -8,4 +8,7 @@
     <color name="white">#ffffff</color>
     <color name="sign_gray">#8d8d8d</color>
     <color name="black">#000000</color>
+    <color name="search_backColor">#B9B9B9</color>
+    <color name="home_background">#F5F6F8</color>
+    <color name="detail_gray">#404040</color>
 </resources>
