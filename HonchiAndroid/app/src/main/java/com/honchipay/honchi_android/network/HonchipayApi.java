@@ -1,5 +1,7 @@
 package com.honchipay.honchi_android.network;
 
+import com.honchipay.honchi_android.home.Data.getPost;
+import com.honchipay.honchi_android.home.Data.newPost;
 import com.honchipay.honchi_android.profile.data.UserProfileResponse;
 import com.honchipay.honchi_android.sign.Data.SignUpRequest;
 import com.honchipay.honchi_android.sign.Data.TokenResponseData;
@@ -19,6 +21,7 @@ import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.PartMap;
+import retrofit2.http.Path;
 
 public interface HonchipayApi {
     @POST("/auth")
@@ -61,4 +64,15 @@ public interface HonchipayApi {
     @FormUrlEncoded
     @DELETE("/user/out")
     Single<Response<Void>> withdrawFromService(@Header("Authorization") String header, @Field("nickName") String name);
+
+    @GET("/post/recent")
+    Single<Response<newPost>> getNewPost(@Header("Authorization")String header, @Path("category")String category);
+
+    @GET("/post")
+    Single<Response<getPost>> getPostList(
+            @Header("Authorization")String header,
+            @Path("category")String category,
+            @Path ("item") String item,
+            @Path ("dist") int dist);
+
 }
