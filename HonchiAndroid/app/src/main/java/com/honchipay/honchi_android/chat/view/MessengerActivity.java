@@ -4,6 +4,8 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
 import android.content.ClipData;
@@ -18,13 +20,20 @@ import android.widget.EditText;
 import com.honchipay.honchi_android.R;
 import com.honchipay.honchi_android.chat.HonchiPaySocket;
 import com.honchipay.honchi_android.chat.model.ChatRoomItem;
+import com.honchipay.honchi_android.chat.model.ChattingContent;
 import com.honchipay.honchi_android.chat.viewModel.ChatViewModel;
 import com.honchipay.honchi_android.databinding.ActivityMessengerBinding;
+
+import java.util.List;
+
+import static java.util.Collections.emptyList;
 
 public class MessengerActivity extends AppCompatActivity {
     ChatRoomItem chatRoomData;
     ChatViewModel chatViewModel;
     ActivityMessengerBinding binding;
+    RecyclerView recyclerView;
+    ChatBubbleAdapter chatBubbleAdapter;
     int PICTURES_REQUEST_CODE = 13;
 
     @Override
@@ -32,6 +41,8 @@ public class MessengerActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         init();
+        setRecyclerView();
+        setSendMessage();
     }
 
     private void init() {
@@ -45,6 +56,21 @@ public class MessengerActivity extends AppCompatActivity {
 
         binding.setChatViewModel(chatViewModel);
         HonchiPaySocket.getInstance().joinIntoRoom(chatRoomData.getRoomId());
+    }
+
+    private void setRecyclerView() {
+        chatBubbleAdapter = new ChatBubbleAdapter(emptyList());
+        recyclerView = findViewById(R.id.messenger_massages_recyclerView);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setAdapter(chatBubbleAdapter);
+    }
+
+    private void setSendMessage() {
+        findViewById(R.id.messenger_sendMessage_imageView).setOnClickListener(v -> {
+            String text = ((EditText) findViewById(R.id.messenger_inputMessage_editText)).getText().toString();
+            chatBubbleAdapter.addMessage(text);
+        });
     }
 
     @SuppressLint("IntentReset")
@@ -70,10 +96,11 @@ public class MessengerActivity extends AppCompatActivity {
             if (clipData != null) {
                 for (int i = 0; i < clipData.getItemCount(); i++) {
                     uri = clipData.getItemAt(i).getUri();
-                    
+                    chatBubbleAdapter.addImage(uri.toString());
                 }
             } else {
                 uri = data.getData();
+                chatBubbleAdapter.addImage(uri.toString());
             }
         }
     }
