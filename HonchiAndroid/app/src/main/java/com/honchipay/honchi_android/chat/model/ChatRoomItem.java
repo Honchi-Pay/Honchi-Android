@@ -7,6 +7,7 @@ public class ChatRoomItem implements Serializable {
     private String title;
     private int people;
     private String message;
+    private String images;
 
     public String getRoomId() {
         return roomId;
@@ -38,5 +39,13 @@ public class ChatRoomItem implements Serializable {
 
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    public String getImages() {
+        return images;
+    }
+
+    public void setImages(String images) {
+        this.images = images;
     }
 }
