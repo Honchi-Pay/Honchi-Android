@@ -104,6 +104,8 @@ public class ChatBubbleAdapter extends RecyclerView.Adapter<ChatBubbleAdapter.Ch
 
         public void makeImageView(String image, boolean isMine) {
             ImageView imageView = new ImageView(itemView.getContext());
+            imageView.setBackground(ContextCompat.getDrawable(itemView.getContext(), R.drawable.background_horizontal_bar));
+            imageView.setClipToOutline(true);
             ByteImage byteImage = getImage(image);
 
             if (byteImage != null) {
