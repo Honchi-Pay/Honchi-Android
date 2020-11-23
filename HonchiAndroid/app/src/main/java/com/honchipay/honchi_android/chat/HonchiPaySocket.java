@@ -48,6 +48,10 @@ public class HonchiPaySocket {
         socket.emit("join", roomId);
     }
 
+    public void sendMessage(String message) {
+        socket.emit("", message);
+    }
+
     public void disConnect() {
         if (isConnected) {
             socket.disconnect();

@@ -23,8 +23,11 @@ import com.honchipay.honchi_android.chat.model.ChatRoomItem;
 import com.honchipay.honchi_android.chat.model.ChattingContent;
 import com.honchipay.honchi_android.chat.viewModel.ChatViewModel;
 import com.honchipay.honchi_android.databinding.ActivityMessengerBinding;
+import com.honchipay.honchi_android.network.HonchipayConnector;
 
 import java.util.List;
+
+import io.socket.emitter.Emitter;
 
 import static java.util.Collections.emptyList;
 
@@ -35,6 +38,8 @@ public class MessengerActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     ChatBubbleAdapter chatBubbleAdapter;
     int PICTURES_REQUEST_CODE = 13;
+    Emitter.Listener textListener = args -> chatBubbleAdapter.addMessage((String) args[0]);
+    Emitter.Listener imageListener = args -> chatBubbleAdapter.addMessage((String) args[0]);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +61,8 @@ public class MessengerActivity extends AppCompatActivity {
 
         binding.setChatViewModel(chatViewModel);
         HonchiPaySocket.getInstance().joinIntoRoom(chatRoomData.getRoomId());
+        HonchiPaySocket.getInstance().socket.on("", textListener);
+        HonchiPaySocket.getInstance().socket.on("", imageListener);
     }
 
     private void setRecyclerView() {
@@ -69,7 +76,7 @@ public class MessengerActivity extends AppCompatActivity {
     private void setSendMessage() {
         findViewById(R.id.messenger_sendMessage_imageView).setOnClickListener(v -> {
             String text = ((EditText) findViewById(R.id.messenger_inputMessage_editText)).getText().toString();
-            chatBubbleAdapter.addMessage(text);
+            HonchiPaySocket.getInstance().sendMessage(text);
         });
     }
 
@@ -108,6 +115,8 @@ public class MessengerActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        HonchiPaySocket.getInstance().socket.off("", textListener);
+        HonchiPaySocket.getInstance().socket.off("", imageListener);
         HonchiPaySocket.getInstance().disConnect();
     }
 }
