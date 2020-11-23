@@ -24,7 +24,9 @@ public class ChatBubbleAdapter extends RecyclerView.Adapter<ChatBubbleAdapter.Ch
     @NonNull
     @Override
     public ChatBubbleViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new ChatBubbleViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_chat_bubble, parent, false));
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_chat_bubble, parent, false);
+
+        return new ChatBubbleViewHolder(view);
     }
 
     @Override

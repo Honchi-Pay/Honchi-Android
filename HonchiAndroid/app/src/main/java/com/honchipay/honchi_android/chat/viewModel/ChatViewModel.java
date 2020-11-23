@@ -18,8 +18,13 @@ import retrofit2.Response;
 public class ChatViewModel extends BaseViewModel {
     private final String TAG = ChatViewModel.class.getSimpleName();
     private final ChatRepository repository = new ChatRepository();
+    private String roomId;
     public final ObservableField<String> roomTitle = new ObservableField<>();
     public MutableLiveData<List<ChatRoomItem>> chatRoomListLiveData = new MutableLiveData<>();
+
+    public void setRoomId(String roomId) {
+        this.roomId = roomId;
+    }
 
     public void setRoomTitleValidation(String preRoomTitle) {
         roomTitle.addOnPropertyChangedCallback(new Observable.OnPropertyChangedCallback() {
@@ -52,6 +57,6 @@ public class ChatViewModel extends BaseViewModel {
             }
         };
 
-        addDisposable(repository.changeRoomTitle(roomTitle.get(), roomTitleObserver));
+        addDisposable(repository.changeRoomTitle(roomId, roomTitle.get(), roomTitleObserver));
     }
 }

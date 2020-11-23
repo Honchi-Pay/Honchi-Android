@@ -39,6 +39,7 @@ public class MessengerActivity extends AppCompatActivity {
 
         chatViewModel = new ViewModelProvider(this).get(ChatViewModel.class);
         chatRoomData = (ChatRoomItem) getIntent().getExtras().getSerializable("chatData");
+        chatViewModel.setRoomId(chatRoomData.getRoomId());
         chatViewModel.roomTitle.set(chatRoomData.getTitle());
         chatViewModel.setRoomTitleValidation(chatRoomData.getTitle());
 
