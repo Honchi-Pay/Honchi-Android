@@ -28,7 +28,7 @@ public class ProfileViewModel extends BaseViewModel {
                 new CustomDisposableSingleObserver<Response<UserProfileResponse>>(TAG) {
                     @Override
                     public void onSuccess(@NonNull Response<UserProfileResponse> profileResponseResponse) {
-                        if (profileResponseResponse.isSuccessful() && profileResponseResponse.code() == 200) {
+                        if (profileResponseResponse.isSuccessful() && profileResponseResponse.code() == 200 && profileResponseResponse.body() != null) {
                             id = profileResponseResponse.body().getUserId();
                             profileLiveData.postValue(profileResponseResponse.body());
                         }

@@ -34,7 +34,9 @@ public class EditProfileFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        image = getArguments().getString("userInformation");
+        if (getArguments() != null) {
+            image = getArguments().getString("userInformation");
+        }
     }
 
     @Override
@@ -63,10 +65,7 @@ public class EditProfileFragment extends Fragment {
             startActivityForResult(Intent.createChooser(intent, "이미지를 선택하세요"), REQUEST_IMAGE);
         });
 
-        binding.editProfileDoChangeButton.setOnClickListener(v -> {
-            editProfileViewModel.uploadUserNewInfo(file);
-        });
-
+        binding.editProfileDoChangeButton.setOnClickListener(v -> editProfileViewModel.uploadUserNewInfo(file));
         editProfileViewModel.changeSuccess.observe(getViewLifecycleOwner(), success -> {
             if (success) {
                 activity.finish();

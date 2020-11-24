@@ -8,6 +8,10 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -16,22 +20,14 @@ import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Toast;
-
 import com.honchipay.honchi_android.R;
 import com.honchipay.honchi_android.databinding.FragmentSignUpUserInfoBinding;
 import com.honchipay.honchi_android.sign.data.Gender;
 import com.honchipay.honchi_android.sign.data.SignUpProcess;
-import com.honchipay.honchi_android.sign.data.SignUpRequest;
 import com.honchipay.honchi_android.sign.viewModel.SignUpViewModel;
 import com.honchipay.honchi_android.splash.SplashActivity;
 
 import org.jetbrains.annotations.NotNull;
-
-import java.util.regex.Pattern;
 
 public class SignUpUserInfoFragment extends Fragment implements LocationListener {
     FragmentSignUpUserInfoBinding binding;

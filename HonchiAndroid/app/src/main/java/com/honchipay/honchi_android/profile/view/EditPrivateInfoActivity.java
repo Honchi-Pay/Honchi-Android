@@ -39,8 +39,6 @@ public class EditPrivateInfoActivity extends AppCompatActivity {
                 finish();
         }
 
-        findViewById(R.id.profile_change_back_button).setOnClickListener(v -> {
-            finish();
-        });
+        findViewById(R.id.profile_change_back_button).setOnClickListener(v -> finish());
     }
 }

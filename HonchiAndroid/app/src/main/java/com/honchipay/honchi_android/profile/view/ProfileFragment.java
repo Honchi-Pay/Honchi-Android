@@ -4,13 +4,6 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.databinding.DataBindingUtil;
-import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +12,11 @@ import android.widget.Button;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.Nullable;
+import androidx.databinding.DataBindingUtil;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.honchipay.honchi_android.R;
 import com.honchipay.honchi_android.databinding.FragmentProfileBinding;
@@ -48,12 +46,9 @@ public class ProfileFragment extends Fragment {
         binding.setProfileViewModel(profileViewModel);
         profileViewModel.getProfile(SharedPreferencesManager.getInstance().getUserName());
 
-        profileViewModel.profileLiveData.observe(getViewLifecycleOwner(), userProfileResponse -> {
-            image = userProfileResponse.getImages();
-        });
-
+        profileViewModel.profileLiveData.observe(getViewLifecycleOwner(), userProfileResponse -> image = userProfileResponse.getImages());
         profileViewModel.signOutLiveData.observe(getViewLifecycleOwner(), isSignOut -> {
-            Context context = getContext();
+            Context context = requireContext();
 
             if (isSignOut) {
                 Intent intent = new Intent(context, SplashActivity.class);

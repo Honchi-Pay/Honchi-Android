@@ -23,7 +23,9 @@ public class DataBindingAdapters {
         HonchipayConnector.getInstance().getApi().getImageByByte(token, imageName).enqueue(new Callback<ByteImage>() {
             @Override
             public void onResponse(@NotNull Call<ByteImage> call, @NotNull Response<ByteImage> response) {
-                Glide.with(view.getContext()).load(response.body().getImages()).circleCrop().into(view);
+                if (response.body() != null) {
+                    Glide.with(view.getContext()).load(response.body().getImages()).circleCrop().into(view);
+                }
             }
 
             @Override

@@ -6,7 +6,7 @@ import io.reactivex.annotations.NonNull;
 import io.reactivex.observers.DisposableSingleObserver;
 
 public abstract class CustomDisposableSingleObserver<T> extends DisposableSingleObserver<T> {
-    private String TAG = "";
+    private final String TAG;
 
     public CustomDisposableSingleObserver(String TAG) {
         this.TAG = TAG;

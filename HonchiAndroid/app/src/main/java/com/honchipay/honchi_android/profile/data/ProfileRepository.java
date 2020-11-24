@@ -7,7 +7,6 @@ import com.honchipay.honchi_android.util.SharedPreferencesManager;
 import java.io.File;
 import java.util.HashMap;
 
-import io.reactivex.Single;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.observers.DisposableSingleObserver;
 import okhttp3.MediaType;

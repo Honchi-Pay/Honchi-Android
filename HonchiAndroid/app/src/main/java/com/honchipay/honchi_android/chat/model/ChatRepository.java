@@ -6,11 +6,8 @@ import com.honchipay.honchi_android.network.HonchipayConnector;
 import java.util.HashMap;
 import java.util.List;
 
-import io.reactivex.Single;
-import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.observers.DisposableSingleObserver;
-import io.reactivex.schedulers.Schedulers;
 import retrofit2.Response;
 
 public class ChatRepository extends BaseRepository {

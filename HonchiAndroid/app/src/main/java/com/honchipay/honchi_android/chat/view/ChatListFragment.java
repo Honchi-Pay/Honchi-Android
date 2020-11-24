@@ -51,8 +51,6 @@ public class ChatListFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
 
         chatViewModel.getParticipatingChatRooms();
-        chatViewModel.chatRoomListLiveData.observe(getViewLifecycleOwner(), chatListItems -> {
-            chatRoomsAdapter.renewChatList(chatListItems);
-        });
+        chatViewModel.chatRoomListLiveData.observe(getViewLifecycleOwner(), chatListItems -> chatRoomsAdapter.renewChatList(chatListItems));
     }
 }

@@ -2,12 +2,10 @@ package com.honchipay.honchi_android.chat;
 
 import android.util.Log;
 
-import java.io.IOException;
-import java.io.ObjectOutputStream;
 import java.net.URISyntaxException;
+
 import io.socket.client.IO;
 import io.socket.client.Socket;
-import io.socket.emitter.Emitter;
 
 public class HonchiPaySocket {
     private static final String TAG = HonchiPaySocket.class.getSimpleName();
