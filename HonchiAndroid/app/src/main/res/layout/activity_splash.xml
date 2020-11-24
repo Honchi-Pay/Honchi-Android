@@ -16,7 +16,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="ContentDescription" />
 
     <TextView
         android:id="@+id/textView"
@@ -37,7 +38,7 @@
         android:layout_height="50dp"
         android:layout_marginBottom="20dp"
         android:background="@drawable/sign_login_btn"
-        android:onClick="onClick"
+        android:onClick="onClickSignButton"
         android:text="@string/splash_login"
         android:textColor="@color/white"
         android:textSize="16sp"
@@ -51,7 +52,7 @@
         android:layout_height="50dp"
         android:layout_marginBottom="80dp"
         android:background="@drawable/splash_login_btn"
-        android:onClick="onClick"
+        android:onClick="onClickSignButton"
         android:text="@string/splash_signUp"
         android:textColor="@color/white"
         android:textSize="16sp"

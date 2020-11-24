@@ -31,6 +31,7 @@ public class EditPasswordFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         editProfileViewModel = new ViewModelProvider(this).get(EditProfileViewModel.class);
         binding.setEditProfileViewModel(editProfileViewModel);
+        binding.setLifecycleOwner(this);
 
         editProfileViewModel.changeSuccess.observe(getViewLifecycleOwner(), success -> {
             if (success) {

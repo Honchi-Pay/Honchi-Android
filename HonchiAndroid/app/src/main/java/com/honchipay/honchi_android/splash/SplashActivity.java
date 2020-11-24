@@ -17,27 +17,30 @@ import com.honchipay.honchi_android.R;
 import com.honchipay.honchi_android.sign.SignActivity;
 import com.honchipay.honchi_android.util.SharedPreferencesManager;
 
-public class SplashActivity extends AppCompatActivity implements View.OnClickListener {
+public class SplashActivity extends AppCompatActivity {
     int PERMISSION_CODE = 1111;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
+
         checkPermission();
         checkAutoLogin();
     }
 
-    @Override
-    public void onClick(View v) {
-        Intent intent = new Intent(this, SignActivity.class);
+    public void onClickSignButton(View v) {
+        int viewId = v.getId();
+        String toSignValue = null;
 
-        if (v.getId() == R.id.splash_login_button) {
-            intent.putExtra("splash", "login");
-        } else if (v.getId() == R.id.splash_signUp_button) {
-            intent.putExtra("splash", "signUp");
+        if (viewId == R.id.splash_login_button) {
+            toSignValue = "login";
+        } else if (viewId == R.id.splash_signUp_button) {
+            toSignValue = "signUp";
         }
 
+        Intent intent = new Intent(this, SignActivity.class);
+        intent.putExtra("splash", toSignValue);
         startActivity(intent);
     }
 

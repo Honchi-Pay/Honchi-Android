@@ -36,6 +36,7 @@ public class SignUpEmailFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         signUpViewModel = new ViewModelProvider(requireActivity()).get(SignUpViewModel.class);
         binding.setSignViewModel(signUpViewModel);
+        binding.setLifecycleOwner(this);
 
         signUpViewModel.haveToNextPageLiveData.observe(getViewLifecycleOwner(), signUpProcess -> {
             switch (signUpProcess) {
@@ -88,7 +89,6 @@ public class SignUpEmailFragment extends Fragment {
             binding.signUpEmailAuthCodeTextView.setVisibility(gone);
             binding.signUpEmailAuthCodeEditText.setVisibility(gone);
             binding.signUpEmailEmailEditText.setText(null);
-
         }
     }
 }

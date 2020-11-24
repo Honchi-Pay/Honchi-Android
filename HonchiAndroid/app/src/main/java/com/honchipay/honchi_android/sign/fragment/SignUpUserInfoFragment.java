@@ -23,7 +23,6 @@ import androidx.lifecycle.ViewModelProvider;
 import com.honchipay.honchi_android.R;
 import com.honchipay.honchi_android.databinding.FragmentSignUpUserInfoBinding;
 import com.honchipay.honchi_android.sign.data.Gender;
-import com.honchipay.honchi_android.sign.data.SignUpProcess;
 import com.honchipay.honchi_android.sign.viewModel.SignUpViewModel;
 import com.honchipay.honchi_android.splash.SplashActivity;
 
@@ -51,6 +50,7 @@ public class SignUpUserInfoFragment extends Fragment implements LocationListener
         super.onActivityCreated(savedInstanceState);
         signUpViewModel = new ViewModelProvider(requireActivity()).get(SignUpViewModel.class);
         binding.setSignUpViewModel(signUpViewModel);
+        binding.setLifecycleOwner(this);
 
         binding.SignUpInfoSignUpButton.setOnClickListener(v -> {
             if (binding.SignUpInfoGenderRadioGroup.getCheckedRadioButtonId() == R.id.SignUpInfo_male_radioButton) {
@@ -63,11 +63,9 @@ public class SignUpUserInfoFragment extends Fragment implements LocationListener
         });
 
         signUpViewModel.haveToNextPageLiveData.observe(getViewLifecycleOwner(), signUpProcess -> {
-            if (signUpProcess == SignUpProcess.SIGN_UP) {
-                Toast.makeText(getContext(), "회원가입을 성공하였습니다.", Toast.LENGTH_LONG).show();
-                Intent intent = new Intent(getContext(), SplashActivity.class);
-                requireActivity().startActivity(intent);
-            }
+            Toast.makeText(getContext(), "회원가입을 성공하였습니다.", Toast.LENGTH_LONG).show();
+            Intent intent = new Intent(getContext(), SplashActivity.class);
+            requireActivity().startActivity(intent);
         });
     }
 

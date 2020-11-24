@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
@@ -28,23 +29,31 @@ public class LoginFragment extends Fragment {
     }
 
     @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        changeToFindPassWordViewsByLayout();
+    }
+
+    @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+
         loginViewModel = new ViewModelProvider(this).get(LoginViewModel.class);
         binding.setLoginViewModel(loginViewModel);
-
-        binding.loginLoginButton.setOnClickListener(v -> loginViewModel.login());
+        binding.setLifecycleOwner(this);
 
         loginViewModel.loginSuccess.observe(getViewLifecycleOwner(), loginIsSuccess -> {
-            if (loginIsSuccess) {
-                if (binding.loginAutoLoginCheckBox.isChecked()) {
-                    SharedPreferencesManager.getInstance().setIsLogin(true);
-                }
-//                Intent intent = new Intent(getContext(), );
-//                requireActivity().startActivity(intent);
+            if (binding.loginAutoLoginCheckBox.isChecked()) {
+                SharedPreferencesManager.getInstance().setIsLogin(true);
             }
-        });
 
+//            Intent intent = new Intent(getContext(), );
+//            requireActivity().startActivity(intent);
+
+        });
+    }
+
+    private void changeToFindPassWordViewsByLayout() {
         binding.loginFindPasswordLayout.setOnClickListener(v -> {
             binding.loginPasswordEditText.setHint("변경하실 비밀번호를 입력해주세요");
             binding.loginAutoLoginCheckBox.setVisibility(View.GONE);

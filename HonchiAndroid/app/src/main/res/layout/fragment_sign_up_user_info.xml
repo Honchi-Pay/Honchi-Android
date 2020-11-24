@@ -66,7 +66,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="45dp"
             android:layout_marginTop="28dp"
-            android:text="@string/phonenumber"
+            android:text="@string/phone_number"
             android:textColor="@color/black"
             android:textSize="10sp"
             app:layout_constraintStart_toStartOf="parent"

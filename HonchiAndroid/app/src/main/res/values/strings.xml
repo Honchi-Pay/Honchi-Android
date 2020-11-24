@@ -21,7 +21,7 @@
     <string name="female">여성</string>
     <string name="nickname">닉네임</string>
     <string name="get_nickname">닉네임을 입력해주세요</string>
-    <string name="phonenumber">전화번호</string>
+    <string name="phone_number">전화번호</string>
     <string name="only_number">숫자만 입력해주세요</string>
     <string name="check">확인</string>
 

@@ -34,9 +34,8 @@ public class EditProfileFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            image = getArguments().getString("userInformation");
-        }
+
+        image = requireArguments().getString("userInformation");
     }
 
     @Override
@@ -50,7 +49,8 @@ public class EditProfileFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         editProfileViewModel = new ViewModelProvider(requireActivity()).get(EditProfileViewModel.class);
         binding.setEditProfileViewModel(editProfileViewModel);
-        Glide.with(this).load(image).circleCrop().into(binding.editProfileUserImageView);
+        binding.setEditProfileFragment(this);
+        binding.setLifecycleOwner(this);
     }
 
     @Override
