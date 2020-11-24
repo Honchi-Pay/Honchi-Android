@@ -8,8 +8,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.honchipay.honchi_android.R;
-import com.honchipay.honchi_android.sign.Fragment.LoginFragment;
-import com.honchipay.honchi_android.sign.Fragment.SignUpEmailFragment;
+import com.honchipay.honchi_android.sign.fragment.LoginFragment;
+import com.honchipay.honchi_android.sign.fragment.SignUpEmailFragment;
 
 public class SignActivity extends AppCompatActivity {
 
@@ -18,6 +18,17 @@ public class SignActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign);
 
+        setbackButton();
+        navigateRoute();
+    }
+
+    private void setbackButton() {
+        findViewById(R.id.sign_back_button).setOnClickListener(v -> {
+            finish();
+        });
+    }
+
+    private void navigateRoute() {
         String division = getIntent().getStringExtra("splash");
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 

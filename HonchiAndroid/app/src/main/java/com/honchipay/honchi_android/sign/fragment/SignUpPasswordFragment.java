@@ -1,11 +1,10 @@
-package com.honchipay.honchi_android.sign.Fragment;
+package com.honchipay.honchi_android.sign.fragment;
 
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,25 +12,19 @@ import android.view.ViewGroup;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.honchipay.honchi_android.R;
 import com.honchipay.honchi_android.databinding.FragmentSignUpPasswordBinding;
 import com.honchipay.honchi_android.sign.SignActivity;
+import com.honchipay.honchi_android.sign.viewModel.SignUpViewModel;
+import com.honchipay.honchi_android.util.CustomTextWatcher;
 
 import org.jetbrains.annotations.NotNull;
 
 public class SignUpPasswordFragment extends Fragment {
     FragmentSignUpPasswordBinding binding;
-    String inputPassword = null;
-    String inputConfirm = null;
-    String email = null;
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        email = getArguments().getString("email");
-    }
+    SignUpViewModel signUpViewModel;
 
     @Override
     public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -42,12 +35,10 @@ public class SignUpPasswordFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        signUpViewModel = new ViewModelProvider(requireActivity()).get(SignUpViewModel.class);
+        binding.setSignUpViewModel(signUpViewModel);
 
-        binding.signUpPasswordConfirmEditText.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-            }
-
+        binding.signUpPasswordConfirmEditText.addTextChangedListener(new CustomTextWatcher() {
             @Override
             public void afterTextChanged(Editable s) {
                 if (!binding.signUpPasswordPasswordEditText.getText().toString().equals(s.toString())) {
@@ -58,26 +49,15 @@ public class SignUpPasswordFragment extends Fragment {
                     binding.signUpPasswordErrorTextView.setVisibility(View.INVISIBLE);
                 }
             }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) { }
         });
 
         binding.signUpPasswordNextButton.setOnClickListener(v -> {
-            inputPassword = binding.signUpPasswordPasswordEditText.getText().toString();
-            inputConfirm = binding.signUpPasswordConfirmEditText.getText().toString();
+            String inputPassword = binding.signUpPasswordPasswordEditText.getText().toString();
+            String inputConfirm = binding.signUpPasswordConfirmEditText.getText().toString();
 
             if (inputPassword.equals(inputConfirm)) {
-                SignUpUserInfoFragment fragment = new SignUpUserInfoFragment();
-                Bundle bundle = new Bundle();
-                bundle.putString("email", email);
-                bundle.putString("password", inputPassword);
-                fragment.setArguments(bundle);
-
-                ((SignActivity) requireActivity()).replaceFragment(fragment);
+                ((SignActivity) requireActivity()).replaceFragment(new SignUpUserInfoFragment());
             }
         });
-
-        binding.signUpPasswordBackButton.setOnClickListener(v -> requireActivity().finish());
     }
 }

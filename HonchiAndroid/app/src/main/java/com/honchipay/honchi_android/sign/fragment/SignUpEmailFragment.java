@@ -1,4 +1,4 @@
-package com.honchipay.honchi_android.sign.Fragment;
+package com.honchipay.honchi_android.sign.fragment;
 
 import android.os.Bundle;
 
@@ -15,15 +15,15 @@ import android.widget.Toast;
 import com.honchipay.honchi_android.R;
 import com.honchipay.honchi_android.databinding.FragmentSignUpEmailBinding;
 import com.honchipay.honchi_android.sign.SignActivity;
-import com.honchipay.honchi_android.sign.ViewModel.SignUpViewModel;
+import com.honchipay.honchi_android.sign.viewModel.SignUpViewModel;
 
 import org.jetbrains.annotations.NotNull;
 
 public class SignUpEmailFragment extends Fragment {
-    String inputUserEmail = null;
-    String inputAuthCode = null;
     FragmentSignUpEmailBinding binding;
     SignUpViewModel signUpViewModel;
+    final int gone = View.GONE;
+    final int visibility = View.VISIBLE;
 
     @Override
     public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -34,29 +34,22 @@ public class SignUpEmailFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        signUpViewModel = new ViewModelProvider(this).get(SignUpViewModel.class);
+        signUpViewModel = new ViewModelProvider(requireActivity()).get(SignUpViewModel.class);
+        binding.setSignViewModel(signUpViewModel);
 
         signUpViewModel.haveToNextPageLiveData.observe(getViewLifecycleOwner(), signUpProcess -> {
             switch (signUpProcess) {
                 case FIRST:
-                    signUpViewModel.checkDuplicatedEmail(inputUserEmail);
+                    signUpViewModel.checkDuplicatedEmail();
                     break;
                 case EMAIL:
                     Toast.makeText(getContext(), "메일을 보냈습니다. 인증코드를 3분 안에 인증해 주시길 바랍니다.", Toast.LENGTH_LONG).show();
-                    binding.signUpEmailEmailTextView.setText("인증코드");
-                    binding.signUpEmailEmailEditText.setText("");
+                    setVisibility(true);
                     binding.signUpEmailAuthButton.setText("다음");
-                    binding.signUpEmailAuthButton.setOnClickListener(v -> {
-                        inputAuthCode = binding.signUpEmailEmailEditText.getText().toString();
-                        signUpViewModel.checkAuthCode(inputUserEmail, inputAuthCode);
-                    });
+                    binding.signUpEmailAuthButton.setOnClickListener(v -> signUpViewModel.checkAuthCode());
                     break;
                 case CODE:
-                    SignUpPasswordFragment fragment = new SignUpPasswordFragment();
-                    Bundle bundle = new Bundle();
-                    bundle.putString("email", inputUserEmail);
-                    fragment.setArguments(bundle);
-                    ((SignActivity) requireActivity()).replaceFragment(fragment);
+                    ((SignActivity) requireActivity()).replaceFragment(new SignUpPasswordFragment());
                     break;
                 case REJECT:
                     Toast.makeText(getContext(), "인증에 실패하였습니다.", Toast.LENGTH_LONG).show();
@@ -68,21 +61,34 @@ public class SignUpEmailFragment extends Fragment {
         });
 
         binding.signUpEmailAuthButton.setOnClickListener(v -> {
-            inputUserEmail = binding.signUpEmailEmailEditText.getText().toString();
-            signUpViewModel.checkFirstUser(inputUserEmail);
+            signUpViewModel.checkFirstUser();
             v.setClickable(false);
         });
-
-        binding.signUpEmailBackButton.setOnClickListener(v -> requireActivity().finish());
     }
 
     void setRejectAuthCode() {
-        binding.signUpEmailEmailEditText.setText("");
+        setVisibility(false);
         binding.signUpEmailAuthButton.setText("인증번호 보내기");
         binding.signUpEmailAuthButton.setOnClickListener(v -> {
-            inputUserEmail = binding.signUpEmailEmailEditText.getText().toString();
-            signUpViewModel.checkFirstUser(inputUserEmail);
+            signUpViewModel.checkFirstUser();
             v.setClickable(false);
         });
+    }
+
+    void setVisibility(boolean isVisibility) {
+        if (isVisibility) {
+            binding.signUpEmailEmailTextView.setVisibility(gone);
+            binding.signUpEmailEmailEditText.setVisibility(gone);
+            binding.signUpEmailAuthCodeTextView.setVisibility(visibility);
+            binding.signUpEmailAuthCodeEditText.setVisibility(visibility);
+            binding.signUpEmailAuthCodeEditText.setText(null);
+        } else {
+            binding.signUpEmailEmailTextView.setVisibility(visibility);
+            binding.signUpEmailEmailEditText.setVisibility(visibility);
+            binding.signUpEmailAuthCodeTextView.setVisibility(gone);
+            binding.signUpEmailAuthCodeEditText.setVisibility(gone);
+            binding.signUpEmailEmailEditText.setText(null);
+
+        }
     }
 }

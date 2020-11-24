@@ -3,8 +3,8 @@ package com.honchipay.honchi_android.network;
 import com.honchipay.honchi_android.base.ByteImage;
 import com.honchipay.honchi_android.chat.model.ChatRoomItem;
 import com.honchipay.honchi_android.profile.data.UserProfileResponse;
-import com.honchipay.honchi_android.sign.Data.SignUpRequest;
-import com.honchipay.honchi_android.sign.Data.TokenResponseData;
+import com.honchipay.honchi_android.sign.data.SignUpRequest;
+import com.honchipay.honchi_android.sign.data.TokenResponseData;
 
 import java.util.HashMap;
 import java.util.List;

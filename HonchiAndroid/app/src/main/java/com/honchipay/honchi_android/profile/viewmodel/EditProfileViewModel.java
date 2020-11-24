@@ -15,12 +15,12 @@ import io.reactivex.observers.DisposableSingleObserver;
 import retrofit2.Response;
 
 public class EditProfileViewModel extends BaseViewModel {
+    private final String TAG = EditProfileViewModel.class.getSimpleName();
     ProfileRepository repository = new ProfileRepository();
     public ObservableField<String> nickName = new ObservableField<>(SharedPreferencesManager.getInstance().getUserName());
     public ObservableField<String> password = new ObservableField<>();
     public ObservableField<String> confirm = new ObservableField<>();
     public MutableLiveData<Boolean> changeSuccess = new MutableLiveData<>();
-    private final String TAG = EditProfileViewModel.class.getSimpleName();
 
     public void uploadUserNewInfo(File file) {
         if (!nickName.get().equals("")) {
@@ -32,7 +32,7 @@ public class EditProfileViewModel extends BaseViewModel {
                         }
                     };
 
-            addSingle(repository.updateUserProfile(nickName.get(), file), uploadUserInfoObserver);
+            addDisposable(repository.updateUserProfile(nickName.get(), file, uploadUserInfoObserver));
         }
     }
 
@@ -46,7 +46,7 @@ public class EditProfileViewModel extends BaseViewModel {
                         }
                     };
 
-            addSingle(repository.changeUserPassword(""), changePasswordObserver);
+            addDisposable(repository.changeUserPassword(password.get(), changePasswordObserver));
         }
     }
 }
