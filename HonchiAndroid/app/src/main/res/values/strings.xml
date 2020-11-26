@@ -10,6 +10,8 @@
     <string name="get_id">아이디를 입력해주세요</string>
     <string name="get_password">비밀번호를 입력해주세요</string>
     <string name="autoLogin">자동 로그인</string>
+    <string name="auth_code">인증코드</string>
+    <string name="input_auth_code">인증코드를 입력해주세요</string>
     <string name="forgot_password">비밀번호를 잊어버리셨나요?</string>
     <string name="find_password">비밀번호 찾기</string>
     <string name="check_password">비밀번호 확인</string>
