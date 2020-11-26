@@ -1,13 +1,17 @@
 package com.honchipay.honchi_android.profile.data;
 
 public class UserProfileResponse {
+    private int userId;
     private String email;
     private String nickName;
     private String sex;
     private double star;
     private String images;
     private boolean mine;
-    private int userId;
+
+    public int getUserId() { return userId; }
+
+    public void setUserId(int userId) { this.userId = userId; }
 
     public String getEmail() {
         return email;
@@ -56,11 +60,6 @@ public class UserProfileResponse {
     public void setMine(boolean mine) {
         this.mine = mine;
     }
-
-    public int getUserId() { return userId; }
-
-    public void setUserId(int userId) { this.userId = userId; }
-
 
     public float getFloatStar() { return (float) star; }
 

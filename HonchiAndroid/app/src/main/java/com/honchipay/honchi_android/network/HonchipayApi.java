@@ -22,6 +22,7 @@ import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.PartMap;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface HonchipayApi {
     @POST("/auth")
@@ -49,7 +50,7 @@ public interface HonchipayApi {
 
     @FormUrlEncoded
     @GET("/user/profile")
-    Single<Response<UserProfileResponse>> getUserProfile(@Header("Authorization") String header, @Field("nickName") String name);
+    Single<Response<UserProfileResponse>> getUserProfile(@Header("Authorization") String header, @Query("nickName") String name);
 
     @Multipart
     @PUT("/user/profile")

@@ -8,8 +8,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class HonchipayConnector {
     HonchipayApi api;
-    String baseURL = "http://13.124.126.208";
-
+    public static final String baseURL = "http://13.124.126.208";
     private static HonchipayConnector single_instance = null;
 
     private HonchipayConnector() {
