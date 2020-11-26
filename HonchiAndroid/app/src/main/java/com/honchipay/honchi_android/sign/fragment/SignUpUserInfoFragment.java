@@ -8,6 +8,7 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +24,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.honchipay.honchi_android.R;
 import com.honchipay.honchi_android.databinding.FragmentSignUpUserInfoBinding;
 import com.honchipay.honchi_android.sign.data.Gender;
+import com.honchipay.honchi_android.sign.data.SignUpProcess;
 import com.honchipay.honchi_android.sign.viewModel.SignUpViewModel;
 import com.honchipay.honchi_android.splash.SplashActivity;
 
@@ -63,9 +65,10 @@ public class SignUpUserInfoFragment extends Fragment implements LocationListener
         });
 
         signUpViewModel.haveToNextPageLiveData.observe(getViewLifecycleOwner(), signUpProcess -> {
-            Toast.makeText(getContext(), "회원가입을 성공하였습니다.", Toast.LENGTH_LONG).show();
-            Intent intent = new Intent(getContext(), SplashActivity.class);
-            requireActivity().startActivity(intent);
+            if (signUpProcess == SignUpProcess.SIGN_UP) {
+                Toast.makeText(getContext(), "회원가입을 성공하였습니다.", Toast.LENGTH_LONG).show();
+                requireActivity().finish();
+            }
         });
     }
 

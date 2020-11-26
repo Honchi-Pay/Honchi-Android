@@ -70,7 +70,7 @@ public class SignUpViewModel extends BaseViewModel {
 
             @Override
             public void onError(@NotNull Throwable e) {
-                Log.e("SignUpViewModel", e.getMessage());
+                super.onError(e);
                 haveToNextPageLiveData.postValue(SignUpProcess.REJECT);
             }
         };
