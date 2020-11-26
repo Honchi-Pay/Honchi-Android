@@ -1,6 +1,5 @@
 package com.honchipay.honchi_android.network;
 
-import com.honchipay.honchi_android.base.ByteImage;
 import com.honchipay.honchi_android.chat.model.ChatRoomItem;
 import com.honchipay.honchi_android.profile.data.UserProfileResponse;
 import com.honchipay.honchi_android.sign.data.SignUpRequest;
@@ -11,7 +10,6 @@ import java.util.List;
 
 import io.reactivex.Single;
 import okhttp3.RequestBody;
-import retrofit2.Call;
 import retrofit2.Response;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
@@ -66,9 +64,6 @@ public interface HonchipayApi {
     @FormUrlEncoded
     @DELETE("/user/out")
     Single<Response<Void>> withdrawFromService(@Header("Authorization") String header, @Field("nickName") String name);
-
-    @GET("/image/<imageName>")
-    Call<ByteImage> getImageByByte(@Header("Authorization") String header, @Path("imageName") String images);
 
     @GET("/chat")
     Single<Response<List<ChatRoomItem>>> getChatRooms(@Header("Authorization") String header);

@@ -2,7 +2,6 @@ package com.honchipay.honchi_android.chat.view;
 
 import android.content.res.ColorStateList;
 import android.graphics.Color;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,19 +16,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.honchipay.honchi_android.R;
-import com.honchipay.honchi_android.base.BaseViewModel;
-import com.honchipay.honchi_android.base.ByteImage;
 import com.honchipay.honchi_android.chat.model.ChattingContent;
-import com.honchipay.honchi_android.network.HonchipayConnector;
-import com.honchipay.honchi_android.util.SharedPreferencesManager;
-
-import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class ChatBubbleAdapter extends RecyclerView.Adapter<ChatBubbleAdapter.ChatBubbleViewHolder> {
     List<ChattingContent> chattingContentList;
@@ -102,47 +91,24 @@ public class ChatBubbleAdapter extends RecyclerView.Adapter<ChatBubbleAdapter.Ch
             ((LinearLayout) itemView.findViewById(R.id.item_bubble_own_layout)).addView(linearLayout);
         }
 
-        public void makeImageView(String image, boolean isMine) {
+        public void makeImageView(String imageUrl, boolean isMine) {
             ImageView imageView = new ImageView(itemView.getContext());
             imageView.setBackground(ContextCompat.getDrawable(itemView.getContext(), R.drawable.background_horizontal_bar));
             imageView.setClipToOutline(true);
-            ByteImage byteImage = getImage(image);
 
-            if (byteImage != null) {
-                Glide.with(imageView.getContext()).load(byteImage.getImages()).into(imageView);
+            Glide.with(imageView.getContext()).load(imageUrl).into(imageView);
+            LinearLayout linearLayout = new LinearLayout(itemView.getContext());
+            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
 
-                LinearLayout linearLayout = new LinearLayout(itemView.getContext());
-                LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-
-                if (isMine) {
-                    layoutParams.gravity = Gravity.END;
-                } else {
-                    layoutParams.gravity = Gravity.START;
-                }
-
-                linearLayout.setLayoutParams(layoutParams);
-                linearLayout.addView(imageView);
-                ((LinearLayout) itemView.findViewById(R.id.item_bubble_own_layout)).addView(linearLayout);
+            if (isMine) {
+                layoutParams.gravity = Gravity.END;
+            } else {
+                layoutParams.gravity = Gravity.START;
             }
-        }
 
-        private ByteImage getImage(String image) {
-            final ByteImage[] byteImage = new ByteImage[1];
-            String token = SharedPreferencesManager.getInstance().getAccessToken();
-            HonchipayConnector.getInstance().getApi().getImageByByte(token, image).enqueue(new Callback<ByteImage>() {
-                @Override
-                public void onResponse(@NotNull Call<ByteImage> call, @NotNull Response<ByteImage> response) {
-                    byteImage[0] = response.body();
-                }
-
-                @Override
-                public void onFailure(@NotNull Call<ByteImage> call, @NotNull Throwable t) {
-                    byteImage[0] = null;
-                    Log.e(BaseViewModel.class.getSimpleName(), t.getMessage());
-                }
-            });
-
-            return byteImage[0];
+            linearLayout.setLayoutParams(layoutParams);
+            linearLayout.addView(imageView);
+            ((LinearLayout) itemView.findViewById(R.id.item_bubble_own_layout)).addView(linearLayout);
         }
     }
 }
