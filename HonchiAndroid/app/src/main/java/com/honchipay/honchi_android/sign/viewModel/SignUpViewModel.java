@@ -1,7 +1,6 @@
 package com.honchipay.honchi_android.sign.viewModel;
 
 import android.location.Location;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.ObservableField;
@@ -27,7 +26,7 @@ import static com.honchipay.honchi_android.sign.data.SignUpProcess.EMAIL;
 public class SignUpViewModel extends BaseViewModel {
     private final String TAG = SignUpViewModel.class.getSimpleName();
     private final SignRepository repository = new SignRepository();
-    public MutableLiveData<SignUpProcess> haveToNextPageLiveData = new MutableLiveData<>();
+    public final MutableLiveData<SignUpProcess> haveToNextPageLiveData = new MutableLiveData<>();
     public final ObservableField<String> inputEmail = new ObservableField<>();
     public final ObservableField<String> inputAuthCode = new ObservableField<>();
     public final ObservableField<String> inputPassword = new ObservableField<>();

@@ -7,7 +7,7 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class HonchipayConnector {
-    HonchipayApi api;
+    final HonchipayApi api;
     public static final String baseURL = "http://13.124.126.208";
     private static HonchipayConnector single_instance = null;
 

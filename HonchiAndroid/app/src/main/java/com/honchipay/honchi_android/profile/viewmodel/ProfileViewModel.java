@@ -18,9 +18,9 @@ import retrofit2.Response;
 public class ProfileViewModel extends BaseViewModel {
     private final String TAG = ProfileViewModel.class.getSimpleName();
     private final ProfileRepository repository = new ProfileRepository();
-    public MutableLiveData<UserProfileResponse> profileLiveData = new MutableLiveData<>();
-    public MutableLiveData<Boolean> signOutLiveData = new MutableLiveData<>();
-    public MutableLiveData<Boolean> successStarLiveData = new MutableLiveData<>();
+    public final MutableLiveData<UserProfileResponse> profileLiveData = new MutableLiveData<>();
+    public final MutableLiveData<Boolean> signOutLiveData = new MutableLiveData<>();
+    public final MutableLiveData<Boolean> successStarLiveData = new MutableLiveData<>();
     private int id = 0;
 
     public void getProfile(String name) {

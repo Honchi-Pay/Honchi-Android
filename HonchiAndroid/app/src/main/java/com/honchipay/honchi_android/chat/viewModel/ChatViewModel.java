@@ -20,7 +20,7 @@ public class ChatViewModel extends BaseViewModel {
     private final ChatRepository repository = new ChatRepository();
     private String roomId;
     public final ObservableField<String> roomTitle = new ObservableField<>();
-    public MutableLiveData<List<ChatRoomItem>> chatRoomListLiveData = new MutableLiveData<>();
+    public final MutableLiveData<List<ChatRoomItem>> chatRoomListLiveData = new MutableLiveData<>();
 
     public void setRoomId(String roomId) {
         this.roomId = roomId;

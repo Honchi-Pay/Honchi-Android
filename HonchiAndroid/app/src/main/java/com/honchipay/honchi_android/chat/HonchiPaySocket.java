@@ -9,7 +9,7 @@ import io.socket.client.Socket;
 
 public class HonchiPaySocket {
     private static final String TAG = HonchiPaySocket.class.getSimpleName();
-    private static final String SERVER_URL = "";
+    private static final String SERVER_URL = "http://:8000";
     private boolean isConnected = false;
     private static HonchiPaySocket single_instance = null;
     public Socket socket;
@@ -36,18 +36,16 @@ public class HonchiPaySocket {
         }
     }
 
-    public void sendParticipants(String[] participants) {
+    public void joinIntoRoom(String roomId) {
         if (isConnected) {
-            socket.emit("", (Object) participants);
+            socket.emit(Socket.EVENT_CONNECT, roomId);
         }
     }
 
-    public void joinIntoRoom(String roomId) {
-        socket.emit("join", roomId);
-    }
-
     public void sendMessage(String message) {
-        socket.emit("", message);
+        if (isConnected) {
+            socket.emit(Socket.EVENT_MESSAGE, message);
+        }
     }
 
     public void disConnect() {

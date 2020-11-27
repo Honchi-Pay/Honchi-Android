@@ -18,7 +18,7 @@ import com.honchipay.honchi_android.sign.SignActivity;
 import com.honchipay.honchi_android.util.SharedPreferencesManager;
 
 public class SplashActivity extends AppCompatActivity {
-    int PERMISSION_CODE = 1111;
+    final int PERMISSION_CODE = 1111;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

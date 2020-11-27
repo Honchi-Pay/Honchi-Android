@@ -2,13 +2,11 @@ package com.honchipay.honchi_android.sign.fragment;
 
 import android.Manifest;
 import android.content.Context;
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,7 +24,6 @@ import com.honchipay.honchi_android.databinding.FragmentSignUpUserInfoBinding;
 import com.honchipay.honchi_android.sign.data.Gender;
 import com.honchipay.honchi_android.sign.data.SignUpProcess;
 import com.honchipay.honchi_android.sign.viewModel.SignUpViewModel;
-import com.honchipay.honchi_android.splash.SplashActivity;
 
 import org.jetbrains.annotations.NotNull;
 

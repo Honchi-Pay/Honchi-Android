@@ -32,9 +32,9 @@ public class MessengerActivity extends AppCompatActivity {
     ActivityMessengerBinding binding;
     RecyclerView recyclerView;
     ChatBubbleAdapter chatBubbleAdapter;
-    int PICTURES_REQUEST_CODE = 13;
-    Emitter.Listener textListener = args -> chatBubbleAdapter.addMessage((String) args[0]);
-    Emitter.Listener imageListener = args -> chatBubbleAdapter.addMessage((String) args[0]);
+    final int PICTURES_REQUEST_CODE = 13;
+    final Emitter.Listener textListener = args -> chatBubbleAdapter.addMessage((String) args[0]);
+    final Emitter.Listener imageListener = args -> chatBubbleAdapter.addMessage((String) args[0]);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,11 +98,9 @@ public class MessengerActivity extends AppCompatActivity {
             if (clipData != null) {
                 for (int i = 0; i < clipData.getItemCount(); i++) {
                     uri = clipData.getItemAt(i).getUri();
-                    chatBubbleAdapter.addImage(uri.toString());
                 }
             } else {
                 uri = data.getData();
-                chatBubbleAdapter.addImage(uri.toString());
             }
         }
     }

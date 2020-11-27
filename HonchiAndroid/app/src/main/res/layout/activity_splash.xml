@@ -10,7 +10,7 @@
         android:id="@+id/imageView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:foreground="#8F000000"
+        android:foreground="@color/splashForeground"
         android:scaleType="centerCrop"
         android:src="@drawable/splash_honchipay"
         app:layout_constraintBottom_toBottomOf="parent"

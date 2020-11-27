@@ -50,7 +50,7 @@ public class ChatRoomsAdapter extends RecyclerView.Adapter<ChatRoomsAdapter.Chat
     }
 
     static class ChatRoomsViewHolder extends RecyclerView.ViewHolder {
-        ItemChatRoomsBinding binding;
+        final ItemChatRoomsBinding binding;
 
         public ChatRoomsViewHolder(View itemView) {
             super(itemView);

@@ -4,6 +4,7 @@
     xmlns:tool="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="chatViewModel"
             type="com.honchipay.honchi_android.chat.viewModel.ChatViewModel" />
@@ -43,16 +44,16 @@
                     android:background="@android:color/transparent"
                     android:fontFamily="@font/nanumsquareextrabold"
                     android:hint="@string/room_title"
-                    android:text="@={chatViewModel.roomTitle}"
+                    android:importantForAutofill="no"
                     android:inputType="text"
+                    android:text="@={chatViewModel.roomTitle}"
                     android:textAlignment="center"
                     android:textColor="@android:color/black"
                     android:textSize="18sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:importantForAutofill="no" />
+                    app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.appcompat.widget.Toolbar>
 
@@ -60,7 +61,8 @@
             android:id="@+id/messenger_massages_recyclerView"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:overScrollMode="never" />
 
         <LinearLayout
             android:layout_width="match_parent"

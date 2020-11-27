@@ -16,11 +16,11 @@ import retrofit2.Response;
 
 public class EditProfileViewModel extends BaseViewModel {
     private final String TAG = EditProfileViewModel.class.getSimpleName();
-    ProfileRepository repository = new ProfileRepository();
-    public ObservableField<String> nickName = new ObservableField<>(SharedPreferencesManager.getInstance().getUserName());
-    public ObservableField<String> password = new ObservableField<>();
-    public ObservableField<String> confirm = new ObservableField<>();
-    public MutableLiveData<Boolean> changeSuccess = new MutableLiveData<>();
+    final ProfileRepository repository = new ProfileRepository();
+    public final ObservableField<String> nickName = new ObservableField<>(SharedPreferencesManager.getInstance().getUserName());
+    public final ObservableField<String> password = new ObservableField<>();
+    public final ObservableField<String> confirm = new ObservableField<>();
+    public final MutableLiveData<Boolean> changeSuccess = new MutableLiveData<>();
 
     public void uploadUserNewInfo(File file) {
         if (!nickName.get().equals("")) {
