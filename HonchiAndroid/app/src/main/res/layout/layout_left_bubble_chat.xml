@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/left_bubble_userName_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/nanumsquareregular"
+        android:textSize="8sp"
+        android:layout_marginStart="8dp"
+        tools:ignore="SmallSp"
+        tools:text="김아름" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/left_bubble_message_textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/background_horizontal_bar"
+            android:backgroundTint="@color/brightGray"
+            android:fontFamily="@font/nanumsquareregular"
+            android:paddingStart="8dp"
+            android:paddingTop="4dp"
+            android:paddingEnd="8dp"
+            android:paddingBottom="4dp"
+            android:textColor="@color/black"
+            android:textSize="12sp"
+            tools:text="hello" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/left_bubble_readCount_textView"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:textSize="8sp"
+                tools:ignore="SmallSp"
+                tools:text="3" />
+
+            <TextView
+                android:id="@+id/left_bubble_time_textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/nanumsquareregular"
+                android:textSize="8sp"
+                tools:ignore="SmallSp"
+                tools:text="12:12" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>
