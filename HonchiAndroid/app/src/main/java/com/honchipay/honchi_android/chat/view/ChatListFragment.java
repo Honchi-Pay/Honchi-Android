@@ -53,4 +53,10 @@ public class ChatListFragment extends Fragment {
         chatViewModel.getParticipatingChatRooms();
         chatViewModel.chatRoomListLiveData.observe(getViewLifecycleOwner(), chatListItems -> chatRoomsAdapter.renewChatList(chatListItems));
     }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        HonchiPaySocket.getInstance().disConnect();
+    }
 }
