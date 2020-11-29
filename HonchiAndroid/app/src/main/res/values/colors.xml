@@ -11,4 +11,5 @@
     <color name="search_backColor">#B9B9B9</color>
     <color name="home_background">#F5F6F8</color>
     <color name="detail_gray">#404040</color>
+    <color name="writing_gray">#EBEBEB</color>
 </resources>
