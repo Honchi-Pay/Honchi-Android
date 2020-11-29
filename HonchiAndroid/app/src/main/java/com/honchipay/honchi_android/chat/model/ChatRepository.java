@@ -21,4 +21,8 @@ public class ChatRepository extends BaseRepository {
     public Disposable getChatRooms(DisposableSingleObserver<Response<List<ChatRoomItem>>> chatRoomsObserver) {
         return wrappingSingle(HonchipayConnector.getInstance().getApi().getChatRooms(token), chatRoomsObserver);
     }
+
+    public Disposable getAllMessages(String roomId, DisposableSingleObserver<Response<List<MessageResponse>>> chatMessageObserver) {
+        return wrappingSingle(HonchipayConnector.getInstance().getApi().getAllMessages(token, roomId), chatMessageObserver);
+    }
 }

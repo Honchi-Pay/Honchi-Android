@@ -7,6 +7,7 @@ import androidx.lifecycle.MutableLiveData;
 import com.honchipay.honchi_android.base.BaseViewModel;
 import com.honchipay.honchi_android.chat.model.ChatRepository;
 import com.honchipay.honchi_android.chat.model.ChatRoomItem;
+import com.honchipay.honchi_android.chat.model.MessageResponse;
 import com.honchipay.honchi_android.util.CustomDisposableSingleObserver;
 
 import java.util.List;
@@ -21,6 +22,7 @@ public class ChatViewModel extends BaseViewModel {
     private String roomId;
     public final ObservableField<String> roomTitle = new ObservableField<>();
     public final MutableLiveData<List<ChatRoomItem>> chatRoomListLiveData = new MutableLiveData<>();
+    public final MutableLiveData<List<MessageResponse>> messageListLiveData = new MutableLiveData<>();
 
     public void setRoomId(String roomId) {
         this.roomId = roomId;
@@ -50,13 +52,25 @@ public class ChatViewModel extends BaseViewModel {
         addDisposable(repository.getChatRooms(chatRoomObserver));
     }
 
-    private void changeChatRoomTitle() {
-        DisposableSingleObserver<Response<Void>> roomTitleObserver = new CustomDisposableSingleObserver<Response<Void>>(TAG) {
+    public void getAllMessages(String roomId) {
+        DisposableSingleObserver<Response<List<MessageResponse>>> chatMessageObserver = new CustomDisposableSingleObserver<Response<List<MessageResponse>>>(TAG) {
             @Override
-            public void onSuccess(@NonNull Response<Void> listResponse) {
+            public void onSuccess(@NonNull Response<List<MessageResponse>> listResponse) {
+                if (listResponse.isSuccessful() && listResponse.code() == 200) {
+                    messageListLiveData.postValue(listResponse.body());
+                }
             }
         };
 
+        addDisposable(repository.getAllMessages(roomId, chatMessageObserver));
+    }
+
+    public void uploadImageToServer() {
+        
+    }
+
+    private void changeChatRoomTitle() {
+        DisposableSingleObserver<Response<Void>> roomTitleObserver = new CustomDisposableSingleObserver<Response<Void>>(TAG);
         addDisposable(repository.changeRoomTitle(roomId, roomTitle.get(), roomTitleObserver));
     }
 }

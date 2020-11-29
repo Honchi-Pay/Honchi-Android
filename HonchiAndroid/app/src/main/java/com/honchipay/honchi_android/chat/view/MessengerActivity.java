@@ -16,11 +16,15 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.gson.Gson;
 import com.honchipay.honchi_android.R;
 import com.honchipay.honchi_android.chat.HonchiPaySocket;
 import com.honchipay.honchi_android.chat.model.ChatRoomItem;
+import com.honchipay.honchi_android.chat.model.MessageResponse;
 import com.honchipay.honchi_android.chat.viewModel.ChatViewModel;
 import com.honchipay.honchi_android.databinding.ActivityMessengerBinding;
+
+import org.json.JSONObject;
 
 import io.socket.emitter.Emitter;
 
@@ -33,8 +37,7 @@ public class MessengerActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     ChatBubbleAdapter chatBubbleAdapter;
     final int PICTURES_REQUEST_CODE = 13;
-    final Emitter.Listener textListener = args -> chatBubbleAdapter.addMessage((String) args[0]);
-    final Emitter.Listener imageListener = args -> chatBubbleAdapter.addMessage((String) args[0]);
+    final Emitter.Listener messageListener = args -> chatBubbleAdapter.addMessage((MessageResponse)args[0]);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,9 +58,6 @@ public class MessengerActivity extends AppCompatActivity {
         chatViewModel.setRoomTitleValidation(chatRoomData.getTitle());
 
         binding.setChatViewModel(chatViewModel);
-        HonchiPaySocket.getInstance().joinIntoRoom(chatRoomData.getRoomId());
-        HonchiPaySocket.getInstance().socket.on("", textListener);
-        HonchiPaySocket.getInstance().socket.on("", imageListener);
     }
 
     private void setRecyclerView() {
@@ -66,9 +66,14 @@ public class MessengerActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(chatBubbleAdapter);
+
+        chatViewModel.getAllMessages(chatRoomData.getRoomId());
+        chatViewModel.messageListLiveData.observe(this, allMessages -> chatBubbleAdapter.setAllMessages(allMessages));
     }
 
     private void setSendMessage() {
+        HonchiPaySocket.getInstance().joinIntoRoom(chatRoomData.getRoomId());
+        HonchiPaySocket.getInstance().socket.on("receive", messageListener);
         findViewById(R.id.messenger_sendMessage_imageView).setOnClickListener(v -> {
             String text = ((EditText) findViewById(R.id.messenger_inputMessage_editText)).getText().toString();
             HonchiPaySocket.getInstance().sendMessage(text);
@@ -98,9 +103,11 @@ public class MessengerActivity extends AppCompatActivity {
             if (clipData != null) {
                 for (int i = 0; i < clipData.getItemCount(); i++) {
                     uri = clipData.getItemAt(i).getUri();
+
                 }
             } else {
                 uri = data.getData();
+
             }
         }
     }
@@ -108,8 +115,7 @@ public class MessengerActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        HonchiPaySocket.getInstance().socket.off("", textListener);
-        HonchiPaySocket.getInstance().socket.off("", imageListener);
-        HonchiPaySocket.getInstance().disConnect();
+        HonchiPaySocket.getInstance().leaveRoom(chatRoomData.getRoomId());
+        HonchiPaySocket.getInstance().socket.off("receive", messageListener);
     }
 }

@@ -1,6 +1,7 @@
 package com.honchipay.honchi_android.network;
 
 import com.honchipay.honchi_android.chat.model.ChatRoomItem;
+import com.honchipay.honchi_android.chat.model.MessageResponse;
 import com.honchipay.honchi_android.profile.data.UserProfileResponse;
 import com.honchipay.honchi_android.sign.data.SignUpRequest;
 import com.honchipay.honchi_android.sign.data.TokenResponseData;
@@ -71,4 +72,7 @@ public interface HonchipayApi {
 
     @PUT("/chat/{roomId}")
     Single<Response<Void>> updateChatRoomTitle(@Header("Authorization") String header, @Path("roomId") String roomId, @Body HashMap<String, String> body);
+
+    @GET("/message/{chatId}")
+    Single<Response<List<MessageResponse>>> getAllMessages(@Header("Authorization") String header, @Path("chatId") String chatId);
 }
