@@ -3,11 +3,17 @@ package com.honchipay.honchi_android.chat;
 import android.util.Log;
 
 import com.honchipay.honchi_android.chat.model.MessageRequest;
+import com.honchipay.honchi_android.util.SharedPreferencesManager;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.net.URISyntaxException;
 
 import io.socket.client.IO;
 import io.socket.client.Socket;
+import okhttp3.Request;
+import okhttp3.WebSocket;
+import okhttp3.WebSocketListener;
 
 public class HonchiPaySocket {
     private static final String TAG = HonchiPaySocket.class.getSimpleName();
@@ -26,7 +32,9 @@ public class HonchiPaySocket {
 
     public void connect() {
         try {
-            socket = IO.socket(SERVER_URL);
+            IO.Options options = new IO.Options();
+            options.query = "token=" + SharedPreferencesManager.getInstance().getAccessToken();
+            socket = IO.socket(SERVER_URL, options);
             socket.connect();
 
             isConnected = true;
