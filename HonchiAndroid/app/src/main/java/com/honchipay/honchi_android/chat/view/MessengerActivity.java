@@ -16,15 +16,13 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.gson.Gson;
 import com.honchipay.honchi_android.R;
 import com.honchipay.honchi_android.chat.HonchiPaySocket;
 import com.honchipay.honchi_android.chat.model.ChatRoomItem;
+import com.honchipay.honchi_android.chat.model.MessageRequest;
 import com.honchipay.honchi_android.chat.model.MessageResponse;
 import com.honchipay.honchi_android.chat.viewModel.ChatViewModel;
 import com.honchipay.honchi_android.databinding.ActivityMessengerBinding;
-
-import org.json.JSONObject;
 
 import io.socket.emitter.Emitter;
 
@@ -61,14 +59,17 @@ public class MessengerActivity extends AppCompatActivity {
     }
 
     private void setRecyclerView() {
-        chatBubbleAdapter = new ChatBubbleAdapter(emptyList());
+        chatBubbleAdapter = new ChatBubbleAdapter(emptyList(), chatViewModel);
         recyclerView = findViewById(R.id.messenger_massages_recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(chatBubbleAdapter);
 
-        chatViewModel.getAllMessages(chatRoomData.getRoomId());
-        chatViewModel.messageListLiveData.observe(this, allMessages -> chatBubbleAdapter.setAllMessages(allMessages));
+        chatViewModel.getAllMessages();
+        chatViewModel.messageListLiveData.observe(this, allMessages -> {
+            chatViewModel.readMessages();
+            chatBubbleAdapter.setAllMessages(allMessages);
+        });
     }
 
     private void setSendMessage() {
@@ -76,7 +77,7 @@ public class MessengerActivity extends AppCompatActivity {
         HonchiPaySocket.getInstance().socket.on("receive", messageListener);
         findViewById(R.id.messenger_sendMessage_imageView).setOnClickListener(v -> {
             String text = ((EditText) findViewById(R.id.messenger_inputMessage_editText)).getText().toString();
-            HonchiPaySocket.getInstance().sendMessage(text);
+            HonchiPaySocket.getInstance().sendMessage(new MessageRequest(chatRoomData.getRoomId(), text));
         });
     }
 
