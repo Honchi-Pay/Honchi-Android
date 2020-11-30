@@ -2,6 +2,8 @@ package com.honchipay.honchi_android.chat;
 
 import android.util.Log;
 
+import com.honchipay.honchi_android.chat.model.MessageRequest;
+
 import java.net.URISyntaxException;
 
 import io.socket.client.IO;
@@ -9,7 +11,7 @@ import io.socket.client.Socket;
 
 public class HonchiPaySocket {
     private static final String TAG = HonchiPaySocket.class.getSimpleName();
-    private static final String SERVER_URL = "http://:8000";
+    private static final String SERVER_URL = "http://13.124.126.208:8000";
     private boolean isConnected = false;
     private static HonchiPaySocket single_instance = null;
     public Socket socket;
@@ -38,13 +40,25 @@ public class HonchiPaySocket {
 
     public void joinIntoRoom(String roomId) {
         if (isConnected) {
-            socket.emit(Socket.EVENT_CONNECT, roomId);
+            socket.emit("joinRoom", roomId);
         }
     }
 
-    public void sendMessage(String message) {
+    public void leaveRoom(String roomId) {
         if (isConnected) {
-            socket.emit(Socket.EVENT_MESSAGE, message);
+            socket.emit("leaveRoom", roomId);
+        }
+    }
+
+    public void changeRoomTitle(String title) {
+        if (isConnected) {
+            socket.emit("changeTitle", title);
+        }
+    }
+
+    public void sendMessage(MessageRequest message) {
+        if (isConnected) {
+            socket.emit("send", message);
         }
     }
 
