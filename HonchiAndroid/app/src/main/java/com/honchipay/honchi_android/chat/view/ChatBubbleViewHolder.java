@@ -36,16 +36,24 @@ class ChatBubbleViewHolder extends RecyclerView.ViewHolder {
 
     private void setValuesByDirection(MessageResponse messageResponse) {
         if (messageResponse.isMine()) {
-            setMessageByIsDelete(messageResponse.isDelete(), messageResponse.getMessage(), R.id.right_bubble_message_textView);
-            ((TextView) linearLayout.findViewById(R.id.right_bubble_userName_textView)).setText(messageResponse.getNickName());
-            ((TextView) linearLayout.findViewById(R.id.right_bubble_time_textView)).setText(messageResponse.getTime().toString());
-            ((TextView) linearLayout.findViewById(R.id.right_bubble_readCount_textView)).setText(messageResponse.getReadCount());
+            setTextViewInRightBubble(messageResponse);
         } else {
-            setMessageByIsDelete(messageResponse.isDelete(), messageResponse.getMessage(), R.id.left_bubble_message_textView);
-            ((TextView) linearLayout.findViewById(R.id.left_bubble_userName_textView)).setText(messageResponse.getNickName());
-            ((TextView) linearLayout.findViewById(R.id.left_bubble_time_textView)).setText(messageResponse.getTime().toString());
-            ((TextView) linearLayout.findViewById(R.id.left_bubble_readCount_textView)).setText(messageResponse.getReadCount());
+            setTextViewInLeftBubble(messageResponse);
         }
+    }
+
+    private void setTextViewInRightBubble(MessageResponse messageResponse) {
+        setMessageByIsDelete(messageResponse.isDelete(), messageResponse.getMessage(), R.id.right_bubble_message_textView);
+        ((TextView) linearLayout.findViewById(R.id.right_bubble_userName_textView)).setText(messageResponse.getNickName());
+        ((TextView) linearLayout.findViewById(R.id.right_bubble_time_textView)).setText(messageResponse.getTime().toString());
+        ((TextView) linearLayout.findViewById(R.id.right_bubble_readCount_textView)).setText(messageResponse.getReadCount());
+    }
+
+    private void setTextViewInLeftBubble(MessageResponse messageResponse) {
+        setMessageByIsDelete(messageResponse.isDelete(), messageResponse.getMessage(), R.id.left_bubble_message_textView);
+        ((TextView) linearLayout.findViewById(R.id.left_bubble_userName_textView)).setText(messageResponse.getNickName());
+        ((TextView) linearLayout.findViewById(R.id.left_bubble_time_textView)).setText(messageResponse.getTime().toString());
+        ((TextView) linearLayout.findViewById(R.id.left_bubble_readCount_textView)).setText(messageResponse.getReadCount());
     }
 
     private void setMessageByIsDelete(boolean isDelete, String message, int bubbleMessageTextViewResourceId) {
