@@ -70,9 +70,15 @@ public interface HonchipayApi {
     @GET("/chat")
     Single<Response<List<ChatRoomItem>>> getChatRooms(@Header("Authorization") String header);
 
-    @PUT("/chat/{roomId}")
-    Single<Response<Void>> updateChatRoomTitle(@Header("Authorization") String header, @Path("roomId") String roomId, @Body HashMap<String, String> body);
-
     @GET("/message/{chatId}")
     Single<Response<List<MessageResponse>>> getAllMessages(@Header("Authorization") String header, @Path("chatId") String chatId);
+
+    @PUT("/message/{chatId}")
+    Single<Response<Void>> readMessages(@Header("Authorization") String header, @Path("chatId") String chatId);
+
+    @PUT("/message/{messageId}")
+    Single<Response<Void>> deleteMessage(@Header("Authorization") String header, @Path("messageId") int messageId);
+
+    @PUT("/chat/{roomId}")
+    Single<Response<Void>> updateChatRoomTitle(@Header("Authorization") String header, @Path("roomId") String roomId, @Body HashMap<String, String> body);
 }
