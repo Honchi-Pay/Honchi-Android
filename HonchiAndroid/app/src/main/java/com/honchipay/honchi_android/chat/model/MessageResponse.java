@@ -1,78 +1,58 @@
 package com.honchipay.honchi_android.chat.model;
 
+import com.honchipay.honchi_android.util.SharedPreferencesManager;
+
 import java.time.LocalDateTime;
 
 public class MessageResponse {
-    private Integer messageId;
-    private Integer userId;
+    private Integer id;
+    private String name;
     private String message;
-    private String nickName;
+    private MessageType messageType;
     private LocalDateTime time;
-    private Integer readCount;
-    private boolean isDelete;
-    private boolean isMine;
+    private boolean isDeleted;
+    private Integer userId;
 
-    public Integer getMessageId() {
-        return messageId;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
-    public void setMessageId(Integer messageId) {
-        this.messageId = messageId;
-    }
-
-    public Integer getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Integer userId) {
-        this.userId = userId;
-    }
-
-    public String getMessage() {
-        return message;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public void setMessage(String message) {
         this.message = message;
     }
 
-    public String getNickName() {
-        return nickName;
-    }
-
-    public void setNickName(String nickName) {
-        this.nickName = nickName;
-    }
-
-    public LocalDateTime getTime() {
-        return time;
+    public void setMessageType(MessageType messageType) {
+        this.messageType = messageType;
     }
 
     public void setTime(LocalDateTime time) {
         this.time = time;
     }
 
-    public Integer getReadCount() {
-        return readCount;
+    public void setDeleted(boolean deleted) {
+        isDeleted = deleted;
     }
 
-    public void setReadCount(Integer readCount) {
-        this.readCount = readCount;
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 
-    public boolean isDelete() {
-        return isDelete;
-    }
+    public MessageResponseByServer wrapping(int readCount) {
+        MessageResponseByServer messageResponseByServer = new MessageResponseByServer();
+        messageResponseByServer.setMessageId(id);
+        messageResponseByServer.setUserId(userId);
+        messageResponseByServer.setMessage(message);
+        messageResponseByServer.setNickName(name);
+        messageResponseByServer.setTime(time);
+        messageResponseByServer.setReadCount(readCount);
+        messageResponseByServer.setMessageType(messageType);
+        messageResponseByServer.setDelete(isDeleted);
+        messageResponseByServer.setMine(name.equals(SharedPreferencesManager.getInstance().getUserName()));
 
-    public void setDelete(boolean delete) {
-        isDelete = delete;
-    }
-
-    public boolean isMine() {
-        return isMine;
-    }
-
-    public void setMine(boolean mine) {
-        isMine = mine;
+        return messageResponseByServer;
     }
 }
