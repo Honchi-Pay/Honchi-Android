@@ -27,6 +27,7 @@
     <string name="only_number">숫자만 입력해주세요</string>
     <string name="check">확인</string>
 
+    <string name="wrap_bracket">(%s)</string>
     <string name="logout">로그아웃</string>
     <string name="change_password">비밀번호 변경</string>
     <string name="unsubscribe">회원탈퇴</string>
@@ -41,7 +42,7 @@
     <string name="no">아니요</string>
     <string name="yes">네</string>
     <string name="cancel">취소</string>
-  
+
     <string name="please_input_message">메시지를 입력하세요</string>
     <string name="room_title">방제목</string>
 </resources>

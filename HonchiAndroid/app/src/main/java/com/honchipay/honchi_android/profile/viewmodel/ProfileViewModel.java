@@ -24,50 +24,41 @@ public class ProfileViewModel extends BaseViewModel {
     private int id = 0;
 
     public void getProfile(String name) {
-        DisposableSingleObserver<Response<UserProfileResponse>> userProfileResponseObserver =
-                new CustomDisposableSingleObserver<Response<UserProfileResponse>>(TAG) {
-                    @Override
-                    public void onSuccess(@NonNull Response<UserProfileResponse> profileResponseResponse) {
-                        if (profileResponseResponse.isSuccessful() && profileResponseResponse.code() == 200 && profileResponseResponse.body() != null) {
-                            id = profileResponseResponse.body().getUserId();
-                            profileLiveData.postValue(profileResponseResponse.body());
-                        }
-                    }
-                };
-
-        addDisposable(repository.getUserProfile(name, userProfileResponseObserver));
+        addDisposable(repository.getUserProfile(name, new CustomDisposableSingleObserver<Response<UserProfileResponse>>(TAG) {
+            @Override
+            public void onSuccess(@NonNull Response<UserProfileResponse> profileResponseResponse) {
+                if (profileResponseResponse.isSuccessful() && profileResponseResponse.code() == 200 && profileResponseResponse.body() != null) {
+                    id = profileResponseResponse.body().getUserId();
+                    profileLiveData.postValue(profileResponseResponse.body());
+                }
+            }
+        }));
     }
 
     public void setUserRating(int rating) {
-        DisposableSingleObserver<Response<Void>> userRatingObserver =
-                new CustomDisposableSingleObserver<Response<Void>>(TAG) {
-                    @Override
-                    public void onSuccess(@NonNull Response<Void> ratingResponse) {
-                        if (ratingResponse.isSuccessful() && ratingResponse.code() == 200) {
-                            successStarLiveData.postValue(true);
-                        }
-                    }
-                };
-
-        addDisposable(repository.sendUserEvaluation(id, rating, userRatingObserver));
+        addDisposable(repository.sendUserEvaluation(id, rating, new CustomDisposableSingleObserver<Response<Void>>(TAG) {
+            @Override
+            public void onSuccess(@NonNull Response<Void> ratingResponse) {
+                if (ratingResponse.isSuccessful() && ratingResponse.code() == 200) {
+                    successStarLiveData.postValue(true);
+                }
+            }
+        }));
     }
 
     public void signOutFromService() {
-        DisposableSingleObserver<Response<Void>> signOutServiceObserver =
-                new CustomDisposableSingleObserver<Response<Void>>(TAG) {
-                    @Override
-                    public void onSuccess(@NonNull Response<Void> deleteUserResponse) {
-                        signOutLiveData.postValue(deleteUserResponse.isSuccessful() && deleteUserResponse.code() == 200);
-                    }
+        addDisposable(repository.withdrawFromService(new CustomDisposableSingleObserver<Response<Void>>(TAG) {
+            @Override
+            public void onSuccess(@NonNull Response<Void> deleteUserResponse) {
+                signOutLiveData.postValue(deleteUserResponse.isSuccessful() && deleteUserResponse.code() == 200);
+            }
 
-                    @Override
-                    public void onError(@NotNull Throwable e) {
-                        Log.e(TAG, e.getMessage());
-                        signOutLiveData.postValue(false);
-                    }
-                };
-
-        addDisposable(repository.withdrawFromService(signOutServiceObserver));
+            @Override
+            public void onError(@NotNull Throwable e) {
+                Log.e(TAG, e.getMessage());
+                signOutLiveData.postValue(false);
+            }
+        }));
     }
 
     public void signOutFromLogin() {

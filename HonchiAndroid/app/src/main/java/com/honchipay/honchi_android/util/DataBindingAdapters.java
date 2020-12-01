@@ -13,8 +13,12 @@ import com.honchipay.honchi_android.network.HonchipayConnector;
 public class DataBindingAdapters {
     @BindingAdapter("setImage")
     public static void setViewFromImageName(ImageView view, String imageName) {
-        GlideUrl glideUrl = new GlideUrl(HonchipayConnector.baseURL + "/image/" + imageName,
-                new LazyHeaders.Builder().addHeader("Authorization", SharedPreferencesManager.getInstance().getAccessToken()).build());
-        Glide.with(view.getContext()).load(glideUrl).error(R.drawable.default_profile).circleCrop().into(view);
+        if (imageName == null) {
+            Glide.with(view.getContext()).load(R.drawable.default_profile).circleCrop().into(view);
+        } else {
+            GlideUrl glideUrl = new GlideUrl(HonchipayConnector.baseURL + "/image/" + imageName,
+                    new LazyHeaders.Builder().addHeader("Authorization", SharedPreferencesManager.getInstance().getAccessToken()).build());
+            Glide.with(view.getContext()).load(glideUrl).error(R.drawable.default_profile).circleCrop().into(view);
+        }
     }
 }
