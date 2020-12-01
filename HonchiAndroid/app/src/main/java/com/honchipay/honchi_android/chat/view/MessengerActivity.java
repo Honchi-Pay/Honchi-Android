@@ -21,7 +21,6 @@ import com.honchipay.honchi_android.chat.HonchiPaySocket;
 import com.honchipay.honchi_android.chat.model.ChatRoomItem;
 import com.honchipay.honchi_android.chat.model.MessageRequest;
 import com.honchipay.honchi_android.chat.model.MessageResponse;
-import com.honchipay.honchi_android.chat.model.MessageResponseByServer;
 import com.honchipay.honchi_android.chat.viewModel.ChatViewModel;
 import com.honchipay.honchi_android.databinding.ActivityMessengerBinding;
 
@@ -36,7 +35,7 @@ public class MessengerActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     ChatBubbleAdapter chatBubbleAdapter;
     final int PICTURES_REQUEST_CODE = 13;
-    final Emitter.Listener messageListener = args -> chatBubbleAdapter.addMessage(((MessageResponse) args[0]).wrapping(chatRoomData.getPeople()));
+    final Emitter.Listener messageListener = args -> chatBubbleAdapter.addMessage((MessageResponse) args[0]);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

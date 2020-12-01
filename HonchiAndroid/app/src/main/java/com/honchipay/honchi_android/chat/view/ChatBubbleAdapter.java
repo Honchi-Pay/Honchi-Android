@@ -8,16 +8,16 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.honchipay.honchi_android.R;
-import com.honchipay.honchi_android.chat.model.MessageResponseByServer;
+import com.honchipay.honchi_android.chat.model.MessageResponse;
 import com.honchipay.honchi_android.chat.viewModel.ChatViewModel;
 
 import java.util.List;
 
 public class ChatBubbleAdapter extends RecyclerView.Adapter<ChatBubbleViewHolder> {
-    List<MessageResponseByServer> chattingContentList;
+    List<MessageResponse> chattingContentList;
     ChatViewModel chatViewModel;
 
-    ChatBubbleAdapter(List<MessageResponseByServer> contentList, ChatViewModel chatViewModel) {
+    ChatBubbleAdapter(List<MessageResponse> contentList, ChatViewModel chatViewModel) {
         chattingContentList = contentList;
         this.chatViewModel = chatViewModel;
     }
@@ -30,14 +30,14 @@ public class ChatBubbleAdapter extends RecyclerView.Adapter<ChatBubbleViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull ChatBubbleViewHolder holder, int position) {
-        MessageResponseByServer messageResponseByServer = chattingContentList.get(position);
-        holder.makeTextView(messageResponseByServer);
+        MessageResponse messageResponse = chattingContentList.get(position);
+        holder.makeTextView(messageResponse);
 
         holder.itemView.setOnLongClickListener(v -> {
             AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
             builder.setTitle("메시지 삭제하시겠습니까?");
             builder.setPositiveButton("네", (dialog, id) -> {
-                chatViewModel.deleteMessage(messageResponseByServer.getMessageId());
+                chatViewModel.deleteMessage(messageResponse.getId());
                 dialog.dismiss();
             });
             builder.setNegativeButton("아니요", (dialog, id) -> dialog.dismiss());
@@ -53,13 +53,13 @@ public class ChatBubbleAdapter extends RecyclerView.Adapter<ChatBubbleViewHolder
         return chattingContentList.size();
     }
 
-    public void setAllMessages(List<MessageResponseByServer> messages) {
+    public void setAllMessages(List<MessageResponse> messages) {
         chattingContentList.clear();
         chattingContentList.addAll(messages);
         notifyDataSetChanged();
     }
 
-    public void addMessage(MessageResponseByServer message) {
+    public void addMessage(MessageResponse message) {
         chattingContentList.add(chattingContentList.size(), message);
         notifyDataSetChanged();
     }
