@@ -1,7 +1,7 @@
 package com.honchipay.honchi_android.network;
 
 import com.honchipay.honchi_android.chat.model.ChatRoomItem;
-import com.honchipay.honchi_android.chat.model.MessageResponse;
+import com.honchipay.honchi_android.chat.model.MessageResponseByServer;
 import com.honchipay.honchi_android.profile.data.UserProfileResponse;
 import com.honchipay.honchi_android.sign.data.SignUpRequest;
 import com.honchipay.honchi_android.sign.data.TokenResponseData;
@@ -70,7 +70,7 @@ public interface HonchipayApi {
     Single<Response<List<ChatRoomItem>>> getChatRooms(@Header("Authorization") String header);
 
     @GET("/message/{chatId}")
-    Single<Response<List<MessageResponse>>> getAllMessages(@Header("Authorization") String header, @Path("chatId") String chatId);
+    Single<Response<List<MessageResponseByServer>>> getAllMessages(@Header("Authorization") String header, @Path("chatId") String chatId);
 
     @PUT("/message/{chatId}")
     Single<Response<Void>> readMessages(@Header("Authorization") String header, @Path("chatId") String chatId);

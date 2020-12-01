@@ -7,7 +7,6 @@ import java.util.HashMap;
 import java.util.List;
 
 import io.reactivex.disposables.Disposable;
-import io.reactivex.observers.DisposableObserver;
 import io.reactivex.observers.DisposableSingleObserver;
 import retrofit2.Response;
 
@@ -23,7 +22,7 @@ public class ChatRepository extends BaseRepository {
         return wrappingSingle(HonchipayConnector.getInstance().getApi().getChatRooms(token), chatRoomsObserver);
     }
 
-    public Disposable getAllMessages(String roomId, DisposableSingleObserver<Response<List<MessageResponse>>> chatMessageObserver) {
+    public Disposable getAllMessages(String roomId, DisposableSingleObserver<Response<List<MessageResponseByServer>>> chatMessageObserver) {
         return wrappingSingle(HonchipayConnector.getInstance().getApi().getAllMessages(token, roomId), chatMessageObserver);
     }
 

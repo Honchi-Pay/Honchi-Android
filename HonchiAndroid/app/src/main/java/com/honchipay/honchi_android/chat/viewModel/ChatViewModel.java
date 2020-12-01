@@ -8,13 +8,12 @@ import com.honchipay.honchi_android.base.BaseViewModel;
 import com.honchipay.honchi_android.chat.HonchiPaySocket;
 import com.honchipay.honchi_android.chat.model.ChatRepository;
 import com.honchipay.honchi_android.chat.model.ChatRoomItem;
-import com.honchipay.honchi_android.chat.model.MessageResponse;
+import com.honchipay.honchi_android.chat.model.MessageResponseByServer;
 import com.honchipay.honchi_android.util.CustomDisposableSingleObserver;
 
 import java.util.List;
 
 import io.reactivex.annotations.NonNull;
-import io.reactivex.observers.DisposableSingleObserver;
 import retrofit2.Response;
 
 public class ChatViewModel extends BaseViewModel {
@@ -22,7 +21,7 @@ public class ChatViewModel extends BaseViewModel {
     private final ChatRepository repository = new ChatRepository();
     public final ObservableField<String> roomTitle = new ObservableField<>();
     public final MutableLiveData<List<ChatRoomItem>> chatRoomListLiveData = new MutableLiveData<>();
-    public final MutableLiveData<List<MessageResponse>> messageListLiveData = new MutableLiveData<>();
+    public final MutableLiveData<List<MessageResponseByServer>> messageListLiveData = new MutableLiveData<>();
     private String roomId;
 
     public void setRoomId(String roomId) {
@@ -61,9 +60,9 @@ public class ChatViewModel extends BaseViewModel {
     }
 
     public void getAllMessages() {
-        addDisposable(repository.getAllMessages(roomId, new CustomDisposableSingleObserver<Response<List<MessageResponse>>>(TAG) {
+        addDisposable(repository.getAllMessages(roomId, new CustomDisposableSingleObserver<Response<List<MessageResponseByServer>>>(TAG) {
             @Override
-            public void onSuccess(@NonNull Response<List<MessageResponse>> listResponse) {
+            public void onSuccess(@NonNull Response<List<MessageResponseByServer>> listResponse) {
                 if (listResponse.isSuccessful() && listResponse.code() == 200) {
                     messageListLiveData.postValue(listResponse.body());
                 }
