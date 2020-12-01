@@ -17,16 +17,16 @@ public class EditPrivateInfoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_edit_private_info);
 
         Intent intent =  getIntent();
-        String division = intent.getStringExtra("editActivity");
+        String division = intent.getStringExtra("editPlace");
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 
         switch (division) {
             case "profile":
-                String toEditValue = intent.getStringExtra("userProfileItem");
+                String toEditValue = intent.getStringExtra("userProfileImage");
                 EditProfileFragment profileFragment = new EditProfileFragment();
 
                 Bundle bundle = new Bundle();
-                bundle.putString("userInformation", toEditValue);
+                bundle.putString("profileBundle", toEditValue);
 
                 profileFragment.setArguments(bundle);
                 transaction.add(R.id.change_info_frameLayout, profileFragment).commit();

@@ -35,7 +35,7 @@ public class EditProfileFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        image = requireArguments().getString("userInformation");
+        image = requireArguments().getString("profileBundle");
     }
 
     @Override

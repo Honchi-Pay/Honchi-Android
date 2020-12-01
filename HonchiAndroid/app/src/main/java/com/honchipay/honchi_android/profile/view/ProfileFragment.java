@@ -70,10 +70,10 @@ public class ProfileFragment extends Fragment {
 
     public void moveToEditActivity(String value) {
         Intent intent = new Intent(getContext(), EditPrivateInfoActivity.class);
-        intent.putExtra("whereToEdit", value);
+        intent.putExtra("editPlace", value);
 
         if (value.equals("profile")) {
-            intent.putExtra("userProfileItem", image);
+            intent.putExtra("userProfileImage", image);
         }
 
         startActivity(intent);
