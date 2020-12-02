@@ -9,9 +9,9 @@
         android:id="@+id/left_bubble_userName_textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
         android:fontFamily="@font/nanumsquareregular"
         android:textSize="8sp"
-        android:layout_marginStart="8dp"
         tools:ignore="SmallSp"
         tools:text="김아름" />
 
@@ -36,28 +36,13 @@
             android:textSize="12sp"
             tools:text="hello" />
 
-        <LinearLayout
+        <TextView
+            android:id="@+id/left_bubble_time_textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/left_bubble_readCount_textView"
-                android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:textSize="8sp"
-                tools:ignore="SmallSp"
-                tools:text="3" />
-
-            <TextView
-                android:id="@+id/left_bubble_time_textView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/nanumsquareregular"
-                android:textSize="8sp"
-                tools:ignore="SmallSp"
-                tools:text="12:12" />
-        </LinearLayout>
+            android:fontFamily="@font/nanumsquareregular"
+            android:textSize="8sp"
+            tools:ignore="SmallSp"
+            tools:text="12:12" />
     </LinearLayout>
 </LinearLayout>
