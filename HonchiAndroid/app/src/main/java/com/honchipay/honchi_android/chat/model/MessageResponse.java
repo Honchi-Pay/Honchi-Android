@@ -7,6 +7,7 @@ public class MessageResponse {
     private Integer userId;
     private String name;
     private String message;
+    private Integer readCount;
     private MessageType messageType;
     private LocalDateTime time;
     private boolean isDelete;
@@ -74,5 +75,13 @@ public class MessageResponse {
 
     public void setMine(boolean mine) {
         isMine = mine;
+    }
+
+    public Integer getReadCount() {
+        return readCount;
+    }
+
+    public void setReadCount(Integer readCount) {
+        this.readCount = readCount;
     }
 }

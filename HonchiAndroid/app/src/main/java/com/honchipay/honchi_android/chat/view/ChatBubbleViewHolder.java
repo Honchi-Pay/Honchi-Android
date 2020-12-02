@@ -60,12 +60,14 @@ class ChatBubbleViewHolder extends RecyclerView.ViewHolder {
         setMessageByIsDelete(messageResponse.isDelete(), messageResponse.getMessage(), R.id.right_bubble_message_textView);
         ((TextView) linearLayout.findViewById(R.id.right_bubble_userName_textView)).setText(messageResponse.getName());
         ((TextView) linearLayout.findViewById(R.id.right_bubble_time_textView)).setText(messageResponse.getTime().toString());
+        ((TextView) linearLayout.findViewById(R.id.right_bubble_readCount_textView)).setText(messageResponse.getReadCount());
     }
 
     private void setTextViewInLeftBubble(MessageResponse messageResponse) {
         setMessageByIsDelete(messageResponse.isDelete(), messageResponse.getMessage(), R.id.left_bubble_message_textView);
         ((TextView) linearLayout.findViewById(R.id.left_bubble_userName_textView)).setText(messageResponse.getName());
         ((TextView) linearLayout.findViewById(R.id.left_bubble_time_textView)).setText(messageResponse.getTime().toString());
+        ((TextView) linearLayout.findViewById(R.id.left_bubble_readCount_textView)).setText(messageResponse.getReadCount());
     }
 
     private void setMessageByIsDelete(boolean isDelete, String message, int bubbleMessageTextViewResourceId) {
@@ -99,12 +101,14 @@ class ChatBubbleViewHolder extends RecyclerView.ViewHolder {
         setImageByIsDelete(messageResponse.isDelete(), messageResponse.getMessage(), R.id.right_bubble_image_imageView);
         ((TextView) linearLayout.findViewById(R.id.right_bubble_image_userName_textView)).setText(messageResponse.getName());
         ((TextView) linearLayout.findViewById(R.id.right_bubble_image_time_textView)).setText(messageResponse.getTime().toString());
+        ((TextView) linearLayout.findViewById(R.id.right_bubble_image_readCount_textView)).setText(messageResponse.getReadCount());
     }
 
     private void setImageViewInLeftBubble(MessageResponse messageResponse) {
         setImageByIsDelete(messageResponse.isDelete(), messageResponse.getMessage(), R.id.left_bubble_image_imageView);
         ((TextView) linearLayout.findViewById(R.id.left_bubble_image_userName_textView)).setText(messageResponse.getName());
         ((TextView) linearLayout.findViewById(R.id.left_bubble_image_time_textView)).setText(messageResponse.getTime().toString());
+        ((TextView) linearLayout.findViewById(R.id.left_bubble_image_readCount_textView)).setText(messageResponse.getReadCount());
     }
 
     private void setImageByIsDelete(boolean isDelete, String message, int bubbleMessageImageViewResourceId) {
