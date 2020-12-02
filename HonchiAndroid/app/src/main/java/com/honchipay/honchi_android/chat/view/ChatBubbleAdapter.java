@@ -31,21 +31,19 @@ public class ChatBubbleAdapter extends RecyclerView.Adapter<ChatBubbleViewHolder
     @Override
     public void onBindViewHolder(@NonNull ChatBubbleViewHolder holder, int position) {
         MessageResponse messageResponse = chattingContentList.get(position);
-        holder.makeTextView(messageResponse);
-
-        holder.itemView.setOnLongClickListener(v -> {
-            AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
-            builder.setTitle("메시지 삭제하시겠습니까?");
-            builder.setPositiveButton("네", (dialog, id) -> {
-                chatViewModel.deleteMessage(messageResponse.getId());
-                dialog.dismiss();
-            });
-            builder.setNegativeButton("아니요", (dialog, id) -> dialog.dismiss());
-            AlertDialog alertDialog = builder.create();
-            alertDialog.show();
-
-            return true;
-        });
+        switch (messageResponse.getMessageType()) {
+            case MESSAGE:
+                holder.makeTextView(messageResponse);
+                holder.setLongClickOnView(chatViewModel, messageResponse.getId());
+                break;
+            case IMAGE:
+                holder.makeImageView(messageResponse);
+                holder.setLongClickOnView(chatViewModel, messageResponse.getId());
+                break;
+            case INFO:
+                holder.showInformation(messageResponse.getMessage());
+                break;
+        }
     }
 
     @Override
