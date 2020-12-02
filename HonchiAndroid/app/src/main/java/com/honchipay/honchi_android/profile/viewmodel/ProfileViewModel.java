@@ -8,6 +8,7 @@ import com.honchipay.honchi_android.base.BaseViewModel;
 import com.honchipay.honchi_android.profile.data.ProfileRepository;
 import com.honchipay.honchi_android.profile.data.UserProfileResponse;
 import com.honchipay.honchi_android.util.CustomDisposableSingleObserver;
+import com.honchipay.honchi_android.util.SharedPreferencesManager;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -23,8 +24,8 @@ public class ProfileViewModel extends BaseViewModel {
     public final MutableLiveData<Boolean> successStarLiveData = new MutableLiveData<>();
     private int id = 0;
 
-    public void getProfile(String name) {
-        addDisposable(repository.getUserProfile(name, new CustomDisposableSingleObserver<Response<UserProfileResponse>>(TAG) {
+    public void getProfile() {
+        addDisposable(repository.getUserProfile(new CustomDisposableSingleObserver<Response<UserProfileResponse>>(TAG) {
             @Override
             public void onSuccess(@NonNull Response<UserProfileResponse> profileResponseResponse) {
                 if (profileResponseResponse.isSuccessful() && profileResponseResponse.code() == 200 && profileResponseResponse.body() != null) {

@@ -14,7 +14,9 @@ import okhttp3.RequestBody;
 import retrofit2.Response;
 
 public class ProfileRepository extends BaseRepository {
-    public Disposable getUserProfile(String name, DisposableSingleObserver<Response<UserProfileResponse>> userProfileResponseObserver) {
+    public Disposable getUserProfile(DisposableSingleObserver<Response<UserProfileResponse>> userProfileResponseObserver) {
+        String name = SharedPreferencesManager.getInstance().getUserName();
+
         return wrappingSingle(HonchipayConnector.getInstance().getApi().getUserProfile(token, name), userProfileResponseObserver);
     }
 

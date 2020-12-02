@@ -42,7 +42,7 @@ public class ProfileFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         profileViewModel = new ViewModelProvider(this).get(ProfileViewModel.class);
-        profileViewModel.getProfile(SharedPreferencesManager.getInstance().getUserName());
+        profileViewModel.getProfile();
         binding.setProfileFragment(this);
         binding.setProfileViewModel(profileViewModel);
         binding.setLifecycleOwner(this);
