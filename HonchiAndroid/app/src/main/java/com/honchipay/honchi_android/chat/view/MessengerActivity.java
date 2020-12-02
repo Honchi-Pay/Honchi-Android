@@ -23,8 +23,10 @@ import com.honchipay.honchi_android.chat.model.MessageRequest;
 import com.honchipay.honchi_android.chat.model.MessageResponse;
 import com.honchipay.honchi_android.chat.viewModel.ChatViewModel;
 import com.honchipay.honchi_android.databinding.ActivityMessengerBinding;
+import com.honchipay.honchi_android.util.SharedPreferencesManager;
 
 import java.io.File;
+import java.util.Collections;
 
 import io.socket.emitter.Emitter;
 
@@ -52,11 +54,19 @@ public class MessengerActivity extends AppCompatActivity {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_messenger);
 
         chatViewModel = new ViewModelProvider(this).get(ChatViewModel.class);
-        chatRoomData = (ChatRoomItem) getIntent().getExtras().getSerializable("chatData");
+        if (HonchiPaySocket.getInstance().postId != null) {
+            chatRoomData = new ChatRoomItem();
+            chatRoomData.setTitle(SharedPreferencesManager.getInstance().getUserName() + "님의 채팅방");
+            chatRoomData.setRoomId(HonchiPaySocket.getInstance().postId);
+            chatRoomData.setPeople(1);
+            chatRoomData.setMessage("");
+        } else {
+            chatRoomData = (ChatRoomItem) getIntent().getExtras().getSerializable("chatData");
+        }
+
         chatViewModel.setRoomId(chatRoomData.getRoomId());
         chatViewModel.roomTitle.set(chatRoomData.getTitle());
         chatViewModel.setRoomTitleValidation(chatRoomData.getTitle());
-
         binding.setChatViewModel(chatViewModel);
     }
 
@@ -67,11 +77,15 @@ public class MessengerActivity extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(chatBubbleAdapter);
 
-        chatViewModel.getAllMessages();
-        chatViewModel.messageListLiveData.observe(this, allMessages -> {
-            chatViewModel.readMessages();
-            chatBubbleAdapter.setAllMessages(allMessages);
-        });
+        if (HonchiPaySocket.getInstance().postId != null) {
+            chatBubbleAdapter.setAllMessages(Collections.singletonList(HonchiPaySocket.getInstance().messageResponse));
+        } else {
+            chatViewModel.getAllMessages();
+            chatViewModel.messageListLiveData.observe(this, allMessages -> {
+                chatViewModel.readMessages();
+                chatBubbleAdapter.setAllMessages(allMessages);
+            });
+        }
     }
 
     private void setSendMessage() {
