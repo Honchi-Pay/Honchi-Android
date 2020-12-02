@@ -24,6 +24,8 @@ import com.honchipay.honchi_android.chat.model.MessageResponse;
 import com.honchipay.honchi_android.chat.viewModel.ChatViewModel;
 import com.honchipay.honchi_android.databinding.ActivityMessengerBinding;
 
+import java.io.File;
+
 import io.socket.emitter.Emitter;
 
 import static java.util.Collections.emptyList;
@@ -104,11 +106,11 @@ public class MessengerActivity extends AppCompatActivity {
             if (clipData != null) {
                 for (int i = 0; i < clipData.getItemCount(); i++) {
                     uri = clipData.getItemAt(i).getUri();
-
+                    chatViewModel.uploadImageToServer(chatRoomData.getRoomId(), new File(String.valueOf(uri)));
                 }
             } else {
                 uri = data.getData();
-
+                chatViewModel.uploadImageToServer(chatRoomData.getRoomId(), new File(String.valueOf(uri)));
             }
         }
     }

@@ -11,6 +11,7 @@ import com.honchipay.honchi_android.chat.model.ChatRoomItem;
 import com.honchipay.honchi_android.chat.model.MessageResponse;
 import com.honchipay.honchi_android.util.CustomDisposableSingleObserver;
 
+import java.io.File;
 import java.util.List;
 
 import io.reactivex.annotations.NonNull;
@@ -78,7 +79,7 @@ public class ChatViewModel extends BaseViewModel {
         addDisposable(repository.deleteMessage(chatId, new CustomDisposableSingleObserver<>(TAG)));
     }
 
-    public void uploadImageToServer() {
-
+    public void uploadImageToServer(String chatId, File file) {
+        addDisposable(repository.uploadImage(chatId, file, new CustomDisposableSingleObserver<>(TAG)));
     }
 }

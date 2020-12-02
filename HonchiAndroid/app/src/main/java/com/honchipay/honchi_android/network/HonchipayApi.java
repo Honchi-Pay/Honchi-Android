@@ -1,6 +1,7 @@
 package com.honchipay.honchi_android.network;
 
 import com.honchipay.honchi_android.chat.model.ChatRoomItem;
+import com.honchipay.honchi_android.chat.model.MessageIdResponse;
 import com.honchipay.honchi_android.chat.model.MessageResponse;
 import com.honchipay.honchi_android.profile.data.UserProfileResponse;
 import com.honchipay.honchi_android.sign.data.SignUpRequest;
@@ -10,6 +11,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import io.reactivex.Single;
+import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import retrofit2.Response;
 import retrofit2.http.Body;
@@ -21,6 +23,7 @@ import retrofit2.http.Header;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
+import retrofit2.http.Part;
 import retrofit2.http.PartMap;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
@@ -68,6 +71,9 @@ public interface HonchipayApi {
 
     @GET("/chat")
     Single<Response<List<ChatRoomItem>>> getChatRooms(@Header("Authorization") String header);
+
+    @POST("/message")
+    Single<Response<MessageIdResponse>> uploadImage(@Header("Authorization") String header, @Part("chatId") RequestBody chatId, @Part MultipartBody.Part file);
 
     @GET("/message/{chatId}")
     Single<Response<List<MessageResponse>>> getAllMessages(@Header("Authorization") String header, @Path("chatId") String chatId);
