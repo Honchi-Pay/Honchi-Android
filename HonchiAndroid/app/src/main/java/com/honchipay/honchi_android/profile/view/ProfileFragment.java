@@ -22,7 +22,6 @@ import com.honchipay.honchi_android.R;
 import com.honchipay.honchi_android.databinding.FragmentProfileBinding;
 import com.honchipay.honchi_android.profile.viewmodel.ProfileViewModel;
 import com.honchipay.honchi_android.splash.SplashActivity;
-import com.honchipay.honchi_android.util.SharedPreferencesManager;
 
 import org.jetbrains.annotations.NotNull;
 

@@ -4,7 +4,6 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.honchipay.honchi_android.R;
@@ -14,8 +13,8 @@ import com.honchipay.honchi_android.chat.viewModel.ChatViewModel;
 import java.util.List;
 
 public class ChatBubbleAdapter extends RecyclerView.Adapter<ChatBubbleViewHolder> {
-    List<MessageResponse> chattingContentList;
-    ChatViewModel chatViewModel;
+    final List<MessageResponse> chattingContentList;
+    final ChatViewModel chatViewModel;
 
     ChatBubbleAdapter(List<MessageResponse> contentList, ChatViewModel chatViewModel) {
         chattingContentList = contentList;

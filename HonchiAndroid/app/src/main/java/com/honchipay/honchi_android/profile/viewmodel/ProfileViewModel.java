@@ -8,12 +8,8 @@ import com.honchipay.honchi_android.base.BaseViewModel;
 import com.honchipay.honchi_android.profile.data.ProfileRepository;
 import com.honchipay.honchi_android.profile.data.UserProfileResponse;
 import com.honchipay.honchi_android.util.CustomDisposableSingleObserver;
-import com.honchipay.honchi_android.util.SharedPreferencesManager;
-
-import org.jetbrains.annotations.NotNull;
 
 import io.reactivex.annotations.NonNull;
-import io.reactivex.observers.DisposableSingleObserver;
 import retrofit2.Response;
 
 public class ProfileViewModel extends BaseViewModel {
@@ -55,7 +51,7 @@ public class ProfileViewModel extends BaseViewModel {
             }
 
             @Override
-            public void onError(@NotNull Throwable e) {
+            public void onError(@NonNull Throwable e) {
                 Log.e(TAG, e.getMessage());
                 signOutLiveData.postValue(false);
             }
