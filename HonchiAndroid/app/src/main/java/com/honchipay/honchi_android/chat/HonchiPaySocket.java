@@ -13,11 +13,11 @@ import io.socket.client.Socket;
 
 public class HonchiPaySocket {
     private static final String TAG = HonchiPaySocket.class.getSimpleName();
-    private static final String SERVER_URL = "http://13.124.126.208:8000";
+    private static final String SERVER_URL = "http://13.124.126.208:8000?token=" + SharedPreferencesManager.getInstance().getAccessToken().substring(7);
     private static HonchiPaySocket single_instance = null;
     private boolean isConnected = false;
     public MessageResponse messageResponse;
-    public String postId;
+    public Integer postId = 4;
     public Socket socket;
 
     public static HonchiPaySocket getInstance() {
@@ -30,12 +30,11 @@ public class HonchiPaySocket {
 
     public void connect() {
         try {
-            IO.Options options = new IO.Options();
-            options.query = "token=" + SharedPreferencesManager.getInstance().getAccessToken();
-            socket = IO.socket(SERVER_URL, options);
+            socket = IO.socket(SERVER_URL);
             socket.connect();
             isConnected = true;
             createChatRoom();
+
             Log.e(TAG, "success connected");
         } catch (URISyntaxException e) {
             e.printStackTrace();
@@ -46,19 +45,19 @@ public class HonchiPaySocket {
 
     public void createChatRoom() {
         if (isConnected && postId != null) {
-            socket.emit("joinRoom", postId);
+            socket.emit("joinRoom", postId.toString());
         }
     }
 
-    public void joinIntoRoom(String roomId) {
+    public void joinIntoRoom(String chatId) {
         if (isConnected) {
-            socket.emit("joinRoom", roomId);
+            socket.emit("joinRoom", chatId);
         }
     }
 
-    public void leaveRoom(String roomId) {
+    public void leaveRoom(String chatId) {
         if (isConnected) {
-            socket.emit("leaveRoom", roomId);
+            socket.emit("leaveRoom", chatId);
         }
     }
 
