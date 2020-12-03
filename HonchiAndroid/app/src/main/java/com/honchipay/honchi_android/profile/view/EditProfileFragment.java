@@ -2,8 +2,11 @@ package com.honchipay.honchi_android.profile.view;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,19 +19,28 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.CustomTarget;
+import com.bumptech.glide.request.transition.Transition;
 import com.honchipay.honchi_android.R;
 import com.honchipay.honchi_android.databinding.FragmentEditProfileBinding;
 import com.honchipay.honchi_android.profile.viewmodel.EditProfileViewModel;
+import com.honchipay.honchi_android.util.SharedPreferencesManager;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.io.BufferedOutputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 
 public class EditProfileFragment extends Fragment {
-    public String image = "";
     private final int REQUEST_IMAGE = 333;
     FragmentEditProfileBinding binding;
     EditProfileViewModel editProfileViewModel;
+    public String image;
     File file = null;
 
     @Override
@@ -36,6 +48,38 @@ public class EditProfileFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         image = requireArguments().getString("profileBundle");
+        if (image == null) {
+            Glide.with(requireContext()).asBitmap().load(R.drawable.default_profile).into(new CustomTarget<Bitmap>() {
+                @Override
+                public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
+                    try {
+                        file = new File(requireContext().getCacheDir(), SharedPreferencesManager.getInstance().getUserName());
+                        OutputStream outStream = new BufferedOutputStream(new FileOutputStream(file));
+                        resource.compress(Bitmap.CompressFormat.PNG, 100, outStream);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                @Override
+                public void onLoadCleared(@Nullable Drawable placeholder) { }
+            });
+        } else {
+            Glide.with(requireContext()).asBitmap().load(image).into(new CustomTarget<Bitmap>() {
+                @Override
+                public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
+                    try {
+                        OutputStream outStream = new BufferedOutputStream(new FileOutputStream(file));
+                        resource.compress(Bitmap.CompressFormat.PNG, 100, outStream);
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                @Override
+                public void onLoadCleared(@Nullable Drawable placeholder) { }
+            });
+        }
     }
 
     @Override

@@ -10,6 +10,7 @@ import java.util.HashMap;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.observers.DisposableSingleObserver;
 import okhttp3.MediaType;
+import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import retrofit2.Response;
 
@@ -21,13 +22,11 @@ public class ProfileRepository extends BaseRepository {
     }
 
     public Disposable updateUserProfile(String name, File file, DisposableSingleObserver<Response<Void>> uploadUserInfoObserver) {
-        HashMap<String, RequestBody> requestHashMap = new HashMap<>();
-        if (file != null) {
-            requestHashMap.put("profile_image", RequestBody.create(file, MediaType.parse("multipart/form-data")));
-        }
-        requestHashMap.put("nick_name", RequestBody.create(name, MediaType.parse("multipart/form-data")));
+        RequestBody nickName = RequestBody.create(name, MediaType.parse("multipart/form-data"));
+        RequestBody rqFile = RequestBody.create(file, MediaType.parse("multipart/form-data"));
+        MultipartBody.Part mpFile = MultipartBody.Part.createFormData("profileImage", file.getName(), rqFile);
 
-        return wrappingSingle(HonchipayConnector.getInstance().getApi().updateUserProfile(token, requestHashMap), uploadUserInfoObserver);
+        return wrappingSingle(HonchipayConnector.getInstance().getApi().updateUserProfile(token, nickName, mpFile), uploadUserInfoObserver);
     }
 
     public Disposable changeUserPassword(String password, DisposableSingleObserver<Response<Void>> changePasswordObserver) {
