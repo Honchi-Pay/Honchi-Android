@@ -1,15 +1,15 @@
 package com.honchipay.honchi_android.chat.model;
 
-import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 public class MessageResponse {
     private Integer id;
     private Integer userId;
-    private String name;
+    private String nickName;
     private String message;
-    private Integer readCount;
     private MessageType messageType;
-    private LocalDateTime time;
+    private Integer readCount;
+    private ArrayList<Integer> time;
     private boolean isDelete;
     private boolean isMine;
 
@@ -21,12 +21,12 @@ public class MessageResponse {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getNickName() {
+        return nickName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setNickName(String name) {
+        this.nickName = name;
     }
 
     public String getMessage() {
@@ -45,11 +45,11 @@ public class MessageResponse {
         this.messageType = messageType;
     }
 
-    public LocalDateTime getTime() {
+    public ArrayList<Integer> getTime() {
         return time;
     }
 
-    public void setTime(LocalDateTime time) {
+    public void setTime(ArrayList<Integer> time) {
         this.time = time;
     }
 
