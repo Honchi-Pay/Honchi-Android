@@ -10,14 +10,15 @@ import com.honchipay.honchi_android.R;
 import com.honchipay.honchi_android.chat.model.MessageResponse;
 import com.honchipay.honchi_android.chat.viewModel.ChatViewModel;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ChatBubbleAdapter extends RecyclerView.Adapter<ChatBubbleViewHolder> {
-    final List<MessageResponse> chattingContentList;
+    final ArrayList<MessageResponse> chattingContentList;
     final ChatViewModel chatViewModel;
 
-    ChatBubbleAdapter(List<MessageResponse> contentList, ChatViewModel chatViewModel) {
-        chattingContentList = contentList;
+    ChatBubbleAdapter(ChatViewModel chatViewModel) {
+        chattingContentList = new ArrayList<>();
         this.chatViewModel = chatViewModel;
     }
 
