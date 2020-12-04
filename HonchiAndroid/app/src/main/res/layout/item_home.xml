@@ -7,8 +7,8 @@
     android:orientation="vertical">
 
     <androidx.cardview.widget.CardView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_width="80dp"
+        android:layout_height="80dp">
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -21,6 +21,7 @@
                 android:layout_gravity="center"
                 app:srcCompat="@drawable/splash_honchipay" />
             <TextView
+                android:id="@+id/home_item_textView"
                 android:layout_width="wrap_content"
                 android:textSize="12sp"
                 android:layout_height="wrap_content"
