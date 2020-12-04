@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
-import android.widget.EditText;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,8 +20,8 @@ import com.google.gson.Gson;
 import com.honchipay.honchi_android.R;
 import com.honchipay.honchi_android.chat.HonchiPaySocket;
 import com.honchipay.honchi_android.chat.model.ChatRoomItem;
-import com.honchipay.honchi_android.chat.model.MessageRequest;
 import com.honchipay.honchi_android.chat.model.MessageResponse;
+import com.honchipay.honchi_android.chat.model.socket.MessageRequest;
 import com.honchipay.honchi_android.chat.viewModel.ChatViewModel;
 import com.honchipay.honchi_android.databinding.ActivityMessengerBinding;
 
@@ -38,12 +37,15 @@ public class MessengerActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     ChatBubbleAdapter chatBubbleAdapter;
     final int PICTURES_REQUEST_CODE = 13;
-    final Emitter.Listener messageListener = args -> {
-        Log.e("MessengerActivity", "messageListener called");
+    final Emitter.Listener messageListener = args -> socketListener(args, "messageListener called");
+    final Emitter.Listener infoListener = args -> socketListener(args, "infoListener called");
+
+    void socketListener(Object[] args, String calledMessage) {
+        Log.e("MessengerActivity", calledMessage);
         MessageResponse messageResponse = new Gson().fromJson(args[0].toString(), MessageResponse.class);
         Log.e("MessengerActivity", messageResponse.getMessage());
         chatBubbleAdapter.addMessage(messageResponse);
-    };
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,8 +83,10 @@ public class MessengerActivity extends AppCompatActivity {
 
     private void setSendMessage() {
         HonchiPaySocket.getInstance().socket.on("receive", messageListener);
+        HonchiPaySocket.getInstance().socket.on("info", infoListener);
         findViewById(R.id.messenger_sendMessage_imageView).setOnClickListener(v -> {
-            String text = ((EditText) findViewById(R.id.messenger_inputMessage_editText)).getText().toString();
+            String text = binding.messengerInputMessageEditText.getText().toString();
+            binding.messengerInputMessageEditText.setText("");
             HonchiPaySocket.getInstance().sendMessage(new MessageRequest(chatRoomData.getChatId(), text));
         });
     }
@@ -123,5 +127,6 @@ public class MessengerActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         HonchiPaySocket.getInstance().socket.off("receive", messageListener);
+        HonchiPaySocket.getInstance().socket.off("info", infoListener);
     }
 }
