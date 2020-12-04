@@ -5,8 +5,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.honchipay.honchi_android.R;
 import com.honchipay.honchi_android.home.Data.homeItem;
 import com.honchipay.honchi_android.home.Data.OnHomeItemClickListener;
@@ -21,7 +23,7 @@ public class homeAdapter extends RecyclerView.Adapter<homeAdapter.ViewHolder> im
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View itemView = inflater.inflate(R.layout.item_home,parent,false);
+        View itemView = inflater.inflate(R.layout.item_home, parent, false);
 
         return new ViewHolder(itemView, this);
     }
@@ -32,42 +34,14 @@ public class homeAdapter extends RecyclerView.Adapter<homeAdapter.ViewHolder> im
         holder.setItem(item);
     }
 
-    @Override
-    public int getItemCount() {
-        return items.size();
-    }
-
-    public void addItem(homeItem item){
-        items.add(item);
-    }
-
-    public void setItems(ArrayList<homeItem> items) {
-        this.items = items;
-    }
-
-    public homeItem getItem(int position){
-        return items.get(position);
-    }
-
-    public void setItem(int position, homeItem item){
-        items.set(position, item);
-    }
-
-    @Override
-    public void onItemClick(ViewHolder holder, View view, int position) {
-        if(listener != null){
-            listener.onItemClick(holder,view,position);
-        }
-    }
-
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder {
         TextView title_textView;
         ImageView image_imageView;
 
         public ViewHolder(@NonNull View itemView, final OnHomeItemClickListener listener) {
             super(itemView);
 
-            title_textView =itemView.findViewById(R.id.home_item_imageView);
+            title_textView = itemView.findViewById(R.id.home_item_textView);
             image_imageView = itemView.findViewById(R.id.home_item_imageView);
 
             itemView.setOnClickListener(new View.OnClickListener() {
@@ -87,4 +61,21 @@ public class homeAdapter extends RecyclerView.Adapter<homeAdapter.ViewHolder> im
             image_imageView.setImageResource(item.getImage());
         }
     }
+
+    @Override
+    public int getItemCount() {
+        return items.size();
+    }
+
+    public void addItem(homeItem item) {
+        items.add(item);
+    }
+
+    @Override
+    public void onItemClick(ViewHolder holder, View view, int position) {
+        if (listener != null) {
+            listener.onItemClick(holder, view, position);
+        }
+    }
+
 }
