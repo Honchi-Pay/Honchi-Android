@@ -13,10 +13,10 @@ import io.socket.client.Socket;
 
 public class HonchiPaySocket {
     private static final String TAG = HonchiPaySocket.class.getSimpleName();
-    private static final String SERVER_URL = "http://13.124.126.208:8000?token=" + SharedPreferencesManager.getInstance().getAccessToken().substring(7);
+    private static final String SERVER_URL = "http://13.124.126.208:8000?token="
+            + SharedPreferencesManager.getInstance().getAccessToken().substring(7);
     private static HonchiPaySocket single_instance = null;
     private boolean isConnected = false;
-    public MessageResponse messageResponse;
     public Integer postId = 4;
     public Socket socket;
 
@@ -33,18 +33,15 @@ public class HonchiPaySocket {
             socket = IO.socket(SERVER_URL);
             socket.connect();
             isConnected = true;
-            createChatRoom();
-
             Log.e(TAG, "success connected");
         } catch (URISyntaxException e) {
             e.printStackTrace();
-
-            isConnected = false;
         }
     }
 
     public void createChatRoom() {
         if (isConnected && postId != null) {
+            Log.e("HonchiPaySocket", "createChatRoom");
             socket.emit("joinRoom", postId.toString());
         }
     }
