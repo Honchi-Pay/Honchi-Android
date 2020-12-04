@@ -17,6 +17,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.gson.Gson;
 import com.honchipay.honchi_android.R;
 import com.honchipay.honchi_android.chat.HonchiPaySocket;
 import com.honchipay.honchi_android.chat.model.ChatRoomItem;
@@ -24,14 +25,11 @@ import com.honchipay.honchi_android.chat.model.MessageRequest;
 import com.honchipay.honchi_android.chat.model.MessageResponse;
 import com.honchipay.honchi_android.chat.viewModel.ChatViewModel;
 import com.honchipay.honchi_android.databinding.ActivityMessengerBinding;
-import com.honchipay.honchi_android.util.SharedPreferencesManager;
 
 import java.io.File;
-import java.util.Collections;
+import java.util.Objects;
 
 import io.socket.emitter.Emitter;
-
-import static java.util.Collections.emptyList;
 
 public class MessengerActivity extends AppCompatActivity {
     ChatRoomItem chatRoomData;
@@ -40,13 +38,17 @@ public class MessengerActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     ChatBubbleAdapter chatBubbleAdapter;
     final int PICTURES_REQUEST_CODE = 13;
-    final Emitter.Listener messageListener = args -> chatBubbleAdapter.addMessage((MessageResponse) args[0]);
+    final Emitter.Listener messageListener = args -> {
+        Log.e("MessengerActivity", "messageListener called");
+        MessageResponse messageResponse = new Gson().fromJson(args[0].toString(), MessageResponse.class);
+        Log.e("MessengerActivity", messageResponse.getMessage());
+        chatBubbleAdapter.addMessage(messageResponse);
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        Log.e("MessengerActivity", "Called");
         init();
         setRecyclerView();
         setSendMessage();
@@ -57,7 +59,7 @@ public class MessengerActivity extends AppCompatActivity {
 
         chatViewModel = new ViewModelProvider(this).get(ChatViewModel.class);
         chatRoomData = (ChatRoomItem) getIntent().getExtras().getSerializable("chatData");
-        chatViewModel.setRoomId(chatRoomData.getRoomId());
+        chatViewModel.setRoomId(chatRoomData.getChatId());
         chatViewModel.roomTitle.set(chatRoomData.getTitle());
         chatViewModel.setRoomTitleValidation(chatRoomData.getTitle());
         binding.setChatViewModel(chatViewModel);
@@ -65,8 +67,8 @@ public class MessengerActivity extends AppCompatActivity {
 
     private void setRecyclerView() {
         chatBubbleAdapter = new ChatBubbleAdapter(chatViewModel);
-        recyclerView = findViewById(R.id.messenger_massages_recyclerView);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView = binding.messengerMassagesRecyclerView;
+        recyclerView.setLayoutManager(new LinearLayoutManager(MessengerActivity.this));
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(chatBubbleAdapter);
 
@@ -81,7 +83,7 @@ public class MessengerActivity extends AppCompatActivity {
         HonchiPaySocket.getInstance().socket.on("receive", messageListener);
         findViewById(R.id.messenger_sendMessage_imageView).setOnClickListener(v -> {
             String text = ((EditText) findViewById(R.id.messenger_inputMessage_editText)).getText().toString();
-            HonchiPaySocket.getInstance().sendMessage(new MessageRequest(chatRoomData.getRoomId(), text));
+            HonchiPaySocket.getInstance().sendMessage(new MessageRequest(chatRoomData.getChatId(), text));
         });
     }
 
@@ -108,11 +110,11 @@ public class MessengerActivity extends AppCompatActivity {
             if (clipData != null) {
                 for (int i = 0; i < clipData.getItemCount(); i++) {
                     uri = clipData.getItemAt(i).getUri();
-                    chatViewModel.uploadImageToServer(chatRoomData.getRoomId(), new File(String.valueOf(uri)));
+                    chatViewModel.uploadImageToServer(chatRoomData.getChatId(), new File(String.valueOf(uri)));
                 }
             } else {
                 uri = data.getData();
-                chatViewModel.uploadImageToServer(chatRoomData.getRoomId(), new File(String.valueOf(uri)));
+                chatViewModel.uploadImageToServer(chatRoomData.getChatId(), new File(String.valueOf(uri)));
             }
         }
     }

@@ -13,6 +13,7 @@ import com.honchipay.honchi_android.util.CustomDisposableSingleObserver;
 
 import java.io.File;
 import java.util.List;
+import java.util.Objects;
 
 import io.reactivex.annotations.NonNull;
 import retrofit2.Response;
@@ -33,7 +34,7 @@ public class ChatViewModel extends BaseViewModel {
         roomTitle.addOnPropertyChangedCallback(new Observable.OnPropertyChangedCallback() {
             @Override
             public void onPropertyChanged(Observable sender, int propertyId) {
-                if (!roomTitle.get().equals("") && !roomTitle.get().equals(preRoomTitle)) {
+                if (!Objects.requireNonNull(roomTitle.get()).equals("") && !Objects.requireNonNull(roomTitle.get()).equals(preRoomTitle)) {
                     changeChatRoomTitle();
                 }
             }
