@@ -3,6 +3,7 @@ package com.honchipay.honchi_android.chat.model;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class ChatRoomItem implements Serializable {
     private String chatId;
@@ -12,8 +13,8 @@ public class ChatRoomItem implements Serializable {
     private ArrayList<String> images;
 
     public static class Builder {
-        private String chatId;
-        private String title;
+        private final String chatId;
+        private final String title;
         private int people = 1;
         private String message = "";
         private ArrayList<String> images = new ArrayList<>();
@@ -86,7 +87,8 @@ public class ChatRoomItem implements Serializable {
         if (images.size() == 0) {
             return null;
         } else {
-            return images.get(0);
+            int index = new Random().nextInt(images.size());
+            return images.get(index);
         }
     }
 
