@@ -17,7 +17,7 @@ public class HonchiPaySocket {
             + SharedPreferencesManager.getInstance().getAccessToken().substring(7);
     private static HonchiPaySocket single_instance = null;
     private boolean isConnected = false;
-    public Integer postId = 4;
+    public Integer postId = null;
     public Socket socket;
 
     public static HonchiPaySocket getInstance() {
@@ -30,10 +30,12 @@ public class HonchiPaySocket {
 
     public void connect() {
         try {
-            socket = IO.socket(SERVER_URL);
-            socket.connect();
-            isConnected = true;
-            Log.e(TAG, "success connected");
+            if (!isConnected) {
+                socket = IO.socket(SERVER_URL);
+                socket.connect();
+                isConnected = true;
+                printLog("success connected");
+            }
         } catch (URISyntaxException e) {
             e.printStackTrace();
         }
@@ -41,38 +43,48 @@ public class HonchiPaySocket {
 
     public void createChatRoom() {
         if (isConnected && postId != null) {
-            Log.e("HonchiPaySocket", "createChatRoom");
             socket.emit("joinRoom", postId.toString());
+            printLog("createChatRoom");
         }
     }
 
     public void joinIntoRoom(String chatId) {
         if (isConnected) {
             socket.emit("joinRoom", chatId);
+            printLog("joinIntoRoom");
         }
     }
 
     public void leaveRoom(String chatId) {
         if (isConnected) {
             socket.emit("leaveRoom", chatId);
+            printLog("leaveRoom");
         }
     }
 
     public void changeRoomTitle(String title) {
         if (isConnected) {
             socket.emit("changeTitle", title);
+            printLog("changeRoomTitle");
         }
     }
 
     public void sendMessage(MessageRequest message) {
         if (isConnected) {
             socket.emit("send", message);
+            printLog("sendMessage");
         }
     }
 
     public void disConnect() {
         if (isConnected) {
             socket.disconnect();
+            isConnected = false;
+            printLog("disConnect");
         }
+    }
+
+    private void printLog(String message) {
+        Log.e(TAG, message);
     }
 }
