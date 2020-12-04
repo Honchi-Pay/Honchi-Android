@@ -1,5 +1,6 @@
 package com.honchipay.honchi_android.chat.view;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -14,8 +15,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ChatBubbleAdapter extends RecyclerView.Adapter<ChatBubbleViewHolder> {
-    final ArrayList<MessageResponse> chattingContentList;
-    final ChatViewModel chatViewModel;
+    private final ArrayList<MessageResponse> chattingContentList;
+    private final ChatViewModel chatViewModel;
 
     ChatBubbleAdapter(ChatViewModel chatViewModel) {
         chattingContentList = new ArrayList<>();
@@ -31,6 +32,7 @@ public class ChatBubbleAdapter extends RecyclerView.Adapter<ChatBubbleViewHolder
     @Override
     public void onBindViewHolder(@NonNull ChatBubbleViewHolder holder, int position) {
         MessageResponse messageResponse = chattingContentList.get(position);
+
         switch (messageResponse.getMessageType()) {
             case MESSAGE:
                 holder.makeTextView(messageResponse);
@@ -41,7 +43,7 @@ public class ChatBubbleAdapter extends RecyclerView.Adapter<ChatBubbleViewHolder
                 holder.setLongClickOnView(chatViewModel, messageResponse.getId());
                 break;
             case INFO:
-                holder.showInformation(messageResponse.getMessage());
+                holder.showInformation(messageResponse.getNickName() + messageResponse.getMessage());
                 break;
         }
     }
