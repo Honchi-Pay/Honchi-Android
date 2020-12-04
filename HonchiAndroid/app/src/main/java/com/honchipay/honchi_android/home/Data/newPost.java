@@ -1,14 +1,18 @@
 package com.honchipay.honchi_android.home.Data;
 
+import com.google.android.gms.common.api.Result;
+
 public class newPost {
+
     int postId;
     String title;
     String writer;
     String item;
     Double lat;
     Double lon;
-    String createdAt;
     String image;
+    String createdAt;
+
 
     public newPost(int postId, String title, String writer, String item, Double lat, Double lon, String createdAt, String image) {
         this.postId = postId;
