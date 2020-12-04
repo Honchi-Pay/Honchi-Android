@@ -12,4 +12,5 @@
     <color name="home_background">#F5F6F8</color>
     <color name="detail_gray">#404040</color>
     <color name="writing_gray">#EBEBEB</color>
+    <color name="post_gray">#6B6B6B</color>
 </resources>
