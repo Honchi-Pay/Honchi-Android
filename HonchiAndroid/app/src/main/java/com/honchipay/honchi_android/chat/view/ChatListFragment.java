@@ -29,7 +29,11 @@ public class ChatListFragment extends Fragment {
     ChatViewModel chatViewModel;
     RecyclerView recyclerView;
     ChatRoomsAdapter chatRoomsAdapter;
+
     final Emitter.Listener newChatRoomListener = args -> {
+        MessageResponse messageResponse = new Gson().fromJson(args[0].toString(), MessageResponse.class);
+        Log.e("ChatListFragment", messageResponse.toString());
+
         ChatRoomItem chatRoomData = new ChatRoomItem.Builder(
                 HonchiPaySocket.getInstance().postId.toString(),
                 SharedPreferencesManager.getInstance().getUserName() + "님의 채팅방"
@@ -79,7 +83,6 @@ public class ChatListFragment extends Fragment {
     @Override
     public void onPause() {
         super.onPause();
-        Log.e("ChatListFragment", "onPause");
         HonchiPaySocket.getInstance().socket.off("info", newChatRoomListener);
     }
 
