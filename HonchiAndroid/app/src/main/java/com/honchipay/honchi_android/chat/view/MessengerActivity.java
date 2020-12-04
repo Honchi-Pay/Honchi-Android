@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
@@ -45,6 +46,7 @@ public class MessengerActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        Log.e("MessengerActivity", "Called");
         init();
         setRecyclerView();
         setSendMessage();
@@ -54,16 +56,7 @@ public class MessengerActivity extends AppCompatActivity {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_messenger);
 
         chatViewModel = new ViewModelProvider(this).get(ChatViewModel.class);
-        if (HonchiPaySocket.getInstance().postId != null) {
-            chatRoomData = new ChatRoomItem();
-            chatRoomData.setTitle(SharedPreferencesManager.getInstance().getUserName() + "님의 채팅방");
-            chatRoomData.setRoomId(HonchiPaySocket.getInstance().postId);
-            chatRoomData.setPeople(1);
-            chatRoomData.setMessage("");
-        } else {
-            chatRoomData = (ChatRoomItem) getIntent().getExtras().getSerializable("chatData");
-        }
-
+        chatRoomData = (ChatRoomItem) getIntent().getExtras().getSerializable("chatData");
         chatViewModel.setRoomId(chatRoomData.getRoomId());
         chatViewModel.roomTitle.set(chatRoomData.getTitle());
         chatViewModel.setRoomTitleValidation(chatRoomData.getTitle());
@@ -71,25 +64,20 @@ public class MessengerActivity extends AppCompatActivity {
     }
 
     private void setRecyclerView() {
-        chatBubbleAdapter = new ChatBubbleAdapter(emptyList(), chatViewModel);
+        chatBubbleAdapter = new ChatBubbleAdapter(chatViewModel);
         recyclerView = findViewById(R.id.messenger_massages_recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(chatBubbleAdapter);
 
-        if (HonchiPaySocket.getInstance().postId != null) {
-            chatBubbleAdapter.setAllMessages(Collections.singletonList(HonchiPaySocket.getInstance().messageResponse));
-        } else {
-            chatViewModel.getAllMessages();
-            chatViewModel.messageListLiveData.observe(this, allMessages -> {
-                chatViewModel.readMessages();
-                chatBubbleAdapter.setAllMessages(allMessages);
-            });
-        }
+        chatViewModel.getAllMessages();
+        chatViewModel.messageListLiveData.observe(this, allMessages -> {
+            chatViewModel.readMessages();
+            chatBubbleAdapter.setAllMessages(allMessages);
+        });
     }
 
     private void setSendMessage() {
-        HonchiPaySocket.getInstance().joinIntoRoom(chatRoomData.getRoomId());
         HonchiPaySocket.getInstance().socket.on("receive", messageListener);
         findViewById(R.id.messenger_sendMessage_imageView).setOnClickListener(v -> {
             String text = ((EditText) findViewById(R.id.messenger_inputMessage_editText)).getText().toString();
@@ -132,7 +120,6 @@ public class MessengerActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        HonchiPaySocket.getInstance().leaveRoom(chatRoomData.getRoomId());
         HonchiPaySocket.getInstance().socket.off("receive", messageListener);
     }
 }
