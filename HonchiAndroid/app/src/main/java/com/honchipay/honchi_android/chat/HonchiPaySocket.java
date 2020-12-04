@@ -2,8 +2,10 @@ package com.honchipay.honchi_android.chat;
 
 import android.util.Log;
 
-import com.honchipay.honchi_android.chat.model.MessageRequest;
-import com.honchipay.honchi_android.chat.model.MessageResponse;
+import com.honchipay.honchi_android.chat.model.socket.ChangeTitleRequest;
+import com.honchipay.honchi_android.chat.model.socket.GetPriceRequest;
+import com.honchipay.honchi_android.chat.model.socket.ImageRequest;
+import com.honchipay.honchi_android.chat.model.socket.MessageRequest;
 import com.honchipay.honchi_android.util.SharedPreferencesManager;
 
 import java.net.URISyntaxException;
@@ -62,17 +64,31 @@ public class HonchiPaySocket {
         }
     }
 
-    public void changeRoomTitle(String title) {
+    public void changeRoomTitle(ChangeTitleRequest changeTitleRequest) {
         if (isConnected) {
-            socket.emit("changeTitle", title);
+            socket.emit("changeTitle", changeTitleRequest);
             printLog("changeRoomTitle");
         }
     }
 
-    public void sendMessage(MessageRequest message) {
+    public void sendMessage(MessageRequest messageRequest) {
         if (isConnected) {
-            socket.emit("send", message);
+            socket.emit("sendMessage", messageRequest);
             printLog("sendMessage");
+        }
+    }
+
+    public void sendImage(ImageRequest imageRequest) {
+        if (isConnected) {
+            socket.emit("sendImage", imageRequest);
+            printLog("sendImage");
+        }
+    }
+
+    public void getPrice(GetPriceRequest getPriceRequest) {
+        if (isConnected) {
+            socket.emit("getPrice", getPriceRequest);
+            printLog("getPrice");
         }
     }
 

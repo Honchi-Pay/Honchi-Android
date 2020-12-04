@@ -9,6 +9,7 @@ import com.honchipay.honchi_android.chat.HonchiPaySocket;
 import com.honchipay.honchi_android.chat.model.ChatRepository;
 import com.honchipay.honchi_android.chat.model.ChatRoomItem;
 import com.honchipay.honchi_android.chat.model.MessageResponse;
+import com.honchipay.honchi_android.chat.model.socket.ChangeTitleRequest;
 import com.honchipay.honchi_android.util.CustomDisposableSingleObserver;
 
 import java.io.File;
@@ -45,7 +46,7 @@ public class ChatViewModel extends BaseViewModel {
         addDisposable(repository.changeRoomTitle(roomId, roomTitle.get(), new CustomDisposableSingleObserver<Response<Void>>(TAG) {
             @Override
             public void onSuccess(@NonNull Response<Void> voidResponse) {
-                HonchiPaySocket.getInstance().changeRoomTitle(roomTitle.get());
+                HonchiPaySocket.getInstance().changeRoomTitle(new ChangeTitleRequest(roomId, roomTitle.get()));
             }
         }));
     }
