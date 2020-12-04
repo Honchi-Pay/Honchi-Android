@@ -5,21 +5,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ChatRoomItem implements Serializable {
-    private String roomId;
+    private String chatId;
     private String title;
     private int people;
     private String message;
     private ArrayList<String> images;
 
     public static class Builder {
-        private String roomId;
+        private String chatId;
         private String title;
         private int people = 1;
         private String message = "";
         private ArrayList<String> images = new ArrayList<>();
 
-        public Builder(String roomId, String title) {
-            this.roomId = roomId;
+        public Builder(String chatId, String title) {
+            this.chatId = chatId;
             this.title = title;
         }
 
@@ -43,19 +43,19 @@ public class ChatRoomItem implements Serializable {
     }
 
     private ChatRoomItem(Builder builder) {
-        roomId = builder.roomId;
+        chatId = builder.chatId;
         title = builder.title;
         people = builder.people;
         message = builder.message;
         images = builder.images;
     }
 
-    public String getRoomId() {
-        return roomId;
+    public String getChatId() {
+        return chatId;
     }
 
-    public void setRoomId(String roomId) {
-        this.roomId = roomId;
+    public void setChatId(String roomId) {
+        this.chatId = roomId;
     }
 
     public String getTitle() {
