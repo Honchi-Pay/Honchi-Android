@@ -4,8 +4,11 @@ public class MessageRequest {
     private String chatId;
     private String message;
 
-    public MessageRequest(String chatId, String message) {
+    public void setChatId(String chatId) {
         this.chatId = chatId;
+    }
+
+    public void setMessage(String message) {
         this.message = message;
     }
 
