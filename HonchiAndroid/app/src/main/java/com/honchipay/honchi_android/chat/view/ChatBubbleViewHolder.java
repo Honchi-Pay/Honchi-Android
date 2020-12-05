@@ -136,6 +136,7 @@ class ChatBubbleViewHolder extends RecyclerView.ViewHolder {
 
         TextView textView = new TextView(itemView.getContext());
         textView.setText(message);
+        textView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
         linearLayout.addView(textView);
         rootLayout.addView(linearLayout);
     }
