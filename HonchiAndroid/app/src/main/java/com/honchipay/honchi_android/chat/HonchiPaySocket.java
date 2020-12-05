@@ -2,11 +2,16 @@ package com.honchipay.honchi_android.chat;
 
 import android.util.Log;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import com.honchipay.honchi_android.chat.model.socket.ChangeTitleRequest;
 import com.honchipay.honchi_android.chat.model.socket.GetPriceRequest;
 import com.honchipay.honchi_android.chat.model.socket.ImageRequest;
 import com.honchipay.honchi_android.chat.model.socket.MessageRequest;
 import com.honchipay.honchi_android.util.SharedPreferencesManager;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.net.URISyntaxException;
 
@@ -66,29 +71,57 @@ public class HonchiPaySocket {
 
     public void changeRoomTitle(ChangeTitleRequest changeTitleRequest) {
         if (isConnected) {
-            socket.emit("changeTitle", changeTitleRequest);
-            printLog("changeRoomTitle");
+            try {
+                String json = new Gson().toJson(changeTitleRequest);
+                printLog(json);
+                JSONObject obj = new JSONObject(json);
+                socket.emit("changeTitle", obj);
+                printLog("changeRoomTitle");
+            } catch (JSONException e) {
+                printLog(e.getMessage());
+            }
         }
     }
 
     public void sendMessage(MessageRequest messageRequest) {
         if (isConnected) {
-            socket.emit("sendMessage", messageRequest);
-            printLog("sendMessage");
+            try {
+                String json = new Gson().toJson(messageRequest);
+                printLog(json);
+                JSONObject obj = new JSONObject(json);
+                socket.emit("sendMessage", obj);
+                printLog("sendMessage");
+            } catch (JSONException e) {
+                printLog(e.getMessage());
+            }
         }
     }
 
     public void sendImage(ImageRequest imageRequest) {
         if (isConnected) {
-            socket.emit("sendImage", imageRequest);
-            printLog("sendImage");
+            try {
+                String json = new Gson().toJson(imageRequest);
+                printLog(json);
+                JSONObject obj = new JSONObject(json);
+                socket.emit("sendImage", obj);
+                printLog("sendImage");
+            } catch (JSONException e) {
+                printLog(e.getMessage());
+            }
         }
     }
 
     public void getPrice(GetPriceRequest getPriceRequest) {
         if (isConnected) {
-            socket.emit("getPrice", getPriceRequest);
-            printLog("getPrice");
+            try {
+                String json = new Gson().toJson(getPriceRequest);
+                printLog(json);
+                JSONObject obj = new JSONObject(json);
+                socket.emit("getPrice", obj);
+                printLog("getPrice");
+            } catch (JSONException e) {
+                printLog(e.getMessage());
+            }
         }
     }
 

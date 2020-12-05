@@ -8,12 +8,4 @@ public class ChangeTitleRequest {
         this.chatId = chatId;
         this.title = title;
     }
-
-    public String getChatId() {
-        return chatId;
-    }
-
-    public String getTitle() {
-        return title;
-    }
 }

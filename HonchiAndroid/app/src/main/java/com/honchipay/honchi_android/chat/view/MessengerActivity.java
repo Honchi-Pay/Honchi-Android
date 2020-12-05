@@ -87,7 +87,10 @@ public class MessengerActivity extends AppCompatActivity {
         findViewById(R.id.messenger_sendMessage_imageView).setOnClickListener(v -> {
             String text = binding.messengerInputMessageEditText.getText().toString();
             binding.messengerInputMessageEditText.setText("");
-            HonchiPaySocket.getInstance().sendMessage(new MessageRequest(chatRoomData.getChatId(), text));
+            MessageRequest messageRequest = new MessageRequest();
+            messageRequest.setChatId(chatRoomData.getChatId());
+            messageRequest.setMessage(text);
+            HonchiPaySocket.getInstance().sendMessage(messageRequest);
         });
     }
 

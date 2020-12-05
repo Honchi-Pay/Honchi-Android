@@ -8,12 +8,4 @@ public class GetPriceRequest {
         this.chatId = chatId;
         this.price = price;
     }
-
-    public String getChatId() {
-        return chatId;
-    }
-
-    public Integer getPrice() {
-        return price;
-    }
 }

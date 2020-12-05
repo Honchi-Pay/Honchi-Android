@@ -1,5 +1,6 @@
 package com.honchipay.honchi_android.chat.view;
 
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -60,16 +61,20 @@ class ChatBubbleViewHolder extends RecyclerView.ViewHolder {
 
     private void setTextViewInRightBubble(MessageResponse messageResponse) {
         setMessageByIsDelete(messageResponse.isDelete(), messageResponse.getMessage(), R.id.right_bubble_message_textView);
+        String time = messageResponse.getTime().get(0).toString() + "/" + messageResponse.getTime().get(1).toString() + "/" + messageResponse.getTime().get(2).toString() + "/"
+                + messageResponse.getTime().get(3).toString() + ":" + messageResponse.getTime().get(4).toString();
         ((TextView) linearLayout.findViewById(R.id.right_bubble_userName_textView)).setText(messageResponse.getNickName());
-        ((TextView) linearLayout.findViewById(R.id.right_bubble_time_textView)).setText(messageResponse.getTime().toString());
-        ((TextView) linearLayout.findViewById(R.id.right_bubble_readCount_textView)).setText(messageResponse.getReadCount());
+        ((TextView) linearLayout.findViewById(R.id.right_bubble_time_textView)).setText(time);
+        ((TextView) linearLayout.findViewById(R.id.right_bubble_readCount_textView)).setText(Integer.toString(messageResponse.getReadCount()));
     }
 
     private void setTextViewInLeftBubble(MessageResponse messageResponse) {
         setMessageByIsDelete(messageResponse.isDelete(), messageResponse.getMessage(), R.id.left_bubble_message_textView);
+        String time = messageResponse.getTime().get(0).toString() + "/" + messageResponse.getTime().get(1).toString() + "/" + messageResponse.getTime().get(2).toString() + "/"
+                + messageResponse.getTime().get(3).toString() + ":" + messageResponse.getTime().get(4).toString();
         ((TextView) linearLayout.findViewById(R.id.left_bubble_userName_textView)).setText(messageResponse.getNickName());
-        ((TextView) linearLayout.findViewById(R.id.left_bubble_time_textView)).setText(messageResponse.getTime().toString());
-        ((TextView) linearLayout.findViewById(R.id.left_bubble_readCount_textView)).setText(messageResponse.getReadCount());
+        ((TextView) linearLayout.findViewById(R.id.left_bubble_time_textView)).setText(time);
+        ((TextView) linearLayout.findViewById(R.id.left_bubble_readCount_textView)).setText(Integer.toString(messageResponse.getReadCount()));
     }
 
     private void setMessageByIsDelete(boolean isDelete, String message, int bubbleMessageTextViewResourceId) {

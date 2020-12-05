@@ -8,12 +8,4 @@ public class ImageRequest {
         this.chatId = chatId;
         this.messageId = messageId;
     }
-
-    public String getChatId() {
-        return chatId;
-    }
-
-    public Integer getMessageId() {
-        return messageId;
-    }
 }

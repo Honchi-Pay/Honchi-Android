@@ -1,6 +1,5 @@
 package com.honchipay.honchi_android.chat.view;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -12,6 +11,7 @@ import com.honchipay.honchi_android.chat.model.MessageResponse;
 import com.honchipay.honchi_android.chat.viewModel.ChatViewModel;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class ChatBubbleAdapter extends RecyclerView.Adapter<ChatBubbleViewHolder> {
@@ -36,11 +36,13 @@ public class ChatBubbleAdapter extends RecyclerView.Adapter<ChatBubbleViewHolder
         switch (messageResponse.getMessageType()) {
             case MESSAGE:
                 holder.makeTextView(messageResponse);
-                holder.setLongClickOnView(chatViewModel, messageResponse.getId());
+                if (messageResponse.isDelete())
+                    holder.setLongClickOnView(chatViewModel, messageResponse.getId());
                 break;
             case IMAGE:
                 holder.makeImageView(messageResponse);
-                holder.setLongClickOnView(chatViewModel, messageResponse.getId());
+                if (messageResponse.isDelete())
+                    holder.setLongClickOnView(chatViewModel, messageResponse.getId());
                 break;
             case INFO:
                 holder.showInformation(messageResponse.getNickName() + messageResponse.getMessage());
@@ -55,6 +57,7 @@ public class ChatBubbleAdapter extends RecyclerView.Adapter<ChatBubbleViewHolder
 
     public void setAllMessages(List<MessageResponse> messages) {
         chattingContentList.clear();
+        Collections.reverse(messages);
         chattingContentList.addAll(messages);
         notifyDataSetChanged();
     }
