@@ -10,8 +10,8 @@ public class MessageResponse {
     private MessageType messageType;
     private Integer readCount;
     private ArrayList<Integer> time;
-    private boolean isDelete;
-    private boolean isMine;
+    private boolean mine;
+    private boolean delete;
 
     public Integer getId() {
         return id;
@@ -62,22 +62,22 @@ public class MessageResponse {
     }
 
     public boolean isDelete() {
-        return isDelete;
+        return delete;
     }
 
     public void setDelete(boolean delete) {
-        isDelete = delete;
+        this.delete = delete;
     }
 
     public boolean isMine() {
-        return isMine;
+        return mine;
     }
 
     public void setMine(boolean mine) {
-        isMine = mine;
+        this.mine = mine;
     }
 
-    public Integer getReadCount() {
+    public int getReadCount() {
         return readCount;
     }
 
