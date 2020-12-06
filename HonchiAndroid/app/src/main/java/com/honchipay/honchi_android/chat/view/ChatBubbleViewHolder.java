@@ -1,6 +1,5 @@
 package com.honchipay.honchi_android.chat.view;
 
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -65,7 +64,9 @@ class ChatBubbleViewHolder extends RecyclerView.ViewHolder {
                 + messageResponse.getTime().get(3).toString() + ":" + messageResponse.getTime().get(4).toString();
         ((TextView) linearLayout.findViewById(R.id.right_bubble_userName_textView)).setText(messageResponse.getNickName());
         ((TextView) linearLayout.findViewById(R.id.right_bubble_time_textView)).setText(time);
-        ((TextView) linearLayout.findViewById(R.id.right_bubble_readCount_textView)).setText(Integer.toString(messageResponse.getReadCount()));
+        int readCount = messageResponse.getReadCount() - 1;
+        if (readCount < 0) readCount = 0;
+        ((TextView) linearLayout.findViewById(R.id.right_bubble_readCount_textView)).setText(Integer.toString(readCount));
     }
 
     private void setTextViewInLeftBubble(MessageResponse messageResponse) {
@@ -74,7 +75,9 @@ class ChatBubbleViewHolder extends RecyclerView.ViewHolder {
                 + messageResponse.getTime().get(3).toString() + ":" + messageResponse.getTime().get(4).toString();
         ((TextView) linearLayout.findViewById(R.id.left_bubble_userName_textView)).setText(messageResponse.getNickName());
         ((TextView) linearLayout.findViewById(R.id.left_bubble_time_textView)).setText(time);
-        ((TextView) linearLayout.findViewById(R.id.left_bubble_readCount_textView)).setText(Integer.toString(messageResponse.getReadCount()));
+        int readCount = messageResponse.getReadCount() - 1;
+        if (readCount < 0) readCount = 0;
+        ((TextView) linearLayout.findViewById(R.id.left_bubble_readCount_textView)).setText(Integer.toString(readCount));
     }
 
     private void setMessageByIsDelete(boolean isDelete, String message, int bubbleMessageTextViewResourceId) {
