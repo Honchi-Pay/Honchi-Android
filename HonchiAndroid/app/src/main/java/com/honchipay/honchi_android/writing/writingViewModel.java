@@ -11,13 +11,22 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.observers.DisposableSingleObserver;
 import io.reactivex.schedulers.Schedulers;
+import okhttp3.MultipartBody;
 import retrofit2.Response;
 
 public class writingViewModel extends BaseViewModel {
     private final writingRepository repository = new writingRepository();
 
-    public void writing(HashMap hashMap){
-        addDisposable(repository.writing(hashMap).
+    public void writing(
+            MultipartBody.Part titlePart,
+            MultipartBody.Part contentPart,
+            MultipartBody.Part imagesPart,
+            MultipartBody.Part categoryPart,
+            MultipartBody.Part itemPart,
+            MultipartBody.Part latPart,
+            MultipartBody.Part lonPart
+    ){
+        addDisposable(repository.writing(titlePart,contentPart,imagesPart,categoryPart,itemPart,latPart,lonPart).
                 subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(new DisposableSingleObserver<Response<Void>>(){

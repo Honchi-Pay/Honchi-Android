@@ -1,9 +1,8 @@
 package com.honchipay.honchi_android.home.Ui;
 
 import android.content.Intent;
-import android.util.Log;
-import android.view.View;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -13,34 +12,27 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.honchipay.honchi_android.R;
-import com.honchipay.honchi_android.home.Data.OnPostClickListener;
-import com.honchipay.honchi_android.home.Data.newPost;
+import com.honchipay.honchi_android.home.Data.getPost;
 
 import java.util.ArrayList;
-import java.util.List;
 
-public class postAdapter extends RecyclerView.Adapter<postAdapter.ViewHolder>{
-    ArrayList<newPost> items = new ArrayList<newPost>();
-    OnPostClickListener listener;
+public class postByCategoryAdapter extends RecyclerView.Adapter<postByCategoryAdapter.ViewHolder> {
+    ArrayList<getPost> items = new ArrayList<getPost>();
 
-    public void notifyDataChanged(List<newPost> postList){
-        items.addAll(postList);
-        Log.e("homeFragment",items.toString());
-        notifyDataSetChanged();
-    }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View itemView = inflater.inflate(R.layout.item_post,parent, false);
+        View itemView = inflater.inflate(R.layout.item_post, parent, false);
 
-        return new ViewHolder(itemView, this);
+        return new ViewHolder(itemView);
     }
 
+
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        newPost post = items.get(position);
+    public void onBindViewHolder(@NonNull postByCategoryAdapter.ViewHolder holder, int position) {
+        getPost post = items.get(position);
         holder.setItem(post);
     }
 
@@ -55,9 +47,8 @@ public class postAdapter extends RecyclerView.Adapter<postAdapter.ViewHolder>{
         TextView user_textView;
         TextView location_textView;
         TextView date_textView;
-        TextView category_textView;
 
-        public ViewHolder(@NonNull View itemView, postAdapter postAdapter) {
+        public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
             image_imageView = itemView.findViewById(R.id.post_image_imageView);
@@ -65,30 +56,24 @@ public class postAdapter extends RecyclerView.Adapter<postAdapter.ViewHolder>{
             user_textView = itemView.findViewById(R.id.post_user_textView);
             location_textView = itemView.findViewById(R.id.post_location_textView);
             date_textView = itemView.findViewById(R.id.post_date_textView);
-            category_textView = itemView.findViewById(R.id.post_category_button);
-
         }
 
-        public void setItem(newPost item) {
+        public void setItem(getPost item) {
             Glide.with(itemView.getContext()).load(item.getImage()).into(image_imageView);
             title_textView.setText(item.getTitle());
             user_textView.setText(item.getWriter());
             location_textView.setText(item.getAddress());
-            date_textView.setText(item.getCreatedAt().toString());
-            category_textView.setText(item.getItem());
+            date_textView.setText(item.getCreateAt());
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (listener != null) {
-                        Intent intent= new Intent(v.getContext(),detailPostFragment.class);
-                        intent.putExtra("position",item.getPostId());
-                        v.getContext().startActivity(intent);
-                    }
+                    Intent intent = new Intent(v.getContext(), detailPostFragment.class);
+                    intent.putExtra("position", item.getPostId());
+                    v.getContext().startActivity(intent);
                 }
             });
 
         }
     }
-
 }

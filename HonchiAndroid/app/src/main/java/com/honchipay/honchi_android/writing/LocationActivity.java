@@ -48,7 +48,7 @@ public class LocationActivity extends AppCompatActivity implements OnMapReadyCal
                 Intent intent = new Intent();
                 intent.putExtra("위도",latitude);
                 intent.putExtra("경도",longitude);
-                setResult(RESULT_OK, intent);
+                setResult(200, intent);
                 finish();
             }
         });

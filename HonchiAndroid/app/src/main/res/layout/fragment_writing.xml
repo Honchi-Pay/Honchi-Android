@@ -124,9 +124,12 @@
 
         <Button
             android:id="@+id/sendBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="보내기"
+            android:layout_width="match_parent"
+            android:background="@drawable/writing_button"
+            android:layout_height="40dp"
+            android:text="작성완료"
+            android:textSize="16sp"
+            android:textColor="@color/white"
             app:layout_constraintTop_toBottomOf="@id/writing_content_editText"
             app:layout_constraintLeft_toLeftOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>

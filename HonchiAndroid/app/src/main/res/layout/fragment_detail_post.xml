@@ -1,164 +1,147 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".home.Ui.detailPostFragment">
+<layout>
 
-    <ImageView
-        android:id="@+id/detail_image_imageView"
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_marginTop="15dp"
-        app:srcCompat="@drawable/splash_honchipay" />
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".home.Ui.detailPostFragment">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/detail_layout"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginTop="20dp"
-        android:layout_weight="1"
-        android:paddingLeft="20dp"
-        android:paddingTop="15dp"
-        android:paddingRight="20dp">
-
-        <TextView
-            android:id="@+id/detail_title_textView"
+        <ImageView
+            android:id="@+id/detail_image_imageView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="뿌링클 같이 먹을 쉐끼"
-            android:textSize="15sp"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="@id/detail_layout" />
+            android:layout_height="200dp"
+            android:layout_marginTop="15dp"
+            app:srcCompat="@drawable/splash_honchipay" />
 
-        <TextView
-            android:id="@+id/detail_people_textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/detail_layout"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
             android:layout_marginTop="20dp"
-            android:drawableLeft="@drawable/icno_detail_profile"
-            android:text=" 이마크"
-            android:textSize="12sp"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/detail_title_textView" />
+            android:layout_weight="1"
+            android:paddingLeft="20dp"
+            android:paddingTop="15dp"
+            android:paddingRight="20dp">
 
-        <TextView
-            android:id="@+id/detail_location_textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="20dp"
-            android:drawableLeft="@drawable/icon_detail_location"
-            android:text=" 대덕소프트웨어마이스터고"
-            android:textSize="12sp"
-            app:layout_constraintLeft_toRightOf="@id/detail_people_textView"
-            app:layout_constraintTop_toBottomOf="@id/detail_title_textView" />
+            <TextView
+                android:id="@+id/detail_title_textView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="뿌링클 같이 먹을 쉐끼"
+                android:textSize="15sp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="@id/detail_layout" />
 
-        <Button
-            android:id="@+id/detail_category_button"
-            android:layout_width="50dp"
-            android:layout_height="35dp"
-            android:layout_marginTop="30dp"
-            android:backgroundTint="@color/colorAccent"
-            android:text="@string/chicken"
-            android:textColor="@color/white"
-            android:textSize="10sp"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            <TextView
+                android:id="@+id/detail_people_textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:drawableLeft="@drawable/icno_detail_profile"
+                android:text=" 이마크"
+                android:textSize="12sp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/detail_title_textView" />
 
-        <View
-            android:id="@+id/detail_view"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="15dp"
-            android:background="@color/detail_gray"
-            app:layout_constraintTop_toBottomOf="@id/detail_location_textView" />
+            <TextView
+                android:id="@+id/detail_location_textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="20dp"
+                android:drawableLeft="@drawable/icon_detail_location"
+                android:text=" 대덕소프트웨어마이스터고"
+                android:textSize="12sp"
+                app:layout_constraintLeft_toRightOf="@id/detail_people_textView"
+                app:layout_constraintTop_toBottomOf="@id/detail_title_textView" />
 
-        <TextView
-            android:id="@+id/detail_content_textView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="25dp"
-            android:layout_marginRight="10dp"
-            android:text="testtesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttest"
-            android:textSize="12sp"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/detail_view" />
+            <View
+                android:id="@+id/detail_view"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="15dp"
+                android:background="@color/detail_gray"
+                app:layout_constraintTop_toBottomOf="@id/detail_location_textView" />
 
-        <TextView
-            android:id="@+id/detail_date_textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="270dp"
-            android:layout_marginTop="15dp"
-            android:text="2020.11.18"
-            android:textSize="10sp"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/detail_content_textView" />
+            <TextView
+                android:id="@+id/detail_content_textView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="25dp"
+                android:layout_marginRight="10dp"
+                android:text="testtesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttest"
+                android:textSize="12sp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/detail_view" />
 
-        <TextView
-            android:id="@+id/detail_time_textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="15dp"
-            android:text="12:12"
-            android:textSize="10sp"
-            app:layout_constraintLeft_toRightOf="@id/detail_date_textView"
-            app:layout_constraintTop_toBottomOf="@id/detail_content_textView" />
+            <TextView
+                android:id="@+id/detail_date_textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="310dp"
+                android:layout_marginTop="15dp"
+                android:text="2020.11.18"
+                android:textSize="10sp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/detail_content_textView" />
 
-        <View
-            android:id="@+id/detail_view2"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="15dp"
-            android:background="@color/detail_gray"
-            app:layout_constraintTop_toBottomOf="@id/detail_time_textView" />
 
-        <ImageButton
-            android:id="@+id/detail_message_button"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginTop="10dp"
-            android:visibility="invisible"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/detail_view2"
-            tools:src="@drawable/icon_detail_message" />
+            <View
+                android:id="@+id/detail_view2"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="15dp"
+                android:background="@color/detail_gray"
+                app:layout_constraintTop_toBottomOf="@id/detail_date_textView" />
 
-        <Button
-            android:id="@+id/detail_modify_button"
-            android:layout_width="70dp"
-            android:layout_height="40dp"
-            android:layout_marginTop="15dp"
-            android:text="@string/modify"
-            android:textSize="12sp"
-            android:visibility="invisible"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/detail_view2" />
+            <ImageButton
+                android:id="@+id/detail_message_button"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="10dp"
+                android:visibility="invisible"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/detail_view2"
+                tools:src="@drawable/icon_detail_message" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/detail_attendPeople_recyclerView"
-            android:layout_width="match_parent"
-            android:layout_height="70dp"
-            android:layout_marginTop="30dp"
-            android:visibility="invisible"
-            app:layout_constraintTop_toBottomOf="@id/detail_view2" />
+            <Button
+                android:id="@+id/detail_modify_button"
+                android:layout_width="70dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="15dp"
+                android:text="@string/modify"
+                android:textSize="12sp"
+                android:visibility="invisible"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/detail_view2" />
 
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="50dp"
-            android:background="@drawable/detaiil_roundbutton"
-            android:backgroundTint="@color/colorAccent"
-            android:text="@string/buy_together"
-            android:textColor="@color/white"
-            android:textSize="14sp"
-            app:layout_constraintBottom_toBottomOf="parent" />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/detail_attendPeople_recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:layout_marginTop="30dp"
+                android:visibility="invisible"
+                app:layout_constraintTop_toBottomOf="@id/detail_view2" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</LinearLayout>
+            <Button
+                android:id="@+id/detail_attend_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="50dp"
+                android:background="@drawable/detaiil_roundbutton"
+                android:backgroundTint="@color/colorAccent"
+                android:text="@string/buy_together"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
+</layout>

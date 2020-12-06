@@ -42,7 +42,7 @@ public class writingFragment extends Fragment {
     File imageFile;
     int latitude;
     int longitude;
-    private writingViewModel viewModel = new writingViewModel();
+    private final writingViewModel viewModel = new writingViewModel();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -116,58 +116,54 @@ public class writingFragment extends Fragment {
 
 
     private void writing() {
-        String getTitle = binding.writingTitleEditText.toString();
-        String getContent = binding.writingContentEditText.toString();
-        HashMap hashMap = new HashMap<String, RequestBody>();
+        String getTitle = binding.writingTitleEditText.getText().toString();
+        String getContent = binding.writingContentEditText.getText().toString();
+        RequestBody requestImage = RequestBody.create(MediaType.parse("image"),imageFile);
 
-        RequestBody requestimage = RequestBody.create(MediaType.parse("image"),imageFile);
+        Log.e("writingFragment","title"+getTitle);
+        Log.e("writingFragment","content"+getContent);
+        Log.e("writingFragment","images"+requestImage);
+        Log.e("writingFragment","category"+setCategory);
+        Log.e("writingFragment","test");
+        Log.e("writingFragment", String.valueOf(latitude));
+        Log.e("writingFragment", String.valueOf(longitude));
 
-        MultipartBody.Part title = MultipartBody.Part.createFormData(
+        MultipartBody.Part titlePart = MultipartBody.Part.createFormData(
                 "title",
                 getTitle
         );
 
-        MultipartBody.Part content = MultipartBody.Part.createFormData(
+        MultipartBody.Part contentPart = MultipartBody.Part.createFormData(
                 "content",
                 getContent
         );
 
-        MultipartBody.Part category = MultipartBody.Part.createFormData(
+        MultipartBody.Part categoryPart = MultipartBody.Part.createFormData(
                 "category",
                 setCategory
         );
 
-        MultipartBody.Part item = MultipartBody.Part.createFormData(
+        MultipartBody.Part itemPart = MultipartBody.Part.createFormData(
                 "item",
                 "CHICKEN"
         );
 
-        MultipartBody.Part lat = MultipartBody.Part.createFormData(
+        MultipartBody.Part latPart = MultipartBody.Part.createFormData(
                 "lat",
                 String.valueOf(latitude)
         );
 
-        MultipartBody.Part lon = MultipartBody.Part.createFormData(
+        MultipartBody.Part lonPart = MultipartBody.Part.createFormData(
                 "lon",
                 String.valueOf(longitude)
         );
 
-        MultipartBody.Part image = MultipartBody.Part.createFormData(
+        MultipartBody.Part imagePart = MultipartBody.Part.createFormData(
                 "images",
-                String.valueOf(requestimage)
+                String.valueOf(requestImage)
         );
 
-        hashMap.put("title",title);
-        hashMap.put("content",content);
-        hashMap.put("category",category);
-        hashMap.put("item",item);
-        hashMap.put("images",image);
-        hashMap.put("lat",lat);
-        hashMap.put("lon",lon);
-
-        Log.e("writingActivity",hashMap.toString());
-
-        viewModel.writing(hashMap);
+        viewModel.writing(titlePart,contentPart,imagePart,categoryPart,itemPart,latPart,lonPart);
     }
 
 

@@ -1,28 +1,32 @@
 package com.honchipay.honchi_android.home.Data;
 
-import com.google.android.gms.common.api.Result;
+import java.util.ArrayList;
 
 public class newPost {
-
     int postId;
     String title;
     String writer;
     String item;
-    Double lat;
-    Double lon;
     String image;
-    String createdAt;
+    String address;
+    ArrayList<Integer> createdAt;
 
-
-    public newPost(int postId, String title, String writer, String item, Double lat, Double lon, String createdAt, String image) {
+    public newPost(int postId, String title, String writer, String item, String image, String address, ArrayList<Integer> createdAt) {
         this.postId = postId;
         this.title = title;
         this.writer = writer;
         this.item = item;
-        this.lat = lat;
-        this.lon = lon;
-        this.createdAt = createdAt;
         this.image = image;
+        this.address = address;
+        this.createdAt = createdAt;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public int getPostId() {
@@ -57,27 +61,11 @@ public class newPost {
         this.item = item;
     }
 
-    public Double getLat() {
-        return lat;
-    }
-
-    public void setLat(Double lat) {
-        this.lat = lat;
-    }
-
-    public Double getLon() {
-        return lon;
-    }
-
-    public void setLon(Double lon) {
-        this.lon = lon;
-    }
-
-    public String getCreatedAt() {
+    public ArrayList<Integer> getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(String createdAt) {
+    public void setCreatedAt(ArrayList<Integer> createdAt) {
         this.createdAt = createdAt;
     }
 

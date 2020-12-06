@@ -6,13 +6,23 @@ public class getPost {
     String writer;
     String image;
     String createAt;
+    String address;
 
-    public getPost(int postId, String title, String writer, String image, String createAt) {
+    public getPost(int postId, String title, String writer, String image, String createAt, String address) {
         this.postId = postId;
         this.title = title;
         this.writer = writer;
         this.image = image;
         this.createAt = createAt;
+        this.address = address;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public int getPostId() {
