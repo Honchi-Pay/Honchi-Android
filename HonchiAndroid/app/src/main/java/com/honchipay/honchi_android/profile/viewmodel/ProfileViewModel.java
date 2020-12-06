@@ -1,79 +1,60 @@
 package com.honchipay.honchi_android.profile.viewmodel;
 
 import android.util.Log;
-import android.widget.ImageView;
 
-import androidx.databinding.BindingAdapter;
 import androidx.lifecycle.MutableLiveData;
 
-import com.bumptech.glide.Glide;
 import com.honchipay.honchi_android.base.BaseViewModel;
 import com.honchipay.honchi_android.profile.data.ProfileRepository;
 import com.honchipay.honchi_android.profile.data.UserProfileResponse;
+import com.honchipay.honchi_android.util.CustomDisposableSingleObserver;
 
 import org.jetbrains.annotations.NotNull;
 
-import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.observers.DisposableSingleObserver;
-import io.reactivex.schedulers.Schedulers;
 import retrofit2.Response;
 
 public class ProfileViewModel extends BaseViewModel {
+    private final String TAG = ProfileViewModel.class.getSimpleName();
     private final ProfileRepository repository = new ProfileRepository();
     public MutableLiveData<UserProfileResponse> profileLiveData = new MutableLiveData<>();
     public MutableLiveData<Boolean> signOutLiveData = new MutableLiveData<>();
     public MutableLiveData<Boolean> successStarLiveData = new MutableLiveData<>();
+    private int id = 0;
 
     public void getProfile(String name) {
-        addDisposable(repository.getUserProfile(name)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeWith(new DisposableSingleObserver<Response<UserProfileResponse>>() {
+        DisposableSingleObserver<Response<UserProfileResponse>> userProfileResponseObserver =
+                new CustomDisposableSingleObserver<Response<UserProfileResponse>>(TAG) {
                     @Override
                     public void onSuccess(@NonNull Response<UserProfileResponse> profileResponseResponse) {
                         if (profileResponseResponse.isSuccessful() && profileResponseResponse.code() == 200) {
+                            id = profileResponseResponse.body().getUserId();
                             profileLiveData.postValue(profileResponseResponse.body());
                         }
                     }
+                };
 
-                    @Override
-                    public void onError(@NotNull Throwable e) {
-                        Log.e("ProfileViewModel", e.getMessage());
-                    }
-                })
-        );
+        addDisposable(repository.getUserProfile(name, userProfileResponseObserver));
     }
 
-    public void setUserRating(int userId, int rating) {
-        addDisposable(repository.sendUserEvaluation(userId, rating)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeWith(new DisposableSingleObserver<Response<Void>>() {
+    public void setUserRating(int rating) {
+        DisposableSingleObserver<Response<Void>> userRatingObserver =
+                new CustomDisposableSingleObserver<Response<Void>>(TAG) {
                     @Override
                     public void onSuccess(@NonNull Response<Void> ratingResponse) {
                         if (ratingResponse.isSuccessful() && ratingResponse.code() == 200) {
                             successStarLiveData.postValue(true);
                         }
                     }
+                };
 
-                    @Override
-                    public void onError(@NotNull Throwable e) {
-                        Log.e("ProfileViewModel", e.getMessage());
-                    }
-                })
-        );
-    }
-
-    public void signOutFromLogin() {
-        signOutLiveData.setValue(true);
+        addDisposable(repository.sendUserEvaluation(id, rating, userRatingObserver));
     }
 
     public void signOutFromService() {
-        addDisposable(repository.withdrawFromService()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeWith(new DisposableSingleObserver<Response<Void>>() {
+        DisposableSingleObserver<Response<Void>> signOutServiceObserver =
+                new CustomDisposableSingleObserver<Response<Void>>(TAG) {
                     @Override
                     public void onSuccess(@NonNull Response<Void> deleteUserResponse) {
                         signOutLiveData.postValue(deleteUserResponse.isSuccessful() && deleteUserResponse.code() == 200);
@@ -81,10 +62,15 @@ public class ProfileViewModel extends BaseViewModel {
 
                     @Override
                     public void onError(@NotNull Throwable e) {
-                        Log.e("ProfileViewModel", e.getMessage());
+                        Log.e(TAG, e.getMessage());
                         signOutLiveData.postValue(false);
                     }
-                })
-        );
+                };
+
+        addDisposable(repository.withdrawFromService(signOutServiceObserver));
+    }
+
+    public void signOutFromLogin() {
+        signOutLiveData.setValue(true);
     }
 }

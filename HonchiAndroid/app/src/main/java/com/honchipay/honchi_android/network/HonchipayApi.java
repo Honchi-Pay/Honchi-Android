@@ -3,9 +3,10 @@ package com.honchipay.honchi_android.network;
 import com.honchipay.honchi_android.home.Data.detailPost;
 import com.honchipay.honchi_android.home.Data.getPost;
 import com.honchipay.honchi_android.home.Data.newPost;
+import com.honchipay.honchi_android.chat.model.ChatRoomItem;
 import com.honchipay.honchi_android.profile.data.UserProfileResponse;
-import com.honchipay.honchi_android.sign.Data.SignUpRequest;
-import com.honchipay.honchi_android.sign.Data.TokenResponseData;
+import com.honchipay.honchi_android.sign.data.SignUpRequest;
+import com.honchipay.honchi_android.sign.data.TokenResponseData;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -118,4 +119,9 @@ public interface HonchipayApi {
             @Path("postID") int postID
     );
 
+    @GET("/chat")
+    Single<Response<List<ChatRoomItem>>> getChatRooms(@Header("Authorization") String header);
+
+    @PUT("/chat")
+    Single<Response<Void>> updateChatRoomTitle(@Field("") String title);
 }

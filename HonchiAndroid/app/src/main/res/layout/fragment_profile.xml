@@ -190,7 +190,7 @@
                 android:layout_height="50dp"
                 android:background="@color/white"
                 android:gravity="center_vertical"
-                android:onClick='@{()->profileFragment.showLogOutDialog()}'
+                android:onClick='@{()->profileFragment.showDialog(@string/logout_message)}'
                 android:orientation="horizontal"
                 app:layout_constraintBottom_toTopOf="@+id/profile_withdraw_layout"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -229,7 +229,7 @@
                 android:layout_height="50dp"
                 android:background="@color/white"
                 android:gravity="center_vertical"
-                android:onClick='@{()->profileFragment.showSignOutDialog()}'
+                android:onClick='@{()->profileFragment.showDialog(@string/sign_out_message)}'
                 android:orientation="horizontal"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

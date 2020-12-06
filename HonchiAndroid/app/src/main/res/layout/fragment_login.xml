@@ -2,23 +2,18 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".sign.Fragment.LoginFragment">
+    tools:context=".sign.fragment.LoginFragment">
+
+    <data>
+
+        <variable
+            name="loginViewModel"
+            type="com.honchipay.honchi_android.sign.viewModel.LoginViewModel" />
+    </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
-        <ImageButton
-            android:id="@+id/login_back_button"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:layout_marginStart="22dp"
-            android:layout_marginTop="6dp"
-            android:background="@android:color/transparent"
-            android:src="@drawable/ic_round_arrow_back_ios_24"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="ContentDescription" />
 
         <TextView
             android:id="@+id/login_title_textView"
@@ -32,7 +27,7 @@
             android:textColor="@color/black"
             android:textSize="24sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/login_back_button" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/login_id_textView"
@@ -62,6 +57,7 @@
             android:inputType="textPersonName"
             android:paddingStart="10dp"
             android:paddingEnd="0dp"
+            android:text="@={loginViewModel.inputUserId}"
             android:textSize="12sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -94,6 +90,7 @@
             android:inputType="textPassword"
             android:paddingStart="10dp"
             android:paddingEnd="0dp"
+            android:text="@={loginViewModel.inputUserPW}"
             android:textSize="12sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

@@ -13,4 +13,6 @@
     <color name="detail_gray">#404040</color>
     <color name="writing_gray">#EBEBEB</color>
     <color name="post_gray">#6B6B6B</color>
+    <color name="mainColor">#79A5DF</color>
+    <color name="brightGray">#E4E4E4</color>
 </resources>

@@ -21,6 +21,12 @@
         android:usesCleartextTraffic="true">
         <activity android:name=".writing.LocationActivity"/>
         <activity android:name=".home.Ui.homeActivity">
+        <activity
+            android:name=".chat.view.MessengerActivity"
+            android:windowSoftInputMode="adjustUnspecified|adjustPan" />
+        <activity
+          android:name=".splash.SplashActivity"
+          android:theme="@style/FullScreenTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -1,4 +1,4 @@
-package com.honchipay.honchi_android.sign.Data;
+package com.honchipay.honchi_android.sign.data;
 
 public class TokenResponseData {
     private String accessToken;
