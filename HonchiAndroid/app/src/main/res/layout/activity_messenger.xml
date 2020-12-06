@@ -57,7 +57,6 @@
                         android:hint="@string/room_title"
                         android:importantForAutofill="no"
                         android:inputType="text"
-                        android:text="@={chatViewModel.roomTitle}"
                         android:textAlignment="center"
                         android:textColor="@android:color/black"
                         android:textSize="18sp" />

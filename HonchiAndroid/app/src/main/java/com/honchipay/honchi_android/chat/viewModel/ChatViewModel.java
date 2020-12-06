@@ -22,7 +22,6 @@ import retrofit2.Response;
 public class ChatViewModel extends BaseViewModel {
     private final String TAG = ChatViewModel.class.getSimpleName();
     private final ChatRepository repository = new ChatRepository();
-    public final ObservableField<String> roomTitle = new ObservableField<>();
     public final MutableLiveData<List<ChatRoomItem>> chatRoomListLiveData = new MutableLiveData<>();
     public final MutableLiveData<List<MessageResponse>> messageListLiveData = new MutableLiveData<>();
     private String roomId;
@@ -31,24 +30,15 @@ public class ChatViewModel extends BaseViewModel {
         this.roomId = roomId;
     }
 
-    public void setRoomTitleValidation(String preRoomTitle) {
-        roomTitle.addOnPropertyChangedCallback(new Observable.OnPropertyChangedCallback() {
-            @Override
-            public void onPropertyChanged(Observable sender, int propertyId) {
-                if (!Objects.requireNonNull(roomTitle.get()).equals("") && !Objects.requireNonNull(roomTitle.get()).equals(preRoomTitle)) {
-                    changeChatRoomTitle();
+    public void changeChatRoomTitle(String preRoomTitle, String title) {
+        if (!Objects.requireNonNull(title).equals("") && !Objects.requireNonNull(title).equals(preRoomTitle)) {
+            addDisposable(repository.changeRoomTitle(roomId, title, new CustomDisposableSingleObserver<Response<Void>>(TAG) {
+                @Override
+                public void onSuccess(@NonNull Response<Void> voidResponse) {
+                    HonchiPaySocket.getInstance().changeRoomTitle(new ChangeTitleRequest(roomId, title));
                 }
-            }
-        });
-    }
-
-    private void changeChatRoomTitle() {
-        addDisposable(repository.changeRoomTitle(roomId, roomTitle.get(), new CustomDisposableSingleObserver<Response<Void>>(TAG) {
-            @Override
-            public void onSuccess(@NonNull Response<Void> voidResponse) {
-                HonchiPaySocket.getInstance().changeRoomTitle(new ChangeTitleRequest(roomId, roomTitle.get()));
-            }
-        }));
+            }));
+        }
     }
 
     public void getParticipatingChatRooms() {

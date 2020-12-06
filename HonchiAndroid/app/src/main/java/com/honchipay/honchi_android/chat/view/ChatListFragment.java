@@ -39,8 +39,10 @@ public class ChatListFragment extends Fragment {
                 SharedPreferencesManager.getInstance().getUserName() + "님의 채팅방"
         ).build();
 
-        chatRoomsAdapter.addChatItem(chatRoomData);
-        HonchiPaySocket.getInstance().postId = null;
+        getActivity().runOnUiThread(() -> {
+            chatRoomsAdapter.addChatItem(chatRoomData);
+            HonchiPaySocket.getInstance().postId = null;
+        });
     };
 
     @Override
