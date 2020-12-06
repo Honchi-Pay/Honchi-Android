@@ -99,6 +99,20 @@ public class homeFragment extends Fragment {
             }
         });
 
+        binding.homeItButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Fragment fragment = new PostByCategoryFragment();
+                Bundle result = new Bundle();
+                result.putString("category","PRODUCT");
+                result.putString("item","IT_DIGITAL");
+                fragment.setArguments(result);
+
+                homeActivity activity = (homeActivity) getActivity();
+                activity.onFragmentChanged(fragment);
+            }
+        });
+
 
     }
 

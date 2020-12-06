@@ -70,7 +70,7 @@ public class postByCategoryAdapter extends RecyclerView.Adapter<postByCategoryAd
                 public void onClick(View v) {
                     Intent intent = new Intent(v.getContext(), detailPostFragment.class);
                     intent.putExtra("position", item.getPostId());
-                    v.getContext().startActivity(intent);
+                    itemView.getContext().startActivity(intent);
                 }
             });
 

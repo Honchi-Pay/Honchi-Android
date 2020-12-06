@@ -32,7 +32,6 @@
             android:theme="@style/FullScreenTheme"/>
         <activity android:name=".sign.SignActivity" />
         <activity android:name=".profile.view.EditPrivateInfoActivity" />
-
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/googleMapApi" />
