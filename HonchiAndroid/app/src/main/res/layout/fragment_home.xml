@@ -1,0 +1,387 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".home.Ui.homeFragment">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <Button
+                    android:id="@+id/home_search_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_marginLeft="350dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="15dp"
+                    android:background="@drawable/home_search_textview"
+                    android:gravity="right|center"
+                    android:paddingRight="15dp"
+                    android:text="@string/title"
+                    android:textColor="@color/black"
+                    android:textSize="12sp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <EditText
+                    android:id="@+id/home_search_editText"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginRight="60dp"
+                    android:background="@drawable/home_search_textview"
+                    android:backgroundTint="@color/white"
+                    android:drawableRight="@drawable/icon_profile"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="10dp"
+                    android:hint="@string/content_to_search"
+                    android:textColor="@color/black"
+                    android:textSize="12sp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+                
+                <LinearLayout
+                    android:id="@+id/home_food"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginLeft="20dp"
+                    app:layout_constraintTop_toBottomOf="@id/home_search_editText">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+                        <Button
+                            android:id="@+id/home_chicken_button"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/home_chicken" />
+                        <Button
+                            android:id="@+id/home_pizza_button"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/home_pizza" />
+                        <Button
+                            android:id="@+id/home_chinesefood_button"
+                            android:layout_width="80dp"
+                            android:layout_weight="1"
+                            android:layout_height="80dp"
+                            android:background="@drawable/home_chinesefood" />
+                        <Button
+                            android:id="@+id/home_jokbal_button"
+                            android:layout_width="80dp"
+                            android:layout_weight="1"
+                            android:layout_height="80dp"
+                            android:background="@drawable/home_jokbal" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="14sp"
+                            android:textColor="@color/black"
+                            android:layout_marginLeft="40dp"
+                            android:text="@string/chicken" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="14sp"
+                            android:layout_marginLeft="50dp"
+                            android:textColor="@color/black"
+                            android:text="@string/pizza_yangsik" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="14sp"
+                            android:layout_marginLeft="40dp"
+                            android:textColor="@color/black"
+                            android:text="@string/chinese_restaurant" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="14sp"
+                            android:layout_marginLeft="40dp"
+                            android:textColor="@color/black"
+                            android:text="@string/jokbal_bossam" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+                        <Button
+                            android:id="@+id/home_boonsik_button"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/home_boonsik" />
+                        <Button
+                            android:id="@+id/home_koreanfood_button"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/home_koreanfood" />
+                        <Button
+                            android:id="@+id/home_yasik_button"
+                            android:layout_width="80dp"
+                            android:layout_weight="1"
+                            android:layout_height="80dp"
+                            android:background="@drawable/home_yasik" />
+                        <Button
+                            android:id="@+id/home_cafe_button"
+                            android:layout_width="80dp"
+                            android:layout_weight="1"
+                            android:layout_height="80dp"
+                            android:background="@drawable/home_cafe" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="14sp"
+                            android:textColor="@color/black"
+                            android:layout_marginLeft="40dp"
+                            android:text="@string/boonsik" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="14sp"
+                            android:layout_marginLeft="60dp"
+                            android:textColor="@color/black"
+                            android:text="@string/korean_food" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="14sp"
+                            android:layout_marginLeft="60dp"
+                            android:textColor="@color/black"
+                            android:text="@string/yasik" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="14sp"
+                            android:layout_marginLeft="50dp"
+                            android:textColor="@color/black"
+                            android:text="@string/cafe_dessert" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/home_product"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginLeft="20dp"
+                    app:layout_constraintTop_toBottomOf="@id/home_food">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+                        <Button
+                            android:id="@+id/home_fashion_button"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/home_fashion" />
+                        <Button
+                            android:id="@+id/home_beauty_button"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/home_beauty" />
+                        <Button
+                            android:id="@+id/home_it_button"
+                            android:layout_width="80dp"
+                            android:layout_weight="1"
+                            android:layout_height="80dp"
+                            android:background="@drawable/home_it" />
+                        <Button
+                            android:id="@+id/home_book_button"
+                            android:layout_width="80dp"
+                            android:layout_weight="1"
+                            android:layout_height="80dp"
+                            android:background="@drawable/home_book" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="14sp"
+                            android:textColor="@color/black"
+                            android:layout_marginLeft="40dp"
+                            android:text="패션" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="14sp"
+                            android:layout_marginLeft="50dp"
+                            android:textColor="@color/black"
+                            android:text="잡화/뷰티" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="14sp"
+                            android:layout_marginLeft="30dp"
+                            android:textColor="@color/black"
+                            android:text="IT/디지절" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="14sp"
+                            android:layout_marginLeft="40dp"
+                            android:textColor="@color/black"
+                            android:text="책/티켓" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+                        <Button
+                            android:id="@+id/home_hobby_button"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/home_hobby" />
+                        <Button
+                            android:id="@+id/home_sports_button"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/home_sports" />
+                        <Button
+                            android:id="@+id/home_deco_button"
+                            android:layout_width="80dp"
+                            android:layout_weight="1"
+                            android:layout_height="80dp"
+                            android:background="@drawable/home_deco" />
+                        <Button
+                            android:id="@+id/home_food_button"
+                            android:layout_width="80dp"
+                            android:layout_weight="1"
+                            android:layout_height="80dp"
+                            android:background="@drawable/home_food" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="14sp"
+                            android:textColor="@color/black"
+                            android:layout_marginLeft="40dp"
+                            android:text="취미" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="14sp"
+                            android:layout_marginLeft="40dp"
+                            android:textColor="@color/black"
+                            android:text="스포츠/건강" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="14sp"
+                            android:layout_marginLeft="30dp"
+                            android:textColor="@color/black"
+                            android:text="데코/문구" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="14sp"
+                            android:layout_marginLeft="20dp"
+                            android:textColor="@color/black"
+                            android:text="식료품/생필품" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <!--<androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/home_food_recyclerview"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="15dp"
+                    app:layout_constraintTop_toBottomOf="@id/home_search_editText" />
+
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/home_product_recyclerview"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="10dp"
+                    app:layout_constraintTop_toBottomOf="@id/home_food_recyclerview"
+                    tools:layout_editor_absoluteX="0dp" />-->
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:paddingLeft="15dp"
+                    android:text="@string/new_Post"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/home_product" />
+
+                <Spinner
+                    android:id="@+id/home_spinner"
+                    android:layout_width="40dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="15dp"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/home_product" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/home_newPost_recyclerview"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="15dp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/home_spinner" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
