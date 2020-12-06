@@ -23,9 +23,7 @@ public class SignActivity extends AppCompatActivity {
     }
 
     private void setbackButton() {
-        findViewById(R.id.sign_back_button).setOnClickListener(v -> {
-            finish();
-        });
+        findViewById(R.id.sign_back_button).setOnClickListener(v -> finish());
     }
 
     private void navigateRoute() {

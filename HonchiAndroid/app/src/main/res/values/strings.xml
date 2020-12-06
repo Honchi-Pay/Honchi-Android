@@ -10,6 +10,8 @@
     <string name="get_id">아이디를 입력해주세요</string>
     <string name="get_password">비밀번호를 입력해주세요</string>
     <string name="autoLogin">자동 로그인</string>
+    <string name="auth_code">인증코드</string>
+    <string name="input_auth_code">인증코드를 입력해주세요</string>
     <string name="forgot_password">비밀번호를 잊어버리셨나요?</string>
     <string name="find_password">비밀번호 찾기</string>
     <string name="check_password">비밀번호 확인</string>
@@ -21,10 +23,11 @@
     <string name="female">여성</string>
     <string name="nickname">닉네임</string>
     <string name="get_nickname">닉네임을 입력해주세요</string>
-    <string name="phonenumber">전화번호</string>
+    <string name="phone_number">전화번호</string>
     <string name="only_number">숫자만 입력해주세요</string>
     <string name="check">확인</string>
 
+    <string name="wrap_bracket">(%s)</string>
     <string name="logout">로그아웃</string>
     <string name="change_password">비밀번호 변경</string>
     <string name="unsubscribe">회원탈퇴</string>
@@ -69,4 +72,5 @@
     <string name="buy_delete">구매 취소</string>
   
     <string name="please_input_message">메시지를 입력하세요</string>
+    <string name="room_title">방제목</string>
 </resources>

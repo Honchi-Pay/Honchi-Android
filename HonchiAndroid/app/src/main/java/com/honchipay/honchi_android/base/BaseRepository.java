@@ -9,7 +9,7 @@ import io.reactivex.observers.DisposableSingleObserver;
 import io.reactivex.schedulers.Schedulers;
 
 public class BaseRepository {
-    public String token = SharedPreferencesManager.getInstance().getAccessToken();
+    public final String token = SharedPreferencesManager.getInstance().getAccessToken();
 
     public <T> Disposable wrappingSingle(Single<T> single, DisposableSingleObserver<T> observer) {
         return single.subscribeOn(Schedulers.io())

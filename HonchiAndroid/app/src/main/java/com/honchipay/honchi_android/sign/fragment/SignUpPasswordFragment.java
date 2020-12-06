@@ -4,7 +4,6 @@ import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,6 +36,7 @@ public class SignUpPasswordFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         signUpViewModel = new ViewModelProvider(requireActivity()).get(SignUpViewModel.class);
         binding.setSignUpViewModel(signUpViewModel);
+        binding.setLifecycleOwner(this);
 
         binding.signUpPasswordConfirmEditText.addTextChangedListener(new CustomTextWatcher() {
             @Override

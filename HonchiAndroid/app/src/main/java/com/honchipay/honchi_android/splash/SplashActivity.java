@@ -17,33 +17,38 @@ import com.honchipay.honchi_android.R;
 import com.honchipay.honchi_android.sign.SignActivity;
 import com.honchipay.honchi_android.util.SharedPreferencesManager;
 
-public class SplashActivity extends AppCompatActivity implements View.OnClickListener {
-    int PERMISSION_CODE = 1111;
+public class SplashActivity extends AppCompatActivity {
+    final int PERMISSION_CODE = 1111;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
+
         checkPermission();
         checkAutoLogin();
     }
 
-    @Override
-    public void onClick(View v) {
-        Intent intent = new Intent(this, SignActivity.class);
+    public void onClickSignButton(View v) {
+        int viewId = v.getId();
+        String toSignValue = null;
 
-        if (v.getId() == R.id.splash_login_button) {
-            intent.putExtra("splash", "login");
-        } else if (v.getId() == R.id.splash_signUp_button) {
-            intent.putExtra("splash", "signUp");
+        if (viewId == R.id.splash_login_button) {
+            toSignValue = "login";
+        } else if (viewId == R.id.splash_signUp_button) {
+            toSignValue = "signUp";
         }
 
+        Intent intent = new Intent(this, SignActivity.class);
+        intent.putExtra("splash", toSignValue);
         startActivity(intent);
     }
 
     private void checkPermission() {
         if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_FINE_LOCATION)
-                && ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_COARSE_LOCATION)) {
+                && ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_COARSE_LOCATION)
+                && ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.READ_EXTERNAL_STORAGE)
+                && ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
 
             new AlertDialog.Builder(this)
                     .setTitle("알림")
@@ -59,7 +64,7 @@ public class SplashActivity extends AppCompatActivity implements View.OnClickLis
         } else {
             ActivityCompat.requestPermissions(
                     this,
-                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION},
+                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE},
                     PERMISSION_CODE
             );
         }

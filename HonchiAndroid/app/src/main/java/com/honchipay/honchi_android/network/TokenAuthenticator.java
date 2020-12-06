@@ -43,16 +43,17 @@ public class TokenAuthenticator implements Interceptor {
                 .subscribe(new DisposableSingleObserver<retrofit2.Response<TokenResponseData>>() {
                     @Override
                     public void onSuccess(@NonNull retrofit2.Response<TokenResponseData> tokenResponse) {
-                        if (tokenResponse.isSuccessful() && tokenResponse.code() == 200) {
-                            SharedPreferencesManager sharedPreferencesManager = SharedPreferencesManager.getInstance();
+                        if (tokenResponse.isSuccessful() && tokenResponse.code() == 200 && tokenResponse.body() != null) {
                             String tokenType = tokenResponse.body().getTokenType();
 
+                            SharedPreferencesManager sharedPreferencesManager = SharedPreferencesManager.getInstance();
                             sharedPreferencesManager.setAccessToken(tokenType + " " + tokenResponse.body().getAccessToken());
                             sharedPreferencesManager.setRefreshToken(tokenType + " " + tokenResponse.body().getAccessToken());
                         } else {
                             Log.e("EditProfileViewModel", "");
                         }
                     }
+
                     @Override
                     public void onError(@NonNull Throwable e) {
                         Log.e("EditProfileViewModel", e.getMessage());

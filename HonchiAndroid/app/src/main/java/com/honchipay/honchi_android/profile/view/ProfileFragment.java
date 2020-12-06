@@ -4,13 +4,6 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.databinding.DataBindingUtil;
-import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,11 +13,15 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
+import androidx.databinding.DataBindingUtil;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+
 import com.honchipay.honchi_android.R;
 import com.honchipay.honchi_android.databinding.FragmentProfileBinding;
 import com.honchipay.honchi_android.profile.viewmodel.ProfileViewModel;
 import com.honchipay.honchi_android.splash.SplashActivity;
-import com.honchipay.honchi_android.util.SharedPreferencesManager;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -44,16 +41,14 @@ public class ProfileFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         profileViewModel = new ViewModelProvider(this).get(ProfileViewModel.class);
+        profileViewModel.getProfile();
         binding.setProfileFragment(this);
         binding.setProfileViewModel(profileViewModel);
-        profileViewModel.getProfile(SharedPreferencesManager.getInstance().getUserName());
+        binding.setLifecycleOwner(this);
 
-        profileViewModel.profileLiveData.observe(getViewLifecycleOwner(), userProfileResponse -> {
-            image = userProfileResponse.getImages();
-        });
-
+        profileViewModel.profileLiveData.observe(getViewLifecycleOwner(), userProfileResponse -> image = userProfileResponse.getImages());
         profileViewModel.signOutLiveData.observe(getViewLifecycleOwner(), isSignOut -> {
-            Context context = getContext();
+            Context context = requireContext();
 
             if (isSignOut) {
                 Intent intent = new Intent(context, SplashActivity.class);
@@ -74,10 +69,10 @@ public class ProfileFragment extends Fragment {
 
     public void moveToEditActivity(String value) {
         Intent intent = new Intent(getContext(), EditPrivateInfoActivity.class);
-        intent.putExtra("whereToEdit", value);
+        intent.putExtra("editPlace", value);
 
         if (value.equals("profile")) {
-            intent.putExtra("userProfileItem", image);
+            intent.putExtra("userProfileImage", image);
         }
 
         startActivity(intent);

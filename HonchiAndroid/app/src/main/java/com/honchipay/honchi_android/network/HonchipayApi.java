@@ -4,6 +4,8 @@ import com.honchipay.honchi_android.home.Data.detailPost;
 import com.honchipay.honchi_android.home.Data.getPost;
 import com.honchipay.honchi_android.home.Data.newPost;
 import com.honchipay.honchi_android.chat.model.ChatRoomItem;
+import com.honchipay.honchi_android.chat.model.MessageIdResponse;
+import com.honchipay.honchi_android.chat.model.MessageResponse;
 import com.honchipay.honchi_android.profile.data.UserProfileResponse;
 import com.honchipay.honchi_android.sign.data.SignUpRequest;
 import com.honchipay.honchi_android.sign.data.TokenResponseData;
@@ -55,13 +57,12 @@ public interface HonchipayApi {
     @POST("/user")
     Single<Response<Void>> singUp(@Body SignUpRequest body);
 
-    @FormUrlEncoded
     @GET("/user/profile")
-    Single<Response<UserProfileResponse>> getUserProfile(@Header("Authorization") String header, @Field("nickName") String name);
+    Single<Response<UserProfileResponse>> getUserProfile(@Header("Authorization") String header, @Query("nickName") String name);
 
     @Multipart
     @PUT("/user/profile")
-    Single<Response<Void>> updateUserProfile(@Header("Authorization") String header, @PartMap HashMap<String, RequestBody> partMap);
+    Single<Response<Void>> updateUserProfile(@Header("Authorization") String header, @Part("nickName") RequestBody name, @Part MultipartBody.Part file);
 
     @PUT("/user/password/change")
     Single<Response<Void>> changePassword(@Header("Authorization") String header, @Body HashMap<String, String> body);
@@ -122,6 +123,18 @@ public interface HonchipayApi {
     @GET("/chat")
     Single<Response<List<ChatRoomItem>>> getChatRooms(@Header("Authorization") String header);
 
-    @PUT("/chat")
-    Single<Response<Void>> updateChatRoomTitle(@Field("") String title);
+    @POST("/message")
+    Single<Response<MessageIdResponse>> uploadImage(@Header("Authorization") String header, @Part("chatId") RequestBody chatId, @Part MultipartBody.Part file);
+
+    @GET("/message/{chatId}")
+    Single<Response<List<MessageResponse>>> getAllMessages(@Header("Authorization") String header, @Path("chatId") String chatId);
+
+    @PUT("/message/{chatId}")
+    Single<Response<Void>> readMessages(@Header("Authorization") String header, @Path("chatId") String chatId);
+
+    @PUT("/message/{messageId}")
+    Single<Response<Void>> deleteMessage(@Header("Authorization") String header, @Path("messageId") int messageId);
+
+    @PUT("/chat/{roomId}")
+    Single<Response<Void>> updateChatRoomTitle(@Header("Authorization") String header, @Path("roomId") String roomId, @Body HashMap<String, String> body);
 }

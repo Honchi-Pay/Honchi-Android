@@ -1,16 +1,14 @@
 package com.honchipay.honchi_android.profile.view;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
-
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.honchipay.honchi_android.R;
 import com.honchipay.honchi_android.databinding.FragmentEditPasswordBinding;
@@ -33,6 +31,7 @@ public class EditPasswordFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         editProfileViewModel = new ViewModelProvider(this).get(EditProfileViewModel.class);
         binding.setEditProfileViewModel(editProfileViewModel);
+        binding.setLifecycleOwner(this);
 
         editProfileViewModel.changeSuccess.observe(getViewLifecycleOwner(), success -> {
             if (success) {

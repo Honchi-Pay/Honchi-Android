@@ -14,14 +14,16 @@ import com.honchipay.honchi_android.R;
 import com.honchipay.honchi_android.chat.model.ChatRoomItem;
 import com.honchipay.honchi_android.databinding.ItemChatRoomsBinding;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 public class ChatRoomsAdapter extends RecyclerView.Adapter<ChatRoomsAdapter.ChatRoomsViewHolder> {
-    private final List<ChatRoomItem> chatRoomItems;
+    private final ArrayList<ChatRoomItem> chatRoomItems;
 
     public ChatRoomsAdapter() {
-        chatRoomItems = Collections.emptyList();
+        chatRoomItems = new ArrayList<>();
     }
 
     @NonNull
@@ -34,7 +36,7 @@ public class ChatRoomsAdapter extends RecyclerView.Adapter<ChatRoomsAdapter.Chat
     @Override
     public void onBindViewHolder(@NonNull ChatRoomsViewHolder holder, int position) {
         ChatRoomItem chatRoomItem = chatRoomItems.get(position);
-        holder.binding.setChatRoomItem(chatRoomItem);
+        Objects.requireNonNull(holder.binding).setChatRoomItem(chatRoomItem);
         holder.itemView.setOnClickListener(v -> holder.onClick(chatRoomItem));
     }
 
@@ -49,8 +51,13 @@ public class ChatRoomsAdapter extends RecyclerView.Adapter<ChatRoomsAdapter.Chat
         notifyDataSetChanged();
     }
 
+    public void addChatItem(ChatRoomItem chatRoomItem) {
+        chatRoomItems.add(chatRoomItem);
+        notifyDataSetChanged();
+    }
+
     static class ChatRoomsViewHolder extends RecyclerView.ViewHolder {
-        ItemChatRoomsBinding binding;
+        final ItemChatRoomsBinding binding;
 
         public ChatRoomsViewHolder(View itemView) {
             super(itemView);

@@ -2,7 +2,6 @@ package com.honchipay.honchi_android.util;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.util.Log;
 
 public class SharedPreferencesManager {
     private static final String MY_APP_PREFERENCES = "Honchipay-Android";
@@ -52,11 +51,11 @@ public class SharedPreferencesManager {
         editor.apply();
     }
 
-    public String getUserName() { return sharedPrefs.getString(SAVE_USER_NAME, ""); }
+    public String getUserName() { return sharedPrefs.getString(SAVE_USER_NAME, null); }
 
     public void setUserName(String value) {
         SharedPreferences.Editor editor = sharedPrefs.edit();
-        editor.putString(SAVE_REFRESH, value);
+        editor.putString(SAVE_USER_NAME, value);
         editor.apply();
     }
 }

@@ -1,24 +1,26 @@
 package com.honchipay.honchi_android.chat.view;
 
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
-import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.honchipay.honchi_android.R;
-import com.honchipay.honchi_android.chat.model.ChattingContent;
-import com.honchipay.honchi_android.databinding.ItemChatBubbleBinding;
+import com.honchipay.honchi_android.chat.model.MessageResponse;
+import com.honchipay.honchi_android.chat.viewModel.ChatViewModel;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
-public class ChatBubbleAdapter extends RecyclerView.Adapter<ChatBubbleAdapter.ChatBubbleViewHolder> {
-    List<ChattingContent> chattingContentList;
+public class ChatBubbleAdapter extends RecyclerView.Adapter<ChatBubbleViewHolder> {
+    private final ArrayList<MessageResponse> chattingContentList;
+    private final ChatViewModel chatViewModel;
 
-    ChatBubbleAdapter(List<ChattingContent> contentList) {
-        chattingContentList = contentList;
+    ChatBubbleAdapter(ChatViewModel chatViewModel) {
+        chattingContentList = new ArrayList<>();
+        this.chatViewModel = chatViewModel;
     }
 
     @NonNull
@@ -29,7 +31,23 @@ public class ChatBubbleAdapter extends RecyclerView.Adapter<ChatBubbleAdapter.Ch
 
     @Override
     public void onBindViewHolder(@NonNull ChatBubbleViewHolder holder, int position) {
-        ChattingContent chattingContent = chattingContentList.get(position);
+        MessageResponse messageResponse = chattingContentList.get(position);
+
+        switch (messageResponse.getMessageType()) {
+            case MESSAGE:
+                holder.makeTextView(messageResponse);
+                if (messageResponse.isDelete())
+                    holder.setLongClickOnView(chatViewModel, messageResponse.getId());
+                break;
+            case IMAGE:
+                holder.makeImageView(messageResponse);
+                if (messageResponse.isDelete())
+                    holder.setLongClickOnView(chatViewModel, messageResponse.getId());
+                break;
+            case INFO:
+                holder.showInformation(messageResponse.getNickName() + messageResponse.getMessage());
+                break;
+        }
     }
 
     @Override
@@ -37,12 +55,15 @@ public class ChatBubbleAdapter extends RecyclerView.Adapter<ChatBubbleAdapter.Ch
         return chattingContentList.size();
     }
 
-    static class ChatBubbleViewHolder extends RecyclerView.ViewHolder {
-        ItemChatBubbleBinding binding;
+    public void setAllMessages(List<MessageResponse> messages) {
+        chattingContentList.clear();
+        Collections.reverse(messages);
+        chattingContentList.addAll(messages);
+        notifyDataSetChanged();
+    }
 
-        public ChatBubbleViewHolder(View itemView) {
-            super(itemView);
-            binding = DataBindingUtil.bind(itemView);
-        }
+    public void addMessage(MessageResponse message) {
+        chattingContentList.add(chattingContentList.size(), message);
+        notifyDataSetChanged();
     }
 }

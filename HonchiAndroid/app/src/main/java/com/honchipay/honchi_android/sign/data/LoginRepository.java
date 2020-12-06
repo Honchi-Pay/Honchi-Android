@@ -5,7 +5,6 @@ import com.honchipay.honchi_android.network.HonchipayConnector;
 
 import java.util.HashMap;
 
-import io.reactivex.Single;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.observers.DisposableSingleObserver;
 import retrofit2.Response;

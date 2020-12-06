@@ -16,7 +16,7 @@ import retrofit2.Response;
 public class LoginViewModel extends BaseViewModel {
     private final String TAG = LoginViewModel.class.getSimpleName();
     private final LoginRepository repository = new LoginRepository();
-    public MutableLiveData<Boolean> loginSuccess = new MutableLiveData<>();
+    public final MutableLiveData<Boolean> loginSuccess = new MutableLiveData<>();
     public final ObservableField<String> inputUserId = new ObservableField<>();
     public final ObservableField<String> inputUserPW = new ObservableField<>();
 
