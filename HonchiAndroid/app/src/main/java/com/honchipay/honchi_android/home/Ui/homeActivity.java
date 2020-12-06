@@ -55,6 +55,7 @@ public class homeActivity extends AppCompatActivity {
                     }
 
                     case R.id.navi_profile: {
+                        onFragmentChanged("profile");
                         break;
                     }
                 }
