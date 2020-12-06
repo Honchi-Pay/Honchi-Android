@@ -28,6 +28,8 @@
     <string name="logout">로그아웃</string>
     <string name="change_password">비밀번호 변경</string>
     <string name="unsubscribe">회원탈퇴</string>
+    <string name="logout_message">정말 로그아웃하시겠습니까?</string>
+    <string name="sign_out_message">정말 탈퇴하시겠습니까?</string>
     <string name="change_profile">프로필 변경</string>
     <string name="to_change">변경하기</string>
     <string name="name">NAME</string>
@@ -65,4 +67,6 @@
     <string name="photo">사진 가져오기</string>
     <string name="get_location">위치 선택</string>
     <string name="buy_delete">구매 취소</string>
+  
+    <string name="please_input_message">메시지를 입력하세요</string>
 </resources>

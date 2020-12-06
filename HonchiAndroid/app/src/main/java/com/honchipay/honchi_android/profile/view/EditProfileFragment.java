@@ -46,7 +46,7 @@ public class EditProfileFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        editProfileViewModel = new ViewModelProvider(this).get(EditProfileViewModel.class);
+        editProfileViewModel = new ViewModelProvider(requireActivity()).get(EditProfileViewModel.class);
         binding.setEditProfileViewModel(editProfileViewModel);
         Glide.with(this).load(image).circleCrop().into(binding.editProfileUserImageView);
     }
@@ -54,7 +54,7 @@ public class EditProfileFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        EditPrivateInfoActivity activity = (EditPrivateInfoActivity) getActivity();
+        EditPrivateInfoActivity activity = (EditPrivateInfoActivity) requireActivity();
 
         binding.editProfileUserImageView.setOnClickListener(v -> {
             Intent intent = new Intent();
@@ -74,8 +74,6 @@ public class EditProfileFragment extends Fragment {
                 Toast.makeText(getContext(), "프로필을 수정하는데 실패하였습니다.", Toast.LENGTH_LONG).show();
             }
         });
-
-        binding.editProfileBackButton.setOnClickListener(v -> activity.finish());
     }
 
     @Override

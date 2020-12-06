@@ -38,5 +38,9 @@ public class EditPrivateInfoActivity extends AppCompatActivity {
                 Toast.makeText(this, "올바르지 않은 요청입니다.", Toast.LENGTH_LONG).show();
                 finish();
         }
+
+        findViewById(R.id.profile_change_back_button).setOnClickListener(v -> {
+            finish();
+        });
     }
 }
