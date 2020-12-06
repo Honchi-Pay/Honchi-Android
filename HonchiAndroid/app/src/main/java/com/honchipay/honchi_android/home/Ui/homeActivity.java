@@ -13,7 +13,9 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.honchipay.honchi_android.R;
+import com.honchipay.honchi_android.chat.view.ChatListFragment;
 import com.honchipay.honchi_android.databinding.ActivityHomeBinding;
+import com.honchipay.honchi_android.profile.view.ProfileFragment;
 import com.honchipay.honchi_android.writing.writingFragment;
 
 public class homeActivity extends AppCompatActivity {
@@ -83,7 +85,7 @@ public class homeActivity extends AppCompatActivity {
                 break;
             }
             case "message": {
-
+                transaction.replace(R.id.home_fragment, new ChatListFragment()).commit();
                 break;
             }
             case "writing": {
@@ -94,6 +96,7 @@ public class homeActivity extends AppCompatActivity {
                 //transaction.replace(R.id.home_fragment,new PostByCategoryFragment()).commit();
             }
             case "profile": {
+                transaction.replace(R.id.home_fragment, new ProfileFragment()).commit();
                 break;
             }
             case "detailItem": {

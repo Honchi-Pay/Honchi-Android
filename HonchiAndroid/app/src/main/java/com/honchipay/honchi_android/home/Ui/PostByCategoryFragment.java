@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.honchipay.honchi_android.R;
+import com.honchipay.honchi_android.chat.HonchiPaySocket;
 import com.honchipay.honchi_android.home.Data.getPost;
 import com.honchipay.honchi_android.home.ViewModel.homeViewModel;
 
@@ -65,6 +66,7 @@ public class PostByCategoryFragment extends Fragment {
             public void onChanged(List<getPost> getPosts) {
                 adapter.items.addAll(getPosts);
                 adapter.notifyDataSetChanged();
+                HonchiPaySocket.getInstance().postId = 4;
             }
         });
     }

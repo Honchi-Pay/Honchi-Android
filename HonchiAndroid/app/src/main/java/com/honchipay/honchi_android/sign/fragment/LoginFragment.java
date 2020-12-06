@@ -1,5 +1,6 @@
 package com.honchipay.honchi_android.sign.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +14,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.honchipay.honchi_android.R;
 import com.honchipay.honchi_android.databinding.FragmentLoginBinding;
+import com.honchipay.honchi_android.home.Ui.homeActivity;
 import com.honchipay.honchi_android.sign.viewModel.LoginViewModel;
 import com.honchipay.honchi_android.util.SharedPreferencesManager;
 
@@ -47,9 +49,8 @@ public class LoginFragment extends Fragment {
                 SharedPreferencesManager.getInstance().setIsLogin(true);
             }
 
-//            Intent intent = new Intent(getContext(), );
-//            requireActivity().startActivity(intent);
-
+            Intent intent = new Intent(getContext(), homeActivity.class);
+            requireActivity().startActivity(intent);
         });
     }
 
