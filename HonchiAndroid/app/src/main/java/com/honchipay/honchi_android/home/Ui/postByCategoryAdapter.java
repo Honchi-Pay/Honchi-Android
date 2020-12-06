@@ -1,6 +1,7 @@
 package com.honchipay.honchi_android.home.Ui;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +20,11 @@ import java.util.ArrayList;
 public class postByCategoryAdapter extends RecyclerView.Adapter<postByCategoryAdapter.ViewHolder> {
     ArrayList<getPost> items = new ArrayList<getPost>();
 
+    homeActivity activity;
+
+    public postByCategoryAdapter(homeActivity activity) {
+        this.activity = activity;
+    }
 
     @NonNull
     @Override
@@ -68,9 +74,11 @@ public class postByCategoryAdapter extends RecyclerView.Adapter<postByCategoryAd
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(v.getContext(), detailPostFragment.class);
-                    intent.putExtra("position", item.getPostId());
-                    v.getContext().startActivity(intent);
+                    detailPostFragment fragment = new detailPostFragment();
+                    Bundle bundle = new Bundle();
+                    bundle.putInt("position", item.getPostId());
+                    fragment.setArguments(bundle);
+                    activity.onFragmentChanged(fragment);
                 }
             });
 

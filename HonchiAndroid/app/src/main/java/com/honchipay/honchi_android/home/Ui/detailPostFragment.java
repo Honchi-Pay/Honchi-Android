@@ -31,8 +31,7 @@ public class detailPostFragment extends Fragment {
         binding = DataBindingUtil.inflate(inflater,R.layout.fragment_detail_post,container,false);
         View root = binding.getRoot();
 
-        Intent intent = getActivity().getIntent();
-        int postId = intent.getExtras().getInt("position");
+        int postId = requireArguments().getInt("position");
 
         viewModel.detailPost(postId);
 

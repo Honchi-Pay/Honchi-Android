@@ -22,7 +22,6 @@ import java.util.List;
 
 public class PostByCategoryFragment extends Fragment {
     private final homeViewModel viewModel = new homeViewModel();
-    postByCategoryAdapter postByCategoryAdapter = new postByCategoryAdapter();
     String category;
     String item;
     postByCategoryAdapter adapter;
@@ -49,7 +48,7 @@ public class PostByCategoryFragment extends Fragment {
         recyclerView = getActivity().findViewById(R.id.test_post_recyclerview);
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), RecyclerView.VERTICAL,false);
-        adapter = new postByCategoryAdapter();
+        adapter = new postByCategoryAdapter((homeActivity) getActivity());
 
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(linearLayoutManager);
