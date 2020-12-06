@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 
@@ -17,13 +19,17 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import com.honchipay.honchi_android.R;
 import com.honchipay.honchi_android.chat.HonchiPaySocket;
 import com.honchipay.honchi_android.chat.model.ChatRoomItem;
 import com.honchipay.honchi_android.chat.model.MessageResponse;
+import com.honchipay.honchi_android.chat.model.MessageResponseByTime;
+import com.honchipay.honchi_android.chat.model.MessageType;
 import com.honchipay.honchi_android.chat.model.socket.MessageRequest;
 import com.honchipay.honchi_android.chat.viewModel.ChatViewModel;
 import com.honchipay.honchi_android.databinding.ActivityMessengerBinding;
+import com.honchipay.honchi_android.util.SharedPreferencesManager;
 
 import java.io.File;
 import java.util.Objects;
@@ -36,16 +42,22 @@ public class MessengerActivity extends AppCompatActivity {
     ActivityMessengerBinding binding;
     RecyclerView recyclerView;
     ChatBubbleAdapter chatBubbleAdapter;
-    final int PICTURES_REQUEST_CODE = 13;
-    final Emitter.Listener messageListener = args -> socketListener(args, "messageListener called");
-    final Emitter.Listener infoListener = args -> socketListener(args, "infoListener called");
 
-    void socketListener(Object[] args, String calledMessage) {
-        Log.e("MessengerActivity", calledMessage);
+    final int PICTURES_REQUEST_CODE = 13;
+    final Emitter.Listener messageListener = args -> {
+        Log.e("MessengerActivity", "messageListener called");
+        String json = String.valueOf(args[0]);
+        Log.e("MessengerActivity", json);
+        MessageResponseByTime messageResponseByTime = new Gson().fromJson(json, MessageResponseByTime.class);
+        MessageResponse messageResponse = messageResponseByTime.converterOriginal();
+        runOnUiThread(() -> chatBubbleAdapter.addMessage(messageResponse));
+    };
+    final Emitter.Listener infoListener = args -> {
+        Log.e("MessengerActivity", "infoListener called");
         MessageResponse messageResponse = new Gson().fromJson(args[0].toString(), MessageResponse.class);
-        Log.e("MessengerActivity", messageResponse.getMessage());
-        chatBubbleAdapter.addMessage(messageResponse);
-    }
+        Log.e("MessengerActivity", messageResponse.toString());
+        runOnUiThread(() -> chatBubbleAdapter.addMessage(messageResponse));
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,8 +74,21 @@ public class MessengerActivity extends AppCompatActivity {
         chatViewModel = new ViewModelProvider(this).get(ChatViewModel.class);
         chatRoomData = (ChatRoomItem) getIntent().getExtras().getSerializable("chatData");
         chatViewModel.setRoomId(chatRoomData.getChatId());
-        chatViewModel.roomTitle.set(chatRoomData.getTitle());
-        chatViewModel.setRoomTitleValidation(chatRoomData.getTitle());
+        binding.messengerTitleNameTextView.setText(chatRoomData.getTitle());
+        binding.messengerTitleNameTextView.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                chatViewModel.changeChatRoomTitle(chatRoomData.getTitle(), s.toString());
+            }
+        });
         binding.setChatViewModel(chatViewModel);
     }
 
