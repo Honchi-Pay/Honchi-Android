@@ -43,6 +43,34 @@
     <string name="yes">네</string>
     <string name="cancel">취소</string>
 
+    <string name="title">제목</string>
+    <string name="content_to_search">검색할 내용을 입력해주세요</string>
+    <string name="new_Post">최신 글</string>
+    <string name="food">음식</string>
+    <string name="goods">상품</string>
+    <string name="chicken">치킨</string>
+    <string name="pizza_yangsik">피자/양식</string>
+    <string name="chinese_restaurant">중국집</string>
+    <string name="korean_food">한식</string>
+    <string name="japanese_food_donkas">일식/돈가스</string>
+    <string name="jokbal_bossam">족발/보쌈</string>
+    <string name="yasik">야식</string>
+    <string name="boonsik">분식</string>
+    <string name="cafe_dessert">카페/디저트</string>
+    <string name="modify">수정하기</string>
+    <string name="buy_together">함께 구매하기</string>
+    <string name="attend_end">구인 완료</string>
+    <string name="get_title">제목을 입력해주세요</string>
+
+    <string name="search_location">위치 검색</string>
+    <string name="location_point">위치 찍기</string>
+    <string name="category">카테고리</string>
+    <string name="delivery">배달</string>
+    <string name="content">내용</string>
+    <string name="photo">사진 가져오기</string>
+    <string name="get_location">위치 선택</string>
+    <string name="buy_delete">구매 취소</string>
+  
     <string name="please_input_message">메시지를 입력하세요</string>
     <string name="room_title">방제목</string>
 </resources>

@@ -1,5 +1,8 @@
 package com.honchipay.honchi_android.network;
 
+import com.honchipay.honchi_android.home.Data.detailPost;
+import com.honchipay.honchi_android.home.Data.getPost;
+import com.honchipay.honchi_android.home.Data.newPost;
 import com.honchipay.honchi_android.chat.model.ChatRoomItem;
 import com.honchipay.honchi_android.chat.model.MessageIdResponse;
 import com.honchipay.honchi_android.chat.model.MessageResponse;
@@ -7,6 +10,7 @@ import com.honchipay.honchi_android.profile.data.UserProfileResponse;
 import com.honchipay.honchi_android.sign.data.SignUpRequest;
 import com.honchipay.honchi_android.sign.data.TokenResponseData;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -19,6 +23,7 @@ import retrofit2.http.DELETE;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.HTTP;
 import retrofit2.http.Header;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
@@ -68,6 +73,52 @@ public interface HonchipayApi {
     @FormUrlEncoded
     @DELETE("/user/out")
     Single<Response<Void>> withdrawFromService(@Header("Authorization") String header, @Field("nickName") String name);
+
+    @GET("/post/recent")
+    Single<Response<List<newPost>>> getNewPost(@Header("Authorization") String header, @Query("category") String category);
+
+    @GET("/post")
+    Single<Response<List<getPost>>> getPostList(
+            @Header("Authorization") String header,
+            @Query("category") String category,
+            @Query ("item") String item,
+            @Query("dist") int dist);
+
+    @Multipart
+    @POST("/post")
+    Single<Response<Void>> writing(
+            @Header("Authorization") String header,
+            @Part MultipartBody.Part title,
+            @Part MultipartBody.Part content,
+            @Part MultipartBody.Part images,
+            @Part MultipartBody.Part category,
+            @Part MultipartBody.Part item,
+            @Part MultipartBody.Part lat,
+            @Part MultipartBody.Part lon
+    );
+
+    @PUT("/post/{postId}")
+    Single<Response<Void>> modifyPost(
+            @Header("Authorization") String header
+    );
+
+    @DELETE("/post/{postId}")
+    Single<Response<Void>> deletePost(
+            @Header("Authorization") String header
+    );
+
+    @GET("/post/search")
+    Single<Response<List<newPost>>> searchPost(
+            @Header("Authorization") String header,
+            @Query("title") String title,
+            @Query("dist") int dist
+    );
+
+    @GET("post/{postID}")
+    Single<Response<detailPost>> detailPost(
+            @Header("Authorization") String header,
+            @Path("postID") int postID
+    );
 
     @GET("/chat")
     Single<Response<List<ChatRoomItem>>> getChatRooms(@Header("Authorization") String header);
