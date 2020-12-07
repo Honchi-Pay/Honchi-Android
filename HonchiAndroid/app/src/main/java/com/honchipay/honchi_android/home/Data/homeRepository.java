@@ -1,4 +1,4 @@
-package com.honchipay.honchi_android.home.Data;
+package com.honchipay.honchi_android.home.data;
 
 import com.honchipay.honchi_android.network.HonchipayConnector;
 import com.honchipay.honchi_android.util.SharedPreferencesManager;
@@ -23,8 +23,7 @@ public class homeRepository {
     }
 
     public Single<Response<List<newPost>>> searchPost(String title, int dist){
-        String title1 = "치킨";
-        return HonchipayConnector.getInstance().getApi().searchPost(testToken,title1,dist);
+        return HonchipayConnector.getInstance().getApi().searchPost(testToken,title,dist);
     }
 
     public Single<Response<detailPost>> detailPost(int postID){
