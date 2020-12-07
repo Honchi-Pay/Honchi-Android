@@ -1,4 +1,4 @@
-package com.honchipay.honchi_android.home.Ui;
+package com.honchipay.honchi_android.home.ui;
 
 import android.os.Bundle;
 
@@ -22,7 +22,7 @@ import android.widget.Toast;
 
 import com.honchipay.honchi_android.R;
 import com.honchipay.honchi_android.databinding.FragmentHomeBinding;
-import com.honchipay.honchi_android.home.Data.newPost;
+import com.honchipay.honchi_android.home.data.newPost;
 import com.honchipay.honchi_android.home.ViewModel.homeViewModel;
 
 import java.util.List;
@@ -30,7 +30,7 @@ import java.util.List;
 public class homeFragment extends Fragment {
 
     private FragmentHomeBinding binding;
-    private postAdapter newPostAdapter = new postAdapter();
+    private postAdapter newPostAdapter;
     private final homeViewModel viewModel = new homeViewModel();
 
     @Override
@@ -39,8 +39,6 @@ public class homeFragment extends Fragment {
 
         binding = DataBindingUtil.inflate(inflater,R.layout.fragment_home,container,false);
         View root  = binding.getRoot();
-
-        setInit();
 
         binding.homeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -60,17 +58,57 @@ public class homeFragment extends Fragment {
     }
 
     @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        newPostAdapter = new postAdapter((homeActivity)getActivity());
+
+        setInit();
+    }
+
+    @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        setOnClick();
+    }
+
+    private void setInit(){
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), RecyclerView.VERTICAL,false);
+
+        binding.homeNewPostRecyclerview.setLayoutManager(linearLayoutManager);
+        binding.homeNewPostRecyclerview.setHasFixedSize(true);
+
+        binding.homeNewPostRecyclerview.setAdapter(newPostAdapter);
+
+        setSpinner();
+        getNewPostView("FOOD");
+    }
+
+    private void setSpinner(){
+        ArrayAdapter adapter = ArrayAdapter.createFromResource(getContext(), R.array.category, android.R.layout.simple_spinner_dropdown_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        binding.homeSpinner.setAdapter(adapter);
+    }
+
+    private void getNewPostView(String category){
+        viewModel.getNewPost(category);
+
+        viewModel.newPostLiveData.observe(getViewLifecycleOwner(), new Observer<List<newPost>>() {
+            @Override
+            public void onChanged(List<newPost> newPostList) {
+                newPostAdapter.notifyDataChanged(newPostList);
+            }
+        });
+    }
+
+    public void setOnClick(){
         binding.homeSearchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 if(binding.homeSearchEditText.getText().toString().length() == 0){
-                    Toast toast = Toast.makeText(getContext(),"검색할 내용을 입력해주세요",Toast.LENGTH_LONG);
-                    toast.show();
-
+                    Toast.makeText(getContext(),"검색할 내용을 입력해주세요",Toast.LENGTH_LONG).show();
                 } else{
                     Fragment fragment = new SearchFragment();
                     Bundle result = new Bundle();
@@ -99,6 +137,8 @@ public class homeFragment extends Fragment {
             }
         });
 
+
+
         binding.homeItButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -110,38 +150,10 @@ public class homeFragment extends Fragment {
 
                 homeActivity activity = (homeActivity) getActivity();
                 activity.onFragmentChanged(fragment);
+
+                Log.e("homeFragment","button click");
             }
         });
 
-
-    }
-
-    private void setInit(){
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), RecyclerView.VERTICAL,false);
-
-        binding.homeNewPostRecyclerview.setLayoutManager(linearLayoutManager);
-        binding.homeNewPostRecyclerview.setHasFixedSize(true);
-
-        binding.homeNewPostRecyclerview.setAdapter(newPostAdapter);
-
-        setSpinner();
-        getNewPostView("FOOD");
-    }
-
-    private void setSpinner(){
-        ArrayAdapter adapter = ArrayAdapter.createFromResource(getContext(), R.array.category, android.R.layout.simple_spinner_dropdown_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        binding.homeSpinner.setAdapter(adapter);
-    }
-
-    private void getNewPostView(String category){
-        viewModel.getNewPost(category);
-
-        viewModel.newPostLiveData.observe(getViewLifecycleOwner(), new Observer<List<newPost>>() {
-            @Override
-            public void onChanged(List<newPost> newPosts) {
-                newPostAdapter.notifyDataChanged(newPosts);
-            }
-        });
     }
 }
