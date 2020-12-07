@@ -1,4 +1,4 @@
-package com.honchipay.honchi_android.home.Ui;
+package com.honchipay.honchi_android.home.ui;
 
 import android.os.Bundle;
 
@@ -14,17 +14,16 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.honchipay.honchi_android.R;
-import com.honchipay.honchi_android.home.Data.getPost;
+import com.honchipay.honchi_android.home.data.getPost;
 import com.honchipay.honchi_android.home.ViewModel.homeViewModel;
 
 import java.util.List;
 
 public class PostByCategoryFragment extends Fragment {
     private final homeViewModel viewModel = new homeViewModel();
-    postByCategoryAdapter postByCategoryAdapter = new postByCategoryAdapter();
     String category;
     String item;
-    postByCategoryAdapter adapter;
+    postByCategoryAdapter categoryAdapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -48,12 +47,12 @@ public class PostByCategoryFragment extends Fragment {
         recyclerView = getActivity().findViewById(R.id.test_post_recyclerview);
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), RecyclerView.VERTICAL,false);
-        adapter = new postByCategoryAdapter();
+        categoryAdapter = new postByCategoryAdapter((homeActivity) getActivity());
 
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(linearLayoutManager);
 
-        recyclerView.setAdapter(adapter);
+        recyclerView.setAdapter(categoryAdapter);
 
     }
 
@@ -62,9 +61,8 @@ public class PostByCategoryFragment extends Fragment {
 
         viewModel.getPostLiveData.observe(getViewLifecycleOwner(), new Observer<List<getPost>>() {
             @Override
-            public void onChanged(List<getPost> getPosts) {
-                adapter.items.addAll(getPosts);
-                adapter.notifyDataSetChanged();
+            public void onChanged(List<getPost> getPostList) {
+                categoryAdapter.notifyDataChanged(getPostList);
             }
         });
     }
