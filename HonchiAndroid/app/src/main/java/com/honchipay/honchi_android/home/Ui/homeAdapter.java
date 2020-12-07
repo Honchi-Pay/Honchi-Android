@@ -1,6 +1,5 @@
-package com.honchipay.honchi_android.home.Ui;
+package com.honchipay.honchi_android.home.ui;
 
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,8 +10,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.honchipay.honchi_android.R;
-import com.honchipay.honchi_android.home.Data.homeItem;
-import com.honchipay.honchi_android.home.Data.OnHomeItemClickListener;
+import com.honchipay.honchi_android.home.data.homeItem;
+import com.honchipay.honchi_android.home.data.OnHomeItemClickListener;
 
 import java.util.ArrayList;
 

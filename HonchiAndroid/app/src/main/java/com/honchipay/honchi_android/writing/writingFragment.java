@@ -21,8 +21,8 @@ import android.widget.Button;
 
 import com.honchipay.honchi_android.R;
 import com.honchipay.honchi_android.databinding.FragmentWritingBinding;
-import com.honchipay.honchi_android.home.Data.homeItem;
-import com.honchipay.honchi_android.home.Ui.homeAdapter;
+import com.honchipay.honchi_android.home.data.homeItem;
+import com.honchipay.honchi_android.home.ui.homeAdapter;
 
 import java.io.File;
 import java.io.FileOutputStream;

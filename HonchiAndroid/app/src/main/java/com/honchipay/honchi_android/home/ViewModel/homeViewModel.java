@@ -5,10 +5,10 @@ import android.util.Log;
 import androidx.lifecycle.MutableLiveData;
 
 import com.honchipay.honchi_android.base.BaseViewModel;
-import com.honchipay.honchi_android.home.Data.detailPost;
-import com.honchipay.honchi_android.home.Data.getPost;
-import com.honchipay.honchi_android.home.Data.homeRepository;
-import com.honchipay.honchi_android.home.Data.newPost;
+import com.honchipay.honchi_android.home.data.detailPost;
+import com.honchipay.honchi_android.home.data.getPost;
+import com.honchipay.honchi_android.home.data.homeRepository;
+import com.honchipay.honchi_android.home.data.newPost;
 
 import java.util.List;
 

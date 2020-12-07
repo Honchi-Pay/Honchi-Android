@@ -20,13 +20,7 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity android:name=".writing.LocationActivity"/>
-        <activity android:name=".home.Ui.homeActivity">
-        <activity
-            android:name=".chat.view.MessengerActivity"
-            android:windowSoftInputMode="adjustUnspecified|adjustPan" />
-        <activity
-          android:name=".splash.SplashActivity"
-          android:theme="@style/FullScreenTheme">
+        <activity android:name=".home.ui.homeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -34,8 +28,13 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".splash.SplashActivity"
-            android:theme="@style/FullScreenTheme"/>
+            android:name=".chat.view.MessengerActivity"
+            android:windowSoftInputMode="adjustUnspecified|adjustPan" />
+        <activity
+          android:name=".splash.SplashActivity"
+          android:theme="@style/FullScreenTheme">
+
+        </activity>
         <activity android:name=".sign.SignActivity" />
         <activity android:name=".profile.view.EditPrivateInfoActivity" />
         <meta-data

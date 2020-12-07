@@ -1,4 +1,4 @@
-package com.honchipay.honchi_android.home.Ui;
+package com.honchipay.honchi_android.home.ui;
 
 import android.os.Bundle;
 
