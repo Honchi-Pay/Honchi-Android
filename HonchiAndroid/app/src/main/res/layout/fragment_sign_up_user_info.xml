@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".sign.fragment.LoginFragment">
+
+    <data>
+
+        <variable
+            name="signUpViewModel"
+            type="com.honchipay.honchi_android.sign.viewModel.SignUpViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/SignUpInfo_title_textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="34dp"
+            android:text="@string/signUp"
+            android:textColor="@color/black"
+            android:textSize="24sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/SignUpInfo_name_textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="45dp"
+            android:layout_marginTop="81dp"
+            android:text="@string/nickname"
+            android:textColor="@color/black"
+            android:textSize="10sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/SignUpInfo_title_textView"
+            tools:ignore="SmallSp" />
+
+        <EditText
+            android:id="@+id/SignUpInfo_name_editText"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="7dp"
+            android:layout_marginEnd="40dp"
+            android:background="@drawable/sign_transparent_btn"
+            android:hint="@string/get_nickname"
+            android:importantForAutofill="no"
+            android:inputType="textPersonName"
+            android:paddingStart="10dp"
+            android:paddingEnd="0dp"
+            android:text="@={signUpViewModel.inputNickName}"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/SignUpInfo_name_textView" />
+
+
+        <TextView
+            android:id="@+id/SignUpInfo_phone_textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="45dp"
+            android:layout_marginTop="28dp"
+            android:text="@string/phonenumber"
+            android:textColor="@color/black"
+            android:textSize="10sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/SignUpInfo_name_editText"
+            tools:ignore="SmallSp" />
+
+        <EditText
+            android:id="@+id/SignUpInfo_phone_editText"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="7dp"
+            android:layout_marginEnd="40dp"
+            android:background="@drawable/sign_transparent_btn"
+            android:hint="@string/only_number"
+            android:importantForAutofill="no"
+            android:inputType="phone"
+            android:paddingStart="10dp"
+            android:paddingEnd="0dp"
+            android:text="@={signUpViewModel.inputPhoneNumber}"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/SignUpInfo_phone_textView" />
+
+        <TextView
+            android:id="@+id/SignUpInfo_gender_textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="45dp"
+            android:layout_marginTop="28dp"
+            android:text="@string/gender"
+            android:textColor="@color/black"
+            android:textSize="10sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/SignUpInfo_phone_editText"
+            tools:ignore="SmallSp" />
+
+        <RadioGroup
+            android:id="@+id/SignUpInfo_gender_radioGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="13dp"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/SignUpInfo_gender_textView">
+
+            <RadioButton
+                android:id="@+id/SignUpInfo_male_radioButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:fontFamily="@font/nanumsquareregular"
+                android:scaleX="0.85"
+                android:scaleY="0.85"
+                android:text="@string/male"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+
+            <RadioButton
+                android:id="@+id/SignUpInfo_female_radioButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/nanumsquareregular"
+                android:scaleX="0.85"
+                android:scaleY="0.85"
+                android:text="@string/female"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+        </RadioGroup>
+
+        <Button
+            android:id="@+id/SignUpInfo_signUp_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginEnd="40dp"
+            android:layout_marginBottom="97dp"
+            android:background="@drawable/sign_login_btn"
+            android:text="@string/check"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
