@@ -8,11 +8,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.honchipay.honchi_android.R;
 import com.honchipay.honchi_android.chat.model.MessageResponse;
-import com.honchipay.honchi_android.chat.viewModel.ChatViewModel;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
+import static io.socket.engineio.parser.Packet.MESSAGE;
 
 public class ChatBubbleAdapter extends RecyclerView.Adapter<ChatBubbleViewHolder> {
     private final ArrayList<MessageResponse> chattingContentList;

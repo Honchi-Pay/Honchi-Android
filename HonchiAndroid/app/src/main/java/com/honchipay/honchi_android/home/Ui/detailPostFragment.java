@@ -1,4 +1,4 @@
-package com.honchipay.honchi_android.home.Ui;
+package com.honchipay.honchi_android.home.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,11 +13,12 @@ import androidx.lifecycle.Observer;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.honchipay.honchi_android.R;
 import com.honchipay.honchi_android.databinding.FragmentDetailPostBinding;
-import com.honchipay.honchi_android.home.Data.detailPost;
+import com.honchipay.honchi_android.home.data.detailPost;
 import com.honchipay.honchi_android.home.ViewModel.homeViewModel;
 
 public class detailPostFragment extends Fragment {
@@ -31,8 +32,8 @@ public class detailPostFragment extends Fragment {
         binding = DataBindingUtil.inflate(inflater,R.layout.fragment_detail_post,container,false);
         View root = binding.getRoot();
 
-        Intent intent = getActivity().getIntent();
-        int postId = intent.getExtras().getInt("position");
+
+        int postId = getArguments().getInt("position");
 
         viewModel.detailPost(postId);
 
@@ -57,6 +58,14 @@ public class detailPostFragment extends Fragment {
 
             }
         });
+
+        binding.detailAttendButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getContext(), "성공적인 메신저 생성", Toast.LENGTH_LONG).show();
+            }
+        });
+
 
         return root;
     }

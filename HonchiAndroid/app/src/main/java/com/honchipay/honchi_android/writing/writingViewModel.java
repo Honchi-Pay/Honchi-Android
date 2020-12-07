@@ -3,9 +3,6 @@ package com.honchipay.honchi_android.writing;
 import android.util.Log;
 
 import com.honchipay.honchi_android.base.BaseViewModel;
-import com.honchipay.honchi_android.home.Data.newPost;
-
-import java.util.HashMap;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;

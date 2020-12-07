@@ -1,4 +1,4 @@
-package com.honchipay.honchi_android.home.Ui;
+package com.honchipay.honchi_android.home.ui;
 
 import android.os.Bundle;
 
@@ -22,15 +22,16 @@ import android.widget.Toast;
 
 import com.honchipay.honchi_android.R;
 import com.honchipay.honchi_android.databinding.FragmentHomeBinding;
-import com.honchipay.honchi_android.home.Data.newPost;
+import com.honchipay.honchi_android.home.data.newPost;
 import com.honchipay.honchi_android.home.ViewModel.homeViewModel;
+import com.honchipay.honchi_android.home.ui.postAdapter;
 
 import java.util.List;
 
 public class homeFragment extends Fragment {
 
     private FragmentHomeBinding binding;
-    private postAdapter newPostAdapter = new postAdapter();
+    private postAdapter newPostAdapter;
     private final homeViewModel viewModel = new homeViewModel();
 
     @Override
@@ -39,8 +40,6 @@ public class homeFragment extends Fragment {
 
         binding = DataBindingUtil.inflate(inflater,R.layout.fragment_home,container,false);
         View root  = binding.getRoot();
-
-        setInit();
 
         binding.homeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -57,6 +56,15 @@ public class homeFragment extends Fragment {
             public void onNothingSelected(AdapterView<?> parent) {}});
 
         return root;
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        newPostAdapter = new postAdapter((homeActivity) getActivity());
+
+        setInit();
     }
 
     @Override
@@ -100,6 +108,21 @@ public class homeFragment extends Fragment {
         });
 
 
+        binding.homeItButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Fragment fragment = new PostByCategoryFragment();
+                Bundle result = new Bundle();
+                result.putString("category","PRODUCT");
+                result.putString("item","IT_DIGITAL");
+                fragment.setArguments(result);
+
+                homeActivity activity = (homeActivity) getActivity();
+                activity.onFragmentChanged(fragment);
+
+                Log.e("homeFragment","button click");
+            }
+        });
     }
 
     private void setInit(){

@@ -1,6 +1,7 @@
-package com.honchipay.honchi_android.home.Ui;
+package com.honchipay.honchi_android.home.ui;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -55,6 +56,7 @@ public class homeActivity extends AppCompatActivity {
                     }
 
                     case R.id.navi_profile: {
+                        onFragmentChanged("profile");
                         break;
                     }
                 }
@@ -96,6 +98,7 @@ public class homeActivity extends AppCompatActivity {
                 //transaction.replace(R.id.home_fragment,new PostByCategoryFragment()).commit();
             }
             case "profile": {
+                transaction = fm.beginTransaction();
                 transaction.replace(R.id.home_fragment, new ProfileFragment()).commit();
                 break;
             }

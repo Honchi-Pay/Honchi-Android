@@ -1,11 +1,9 @@
-package com.honchipay.honchi_android.home.Data;
+package com.honchipay.honchi_android.home.data;
 
 import com.honchipay.honchi_android.network.HonchipayConnector;
-import com.honchipay.honchi_android.util.SharedPreferencesManager;
 
 import java.util.List;
 
-import io.reactivex.Completable;
 import io.reactivex.Single;
 import retrofit2.Response;
 

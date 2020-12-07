@@ -14,7 +14,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.honchipay.honchi_android.R;
 import com.honchipay.honchi_android.databinding.FragmentLoginBinding;
-import com.honchipay.honchi_android.home.Ui.homeActivity;
+import com.honchipay.honchi_android.home.ui.homeActivity;
 import com.honchipay.honchi_android.sign.viewModel.LoginViewModel;
 import com.honchipay.honchi_android.util.SharedPreferencesManager;
 

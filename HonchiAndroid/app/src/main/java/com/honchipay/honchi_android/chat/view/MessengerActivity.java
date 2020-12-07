@@ -19,17 +19,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonObject;
-import com.honchipay.honchi_android.R;
-import com.honchipay.honchi_android.chat.HonchiPaySocket;
-import com.honchipay.honchi_android.chat.model.ChatRoomItem;
 import com.honchipay.honchi_android.chat.model.MessageResponse;
-import com.honchipay.honchi_android.chat.model.MessageResponseByTime;
-import com.honchipay.honchi_android.chat.model.MessageType;
-import com.honchipay.honchi_android.chat.model.socket.MessageRequest;
 import com.honchipay.honchi_android.chat.viewModel.ChatViewModel;
 import com.honchipay.honchi_android.databinding.ActivityMessengerBinding;
-import com.honchipay.honchi_android.util.SharedPreferencesManager;
 
 import java.io.File;
 import java.util.Objects;

@@ -6,7 +6,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".home.Ui.SearchFragment">
+        tools:context=".home.ui.SearchFragment">
 
         <ScrollView
             android:layout_width="match_parent"

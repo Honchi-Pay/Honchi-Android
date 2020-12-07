@@ -1,7 +1,6 @@
 package com.honchipay.honchi_android.chat.model;
 
-import org.threeten.bp.LocalDateTime;
-
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class MessageResponseByTime {

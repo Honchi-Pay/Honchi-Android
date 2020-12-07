@@ -1,8 +1,8 @@
 package com.honchipay.honchi_android.network;
 
-import com.honchipay.honchi_android.home.Data.detailPost;
-import com.honchipay.honchi_android.home.Data.getPost;
-import com.honchipay.honchi_android.home.Data.newPost;
+import com.honchipay.honchi_android.home.data.detailPost;
+import com.honchipay.honchi_android.home.data.getPost;
+import com.honchipay.honchi_android.home.data.newPost;
 import com.honchipay.honchi_android.chat.model.ChatRoomItem;
 import com.honchipay.honchi_android.chat.model.MessageIdResponse;
 import com.honchipay.honchi_android.chat.model.MessageResponse;
@@ -10,7 +10,6 @@ import com.honchipay.honchi_android.profile.data.UserProfileResponse;
 import com.honchipay.honchi_android.sign.data.SignUpRequest;
 import com.honchipay.honchi_android.sign.data.TokenResponseData;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -23,13 +22,11 @@ import retrofit2.http.DELETE;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
-import retrofit2.http.HTTP;
 import retrofit2.http.Header;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Part;
-import retrofit2.http.PartMap;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 

@@ -23,7 +23,7 @@
         tools:ignore="AllowBackup">
 
         <activity android:name=".writing.LocationActivity" />
-        <activity android:name=".home.Ui.homeActivity" />
+        <activity android:name=".home.ui.homeActivity" />
         <activity
             android:name=".chat.view.MessengerActivity"
             android:windowSoftInputMode="adjustUnspecified|adjustPan" />

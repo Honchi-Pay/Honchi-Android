@@ -8,7 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:context=".home.Ui.detailPostFragment">
+        tools:context=".home.ui.detailPostFragment">
 
         <ImageView
             android:id="@+id/detail_image_imageView"
@@ -31,7 +31,7 @@
                 android:id="@+id/detail_title_textView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="뿌링클 같이 먹을 쉐끼"
+                android:text="노트북"
                 android:textSize="15sp"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"

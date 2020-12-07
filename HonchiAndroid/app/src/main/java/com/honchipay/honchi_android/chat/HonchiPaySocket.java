@@ -3,7 +3,6 @@ package com.honchipay.honchi_android.chat;
 import android.util.Log;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonObject;
 import com.honchipay.honchi_android.chat.model.socket.ChangeTitleRequest;
 import com.honchipay.honchi_android.chat.model.socket.GetPriceRequest;
 import com.honchipay.honchi_android.chat.model.socket.ImageRequest;
@@ -52,6 +51,7 @@ public class HonchiPaySocket {
         if (isConnected && postId != null) {
             socket.emit("joinRoom", postId.toString());
             printLog("createChatRoom");
+            printLog(postId.toString());
         }
     }
 

@@ -1,4 +1,4 @@
-package com.honchipay.honchi_android.home.Data;
+package com.honchipay.honchi_android.home.data;
 
 public class homeItem {
     String title;

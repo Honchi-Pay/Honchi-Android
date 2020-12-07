@@ -4,13 +4,9 @@ import androidx.databinding.Observable;
 import androidx.databinding.ObservableField;
 import androidx.lifecycle.MutableLiveData;
 
-import com.honchipay.honchi_android.base.BaseViewModel;
-import com.honchipay.honchi_android.chat.HonchiPaySocket;
-import com.honchipay.honchi_android.chat.model.ChatRepository;
-import com.honchipay.honchi_android.chat.model.ChatRoomItem;
 import com.honchipay.honchi_android.chat.model.MessageResponse;
 import com.honchipay.honchi_android.chat.model.socket.ChangeTitleRequest;
-import com.honchipay.honchi_android.util.CustomDisposableSingleObserver;
+
 
 import java.io.File;
 import java.util.List;

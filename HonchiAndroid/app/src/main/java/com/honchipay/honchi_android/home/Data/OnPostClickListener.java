@@ -1,8 +1,8 @@
-package com.honchipay.honchi_android.home.Data;
+package com.honchipay.honchi_android.home.data;
 
 import android.view.View;
 
-import com.honchipay.honchi_android.home.Ui.postAdapter;
+import com.honchipay.honchi_android.home.ui.postAdapter;
 
 
 public interface OnPostClickListener {

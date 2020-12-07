@@ -1,6 +1,7 @@
-package com.honchipay.honchi_android.home.Ui;
+package com.honchipay.honchi_android.home.ui;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.LayoutInflater;
@@ -13,8 +14,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.honchipay.honchi_android.R;
-import com.honchipay.honchi_android.home.Data.OnPostClickListener;
-import com.honchipay.honchi_android.home.Data.newPost;
+import com.honchipay.honchi_android.home.data.OnPostClickListener;
+import com.honchipay.honchi_android.home.data.newPost;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +23,11 @@ import java.util.List;
 public class postAdapter extends RecyclerView.Adapter<postAdapter.ViewHolder>{
     ArrayList<newPost> items = new ArrayList<newPost>();
     OnPostClickListener listener;
+    homeActivity activity;
+
+    public postAdapter(homeActivity activity){
+        this.activity = activity;
+    }
 
     public void notifyDataChanged(List<newPost> postList){
         items.addAll(postList);
@@ -81,9 +87,13 @@ public class postAdapter extends RecyclerView.Adapter<postAdapter.ViewHolder>{
                 @Override
                 public void onClick(View v) {
                     if (listener != null) {
-                        Intent intent= new Intent(v.getContext(),detailPostFragment.class);
-                        intent.putExtra("position",item.getPostId());
-                        v.getContext().startActivity(intent);
+                        detailPostFragment fragment = new detailPostFragment();
+                        Bundle bundle = new Bundle();
+                        bundle.putInt("position",item.getPostId());
+                        fragment.setArguments(bundle);
+
+                        activity.onFragmentChanged(fragment);
+
                     }
                 }
             });

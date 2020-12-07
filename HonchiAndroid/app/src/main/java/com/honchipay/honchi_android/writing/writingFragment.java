@@ -17,23 +17,20 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 
 import com.honchipay.honchi_android.R;
 import com.honchipay.honchi_android.databinding.FragmentWritingBinding;
-import com.honchipay.honchi_android.home.Data.homeItem;
-import com.honchipay.honchi_android.home.Ui.homeAdapter;
+import com.honchipay.honchi_android.home.data.homeItem;
+import com.honchipay.honchi_android.home.ui.homeAdapter;
 
 import java.io.File;
 import java.io.FileOutputStream;
-import java.util.HashMap;
 
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 
 import static android.app.Activity.RESULT_OK;
-import static java.sql.DriverManager.println;
 
 public class writingFragment extends Fragment {
     private FragmentWritingBinding binding;
