@@ -1,4 +1,4 @@
-package com.honchipay.honchi_android.home.Ui;
+package com.honchipay.honchi_android.home.ui;
 
 import android.os.Bundle;
 import android.view.Menu;
@@ -13,7 +13,9 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.honchipay.honchi_android.R;
+import com.honchipay.honchi_android.chat.view.ChatListFragment;
 import com.honchipay.honchi_android.databinding.ActivityHomeBinding;
+import com.honchipay.honchi_android.profile.view.ProfileFragment;
 import com.honchipay.honchi_android.writing.writingFragment;
 
 public class homeActivity extends AppCompatActivity {
@@ -44,6 +46,7 @@ public class homeActivity extends AppCompatActivity {
                     }
 
                     case R.id.navi_buylist: {
+                        onFragmentChanged("buyList");
                         break;
                     }
 
@@ -53,6 +56,7 @@ public class homeActivity extends AppCompatActivity {
                     }
 
                     case R.id.navi_profile: {
+                        onFragmentChanged("profile");
                         break;
                     }
                 }
@@ -83,7 +87,7 @@ public class homeActivity extends AppCompatActivity {
                 break;
             }
             case "message": {
-
+                transaction.replace(R.id.home_fragment, new ChatListFragment()).commit();
                 break;
             }
             case "writing": {
@@ -91,9 +95,11 @@ public class homeActivity extends AppCompatActivity {
                 break;
             }
             case "postByCategory":{
-                //transaction.replace(R.id.home_fragment,new PostByCategoryFragment()).commit();
+                transaction.replace(R.id.home_fragment,new PostByCategoryFragment()).commit();
+                break;
             }
             case "profile": {
+                transaction.replace(R.id.home_fragment,new ProfileFragment()).commit();
                 break;
             }
             case "detailItem": {
@@ -118,6 +124,5 @@ public class homeActivity extends AppCompatActivity {
         }
         return true;
     }
-
 
 }
