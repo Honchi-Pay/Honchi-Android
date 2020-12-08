@@ -10,25 +10,25 @@ import io.reactivex.Single;
 import retrofit2.Response;
 
 public class homeRepository {
-    String testToken = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2MDcyMzUwNDgsImV4cCI6MTYwNzgzOTg0OCwic3ViIjoibWFyYmxpbmcxMjkzQGRzbS5ocy5rciIsInR5cGUiOiJyZWZyZXNoX3Rva2VuIn0.8c36-K9xnEUZjTSZQbTFPhn3PePpIGxuOb5L0qHfDcY";
 
     public Single<Response<List<newPost>>> getNewPost(String category){
-        //String token = SharedPreferencesManager.getInstance().getAccessToken();
-        return HonchipayConnector.getInstance().getApi().getNewPost(testToken,category);
+        String token = SharedPreferencesManager.getInstance().getAccessToken();
+        return HonchipayConnector.getInstance().getApi().getNewPost(token,category);
     }
 
     public Single<Response<List<getPost>>> getPostList(String category,String item, int dist){
-        //String token = SharedPreferencesManager.getInstance().getAccessToken();
-        return HonchipayConnector.getInstance().getApi().getPostList(testToken, category, item, dist);
+        String token = SharedPreferencesManager.getInstance().getAccessToken();
+        return HonchipayConnector.getInstance().getApi().getPostList(token, category, item, dist);
     }
 
     public Single<Response<List<newPost>>> searchPost(String title, int dist){
-        String title1 = "치킨";
-        return HonchipayConnector.getInstance().getApi().searchPost(testToken,title1,dist);
+        String token = SharedPreferencesManager.getInstance().getAccessToken();
+        return HonchipayConnector.getInstance().getApi().searchPost(token,title,dist);
     }
 
     public Single<Response<detailPost>> detailPost(int postID){
-        return HonchipayConnector.getInstance().getApi().detailPost(testToken,postID);
+        String token = SharedPreferencesManager.getInstance().getAccessToken();
+        return HonchipayConnector.getInstance().getApi().detailPost(token,postID);
     }
 
 }

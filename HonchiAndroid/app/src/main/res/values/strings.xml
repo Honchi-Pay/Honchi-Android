@@ -70,7 +70,12 @@
     <string name="photo">사진 가져오기</string>
     <string name="get_location">위치 선택</string>
     <string name="buy_delete">구매 취소</string>
-  
+
     <string name="please_input_message">메시지를 입력하세요</string>
     <string name="room_title">방제목</string>
+
+    <string name="buyList_history">구매내역</string>
+    <string name="goods_name">상품이름</string>
+    <string name="price">가격</string>
+    <string name="date">날짜</string>
 </resources>

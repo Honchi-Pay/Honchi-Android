@@ -13,6 +13,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.honchipay.honchi_android.R;
+import com.honchipay.honchi_android.buyList.BuyListFragment;
 import com.honchipay.honchi_android.chat.view.ChatListFragment;
 import com.honchipay.honchi_android.databinding.ActivityHomeBinding;
 import com.honchipay.honchi_android.profile.view.ProfileFragment;
@@ -46,6 +47,7 @@ public class homeActivity extends AppCompatActivity {
                     }
 
                     case R.id.navi_buylist: {
+                        onFragmentChanged("buyList");
                         break;
                     }
 
@@ -82,7 +84,7 @@ public class homeActivity extends AppCompatActivity {
                 break;
             }
             case "buyList": {
-
+                transaction.replace(R.id.home_fragment,new BuyListFragment()).commit();
                 break;
             }
             case "message": {
@@ -94,7 +96,8 @@ public class homeActivity extends AppCompatActivity {
                 break;
             }
             case "postByCategory":{
-                //transaction.replace(R.id.home_fragment,new PostByCategoryFragment()).commit();
+                transaction.replace(R.id.home_fragment,new PostByCategoryFragment()).commit();
+                break;
             }
             case "profile": {
                 transaction.replace(R.id.home_fragment, new ProfileFragment()).commit();
