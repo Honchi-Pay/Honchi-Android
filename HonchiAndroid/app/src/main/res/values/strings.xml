@@ -1,3 +1,76 @@
 <resources>
     <string name="app_name">Honchi-Android</string>
+    <string name="HonchiPay">Honchi Pay.</string>
+    <string name="splash_login">LOGIN</string>
+    <string name="splash_signUp">SIGN UP</string>
+    <string name="login">로그인</string>
+    <string name="signUp">회원가입</string>
+    <string name="id">아이디(이메일)</string>
+    <string name="password">비밀번호</string>
+    <string name="get_id">아이디를 입력해주세요</string>
+    <string name="get_password">비밀번호를 입력해주세요</string>
+    <string name="autoLogin">자동 로그인</string>
+    <string name="auth_code">인증코드</string>
+    <string name="input_auth_code">인증코드를 입력해주세요</string>
+    <string name="forgot_password">비밀번호를 잊어버리셨나요?</string>
+    <string name="find_password">비밀번호 찾기</string>
+    <string name="check_password">비밀번호 확인</string>
+    <string name="password_not_correct">비밀번호가 일치하 않습니다</string>
+    <string name="output_auth_code">인증번호 보내기</string>
+    <string name="next">다음</string>
+    <string name="gender">성별</string>
+    <string name="male">남성</string>
+    <string name="female">여성</string>
+    <string name="nickname">닉네임</string>
+    <string name="get_nickname">닉네임을 입력해주세요</string>
+    <string name="phone_number">전화번호</string>
+    <string name="only_number">숫자만 입력해주세요</string>
+    <string name="check">확인</string>
+
+    <string name="wrap_bracket">(%s)</string>
+    <string name="logout">로그아웃</string>
+    <string name="change_password">비밀번호 변경</string>
+    <string name="unsubscribe">회원탈퇴</string>
+    <string name="logout_message">정말 로그아웃하시겠습니까?</string>
+    <string name="sign_out_message">정말 탈퇴하시겠습니까?</string>
+    <string name="change_profile">프로필 변경</string>
+    <string name="to_change">변경하기</string>
+    <string name="name">NAME</string>
+    <string name="to_change_password">변결할 비밀번호</string>
+    <string name="to_change_input_password">변경할 비밀번호를 입력해주세요</string>
+    <string name="password_again">다시 한 번 입력해주세요</string>
+    <string name="no">아니요</string>
+    <string name="yes">네</string>
+    <string name="cancel">취소</string>
+
+    <string name="title">제목</string>
+    <string name="content_to_search">검색할 내용을 입력해주세요</string>
+    <string name="new_Post">최신 글</string>
+    <string name="food">음식</string>
+    <string name="goods">상품</string>
+    <string name="chicken">치킨</string>
+    <string name="pizza_yangsik">피자/양식</string>
+    <string name="chinese_restaurant">중국집</string>
+    <string name="korean_food">한식</string>
+    <string name="japanese_food_donkas">일식/돈가스</string>
+    <string name="jokbal_bossam">족발/보쌈</string>
+    <string name="yasik">야식</string>
+    <string name="boonsik">분식</string>
+    <string name="cafe_dessert">카페/디저트</string>
+    <string name="modify">수정하기</string>
+    <string name="buy_together">함께 구매하기</string>
+    <string name="attend_end">구인 완료</string>
+    <string name="get_title">제목을 입력해주세요</string>
+
+    <string name="search_location">위치 검색</string>
+    <string name="location_point">위치 찍기</string>
+    <string name="category">카테고리</string>
+    <string name="delivery">배달</string>
+    <string name="content">내용</string>
+    <string name="photo">사진 가져오기</string>
+    <string name="get_location">위치 선택</string>
+    <string name="buy_delete">구매 취소</string>
+  
+    <string name="please_input_message">메시지를 입력하세요</string>
+    <string name="room_title">방제목</string>
 </resources>
