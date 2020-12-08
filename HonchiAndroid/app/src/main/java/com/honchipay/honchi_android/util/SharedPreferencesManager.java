@@ -51,7 +51,7 @@ public class SharedPreferencesManager {
         editor.apply();
     }
 
-    public String getUserName() { return sharedPrefs.getString(SAVE_USER_NAME, null); }
+    public String getUserName() { return sharedPrefs.getString(SAVE_USER_NAME, ""); }
 
     public void setUserName(String value) {
         SharedPreferences.Editor editor = sharedPrefs.edit();

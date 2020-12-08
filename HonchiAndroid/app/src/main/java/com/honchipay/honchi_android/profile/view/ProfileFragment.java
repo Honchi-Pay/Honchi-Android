@@ -1,7 +1,6 @@
 package com.honchipay.honchi_android.profile.view;
 
 import android.app.Dialog;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -48,14 +47,12 @@ public class ProfileFragment extends Fragment {
 
         profileViewModel.profileLiveData.observe(getViewLifecycleOwner(), userProfileResponse -> image = userProfileResponse.getImages());
         profileViewModel.signOutLiveData.observe(getViewLifecycleOwner(), isSignOut -> {
-            Context context = requireContext();
-
             if (isSignOut) {
-                Intent intent = new Intent(context, SplashActivity.class);
-                context.startActivity(intent);
-                requireActivity().finish();
+                Intent intent = new Intent(getContext(), SplashActivity.class);
+                startActivity(intent);
+                getActivity().finish();
             } else {
-                Toast.makeText(context, "실패하였습니다.", Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(), "실패하였습니다.", Toast.LENGTH_LONG).show();
             }
         });
 
