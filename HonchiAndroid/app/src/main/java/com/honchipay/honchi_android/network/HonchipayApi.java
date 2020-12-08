@@ -7,6 +7,6 @@ import retrofit2.http.Field;
 import retrofit2.http.GET;
 
 public interface HonchipayApi {
-    @GET("/post/buyList")
+    @GET("/buyList")
     Single<Response<DetailBuyList>> getBuyList(@Field("Authorization") String authorization);
 }
