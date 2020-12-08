@@ -10,8 +10,6 @@ import okhttp3.MultipartBody;
 import retrofit2.Response;
 
 public class writingRepository {
-    String testToken = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2MDcyMzUwNDgsImV4cCI6MTYwNzgzOTg0OCwic3ViIjoibWFyYmxpbmcxMjkzQGRzbS5ocy5rciIsInR5cGUiOiJyZWZyZXNoX3Rva2VuIn0.8c36-K9xnEUZjTSZQbTFPhn3PePpIGxuOb5L0qHfDcY";
-
     public Single<Response<Void>> writing(
             MultipartBody.Part titlePart,
             MultipartBody.Part contentPart,
@@ -21,8 +19,8 @@ public class writingRepository {
             MultipartBody.Part latPart,
             MultipartBody.Part lonPart
             ) {
-        //String token = SharedPreferencesManager.getInstance().getAccessToken();
-        return HonchipayConnector.getInstance().getApi().writing(testToken,titlePart, contentPart,imagesPart,categoryPart,itemPart,latPart,lonPart);
+        String token = SharedPreferencesManager.getInstance().getAccessToken();
+        return HonchipayConnector.getInstance().getApi().writing(token,titlePart, contentPart,imagesPart,categoryPart,itemPart,latPart,lonPart);
     }
 
     public Single<Response<Void>> modifyPost(){
