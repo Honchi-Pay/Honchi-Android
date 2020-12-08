@@ -58,7 +58,7 @@ public interface HonchipayApi {
     Single<Response<Void>> singUp(@Body SignUpRequest body);
 
     @GET("/user/profile")
-    Single<Response<UserProfileResponse>> getUserProfile(@Header("Authorization") String header, @Query("nickName") String name);
+    Single<Response<UserProfileResponse>> getUserProfile(@Header("Authorization") String header, @Query(value = "nickName", encoded = true) String name);
 
     @Multipart
     @PUT("/user/profile")

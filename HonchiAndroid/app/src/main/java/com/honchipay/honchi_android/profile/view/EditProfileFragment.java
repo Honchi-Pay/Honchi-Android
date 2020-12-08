@@ -1,12 +1,13 @@
 package com.honchipay.honchi_android.profile.view;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -103,9 +104,9 @@ public class EditProfileFragment extends Fragment {
         EditPrivateInfoActivity activity = (EditPrivateInfoActivity) requireActivity();
 
         binding.editProfileUserImageView.setOnClickListener(v -> {
-            Intent intent = new Intent();
+            Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+            intent.addCategory(Intent.CATEGORY_OPENABLE);
             intent.setType("image/*");
-            intent.setAction(Intent.ACTION_PICK);
             startActivityForResult(Intent.createChooser(intent, "이미지를 선택하세요"), REQUEST_IMAGE);
         });
 
@@ -125,7 +126,13 @@ public class EditProfileFragment extends Fragment {
 
         if (resultCode == Activity.RESULT_OK && requestCode == REQUEST_IMAGE) {
             Uri uri = data.getData();
-            file = new File(uri.getPath());
+            @SuppressLint("Recycle")
+            Cursor cursor = getContext().getContentResolver().query(uri, null, null, null, null );
+            cursor.moveToNext();
+            String path = cursor.getString( cursor.getColumnIndex( "_data" ) );
+            file = new File(path);
+            cursor.close();
+
             Glide.with(this).load(uri).circleCrop().into(binding.editProfileUserImageView);
         }
     }
