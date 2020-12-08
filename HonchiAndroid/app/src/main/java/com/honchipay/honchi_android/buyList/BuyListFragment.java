@@ -20,33 +20,35 @@ import java.util.List;
 public class BuyListFragment extends Fragment {
     private FragmentBuyListBinding binding;
     BuyListViewModel viewModel = new BuyListViewModel();
-    BuyListAdapter adapter = new BuyListAdapter();
+    private BuyListAdapter adapter = new BuyListAdapter();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_buy_list, container, false);
 
         initRecyclerView();
-        setView();
+
+
         return binding.getRoot();
     }
 
     private void initRecyclerView(){
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+        BuyListAdapter adapter = new BuyListAdapter();
 
-        binding.buyListRecyclerView.setLayoutManager(linearLayoutManager);
         binding.buyListRecyclerView.setHasFixedSize(true);
+        binding.buyListRecyclerView.setLayoutManager(linearLayoutManager);
 
         binding.buyListRecyclerView.setAdapter(adapter);
     }
 
-    private void setView(){
+    private void getBuyList(){
         viewModel.getBuyList();
 
         viewModel.buyListLiveData.observe(getViewLifecycleOwner(), new Observer<List<BuyListResponse>>() {
             @Override
-            public void onChanged(List<BuyListResponse> buyListResponses) {
-                adapter.BuyListAdapter(buyListResponses);
+            public void onChanged(List<BuyListResponse> buyList) {
+                adapter.notifyDataChanged(buyList);
             }
         });
     }
