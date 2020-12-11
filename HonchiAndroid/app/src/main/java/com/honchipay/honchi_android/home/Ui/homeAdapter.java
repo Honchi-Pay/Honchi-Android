@@ -1,6 +1,6 @@
 package com.honchipay.honchi_android.home.Ui;
 
-import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,13 +12,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.honchipay.honchi_android.R;
 import com.honchipay.honchi_android.home.Data.homeItem;
-import com.honchipay.honchi_android.home.Data.OnHomeItemClickListener;
 
 import java.util.ArrayList;
 
-public class homeAdapter extends RecyclerView.Adapter<homeAdapter.ViewHolder> implements OnHomeItemClickListener {
+public class homeAdapter extends RecyclerView.Adapter<homeAdapter.ViewHolder>{
     ArrayList<homeItem> items = new ArrayList<homeItem>();
-    OnHomeItemClickListener listener;
 
     @NonNull
     @Override
@@ -26,7 +24,7 @@ public class homeAdapter extends RecyclerView.Adapter<homeAdapter.ViewHolder> im
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View itemView = inflater.inflate(R.layout.item_home, parent, false);
 
-        return new ViewHolder(itemView, this);
+        return new ViewHolder(itemView);
     }
 
     @Override
@@ -39,7 +37,7 @@ public class homeAdapter extends RecyclerView.Adapter<homeAdapter.ViewHolder> im
         TextView title_textView;
         ImageView image_imageView;
 
-        public ViewHolder(@NonNull View itemView, final OnHomeItemClickListener listener) {
+        public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
             title_textView = itemView.findViewById(R.id.home_item_textView);
@@ -48,11 +46,11 @@ public class homeAdapter extends RecyclerView.Adapter<homeAdapter.ViewHolder> im
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    int position = getAdapterPosition();
+                    homeActivity activity = new homeActivity();
 
-                    if (listener != null) {
-
-                    }
+                    Bundle bundle = new Bundle();
+                    bundle.putInt("position",getAdapterPosition());
+                    activity.onFragmentChanged(bundle,"1");
                 }
             });
         }
@@ -70,13 +68,6 @@ public class homeAdapter extends RecyclerView.Adapter<homeAdapter.ViewHolder> im
 
     public void addItem(homeItem item) {
         items.add(item);
-    }
-
-    @Override
-    public void onItemClick(ViewHolder holder, View view, int position) {
-        if (listener != null) {
-            listener.onItemClick(holder, view, position);
-        }
     }
 
 }

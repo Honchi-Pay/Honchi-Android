@@ -1,6 +1,5 @@
 package com.honchipay.honchi_android.buyList;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,7 +10,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.honchipay.honchi_android.R;
-import com.honchipay.honchi_android.home.Data.newPost;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +17,7 @@ import java.util.List;
 public class BuyListAdapter extends RecyclerView.Adapter<BuyListAdapter.ViewHolder> {
     private ArrayList<BuyListResponse> items = null;
 
-    public void notifyDataChanged(List<BuyListResponse> postList){
+    public void notifyDataChanged(List<BuyListResponse> postList) {
         items.addAll(postList);
         notifyDataSetChanged();
     }
