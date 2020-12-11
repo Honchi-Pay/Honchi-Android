@@ -28,6 +28,7 @@ import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Part;
+import retrofit2.http.PartMap;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
@@ -79,21 +80,14 @@ public interface HonchipayApi {
     Single<Response<List<getPost>>> getPostList(
             @Header("Authorization") String header,
             @Query("category") String category,
-            @Query ("item") String item,
+            @Query("item") String item,
             @Query("dist") int dist);
 
     @Multipart
     @POST("/post")
     Single<Response<Void>> writing(
             @Header("Authorization") String header,
-            @Part MultipartBody.Part title,
-            @Part MultipartBody.Part content,
-            @Part MultipartBody.Part images,
-            @Part MultipartBody.Part category,
-            @Part MultipartBody.Part item,
-            @Part MultipartBody.Part lat,
-            @Part MultipartBody.Part lon
-    );
+            @PartMap HashMap<String, RequestBody> partMap);
 
     @PUT("/post/{postId}")
     Single<Response<Void>> modifyPost(
