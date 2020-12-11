@@ -11,35 +11,30 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 
+import com.bumptech.glide.Glide;
 import com.honchipay.honchi_android.R;
 import com.honchipay.honchi_android.databinding.FragmentWritingBinding;
 import com.honchipay.honchi_android.home.Data.homeItem;
 import com.honchipay.honchi_android.home.Ui.homeAdapter;
 
 import java.io.File;
-import java.io.FileOutputStream;
-import java.util.HashMap;
 
 import okhttp3.MediaType;
-import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 
 import static android.app.Activity.RESULT_OK;
-import static java.sql.DriverManager.println;
 
 public class writingFragment extends Fragment {
     private FragmentWritingBinding binding;
     private homeAdapter adapter;
-    String setCategory;
-    File imageFile;
+    String category;
+    File imageFile = null;
     int latitude;
     int longitude;
     private final writingViewModel viewModel = new writingViewModel();
@@ -53,7 +48,6 @@ public class writingFragment extends Fragment {
 
         return binding.getRoot();
     }
-
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -71,7 +65,7 @@ public class writingFragment extends Fragment {
         binding.writingDeliveryButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 setFoodView();
-                setCategory = "FOOD";
+                category = "FOOD";
             }
         });
 
@@ -79,7 +73,7 @@ public class writingFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 setProductView();
-                setCategory = "PRODUCT";
+                category = "PRODUCT";
             }
         });
 
@@ -104,8 +98,6 @@ public class writingFragment extends Fragment {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL, false);
         binding.writingRecyclerView.setLayoutManager(linearLayoutManager);
         binding.writingRecyclerView.setHasFixedSize(true);
-
-        imageFile = new File(Environment.getExternalStorageDirectory(), "honchi.png");
     }
 
     void getPhoto() {
@@ -116,54 +108,10 @@ public class writingFragment extends Fragment {
 
 
     private void writing() {
-        String getTitle = binding.writingTitleEditText.getText().toString();
-        String getContent = binding.writingContentEditText.getText().toString();
-        RequestBody requestImage = RequestBody.create(MediaType.parse("image"),imageFile);
+        String title = binding.writingTitleEditText.getText().toString();
+        String content = binding.writingContentEditText.getText().toString();
 
-        Log.e("writingFragment","title"+getTitle);
-        Log.e("writingFragment","content"+getContent);
-        Log.e("writingFragment","images"+requestImage);
-        Log.e("writingFragment","category"+setCategory);
-        Log.e("writingFragment","test");
-        Log.e("writingFragment", String.valueOf(latitude));
-        Log.e("writingFragment", String.valueOf(longitude));
-
-        MultipartBody.Part titlePart = MultipartBody.Part.createFormData(
-                "title",
-                getTitle
-        );
-
-        MultipartBody.Part contentPart = MultipartBody.Part.createFormData(
-                "content",
-                getContent
-        );
-
-        MultipartBody.Part categoryPart = MultipartBody.Part.createFormData(
-                "category",
-                setCategory
-        );
-
-        MultipartBody.Part itemPart = MultipartBody.Part.createFormData(
-                "item",
-                "CHICKEN"
-        );
-
-        MultipartBody.Part latPart = MultipartBody.Part.createFormData(
-                "lat",
-                String.valueOf(latitude)
-        );
-
-        MultipartBody.Part lonPart = MultipartBody.Part.createFormData(
-                "lon",
-                String.valueOf(longitude)
-        );
-
-        MultipartBody.Part imagePart = MultipartBody.Part.createFormData(
-                "images",
-                String.valueOf(requestImage)
-        );
-
-        viewModel.writing(titlePart,contentPart,imagePart,categoryPart,itemPart,latPart,lonPart);
+        viewModel.writing(title,content,imageFile, category," ",latitude,longitude);
     }
 
 
@@ -183,12 +131,8 @@ public class writingFragment extends Fragment {
                 case 300: {
                     try {
                         Uri uri = data.getData();
-                        imageFile.delete();
-                        imageFile.createNewFile();
-
-                        FileOutputStream out = new FileOutputStream(imageFile);
-                        getActivity().getContentResolver().openInputStream(uri);
-                        out.close();
+                        imageFile = new File(uri.getPath());
+                        Glide.with(this).load(uri).into(binding.writingPhotoImageButton);
 
                     } catch (Exception e) {
                         Log.e("writingFragment", e.getMessage());
