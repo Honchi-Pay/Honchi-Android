@@ -5,6 +5,7 @@ import android.util.Log;
 import com.honchipay.honchi_android.base.BaseViewModel;
 import com.honchipay.honchi_android.home.Data.newPost;
 
+import java.io.File;
 import java.util.HashMap;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -17,16 +18,8 @@ import retrofit2.Response;
 public class writingViewModel extends BaseViewModel {
     private final writingRepository repository = new writingRepository();
 
-    public void writing(
-            MultipartBody.Part titlePart,
-            MultipartBody.Part contentPart,
-            MultipartBody.Part imagesPart,
-            MultipartBody.Part categoryPart,
-            MultipartBody.Part itemPart,
-            MultipartBody.Part latPart,
-            MultipartBody.Part lonPart
-    ){
-        addDisposable(repository.writing(titlePart,contentPart,imagesPart,categoryPart,itemPart,latPart,lonPart).
+    public void writing(String title, String content, File image, String category, String item, int lat, int lan){
+        addDisposable(repository.writing(title,content,image,category,item,lat,lan).
                 subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(new DisposableSingleObserver<Response<Void>>(){
