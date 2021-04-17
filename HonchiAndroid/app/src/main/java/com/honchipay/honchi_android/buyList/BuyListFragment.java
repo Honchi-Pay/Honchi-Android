@@ -27,7 +27,7 @@ public class BuyListFragment extends Fragment {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_buy_list, container, false);
 
         initRecyclerView();
-
+        getBuyList();
 
         return binding.getRoot();
     }
